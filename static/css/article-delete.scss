@@ -1,0 +1,83 @@
+.article-delete {
+    color: #fff;
+    text-align: center;
+    padding: 5% 0%;
+    .inner-articleDelete {
+        padding: 1%;
+        @include form-background-color;
+        @include box-shadow;
+        border-radius: 0.5rem;
+        border: 2px solid #fff;
+        & h3 {
+            margin-bottom: 2%;
+            font-weight: bold;
+        }
+        & form .row-input {
+            display: flex;
+            justify-content: space-around;
+        }
+        & form .row-input .md-form .lebal-text {
+            font-size: 24px;
+            color: #fff;
+        }
+        & form .row-input .md-form .label-select {
+            font-size: 20px;
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+        }
+        & form .row-input .md-form .select-option {
+            color: #fff;
+            margin-top: 3rem;
+        }
+        & form .row-input .md-form .select-option option {
+            background: none;
+            color: #000;
+        }
+        & form .row-input .md-form input {
+            margin-top: 20px;
+            color: #fff;
+        }
+        // placeholder color Chrome
+        & form .row-input .md-form input::placeholder {
+            color: #fff;
+            font-weight: normal;
+        }
+        // placeholder color FireFox
+        & form .row-input .md-form input:-ms-input-placeholder {
+            color: #fff;
+            font-weight: normal;
+        }
+        & form .form-group .label-content {
+            display: block;
+            text-align: left;
+            color: #fff;
+            font-size: 24px;
+            padding-left: 1rem;
+        }
+        & .btn-indigo:hover {
+            @include btn-hover-shadow;
+        }
+        & .btn-delete:hover {
+            @include btn-hover-shadow;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .article-delete {
+        .inner-articleDelete {
+            form .row-input {
+                width: 100%;
+                flex-direction: column;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .article-delete {
+        .inner-articleDelete {
+            width: 94%;
+        }
+    }
+}

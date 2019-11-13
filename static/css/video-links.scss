@@ -1,0 +1,24 @@
+.video-intro {
+    .carousel-inner {
+        display: flex;
+        justify-content: center;
+        .carousel-item {
+            display: flex;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .carousel-multi-item-2 .col-md-3 {
+        float: left;
+        width: 25%;
+        max-width: 100%;
+        .video-box {
+            width: 100%;
+        }
+    }
+}
+
+.carousel-multi-item-2 .video-box iframe {
+    border-radius: 5px;
+}

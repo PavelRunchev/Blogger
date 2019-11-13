@@ -1,0 +1,27 @@
+.post-send-form {
+    width: 40%;
+    margin: 10% auto;
+    @include box-shadow;
+    border-radius: 0.5rem;
+    padding: 2%;
+    background-color: rgba(230, 230, 230, 0.6);
+    #text-form:focus,
+    #text-form:focus~label,
+    #text-form:focus~.fa-pencil-alt {
+        border-color: rgb(0, 98, 165);
+        color: rgb(0, 98, 165);
+    }
+    .send {
+        display: block;
+        margin: 0 auto;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        border-radius: 50%;
+        padding: 15px;
+        color: #fff;
+    }
+    .send:hover {
+        @include btn-hover-shadow-black;
+    }
+}

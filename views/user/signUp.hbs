@@ -1,0 +1,86 @@
+<div class="signUp">
+    <h2 class="h2 text-center">
+       Create My Account
+    </h2>
+
+    <div class="form-signUp">
+        <a href="/user/signIn" class="backspace h3 mt-3 mr-3" data-pjax="#pjax-container"><i class="fas fa-backspace"></i></a>
+        <h3 class="text-center text-light">Sign Up</h3>
+
+         {{#if globalError}}
+            <p class="text-center text-danger font-weight-bold">{{globalError}}</p>
+        {{/if}}
+
+        <form class="text-center" encType="multipart/form-data" action="/user/signUp" method="POST">
+            
+            <div class="md-form form-lg col-12">
+                <div class="row">
+                    <i class="fas fa-envelope text-light fa-2x mr-3"></i>
+                    <input type="text" id="inputLGEx" class="form-control col-10" name="email"
+                        value="{{user.email}}" />
+                    <label for="inputLGEx" class="text-light pl-5 label-text">Email</label>
+                </div>  
+            </div>
+
+            <div class="md-form form-lg col-12">
+                <div class="row">
+                    <i class="fas fa-lock text-light fa-2x mr-3"></i>
+                    <input type="text" id="inputLGEx" class="form-control col-10" name="password"
+                        value="{{user.password}}" />
+                    <label for="inputLGEx" class="text-light pl-5 label-text">Password</label>
+                </div>  
+            </div>
+
+            <div class="md-form form-lg col-12">
+                <div class="row">
+                    <i class="fas fa-user text-light fa-2x mr-3"></i>
+                    <input type="text" id="inputLGEx" class="form-control col-10" name="firstName"
+                        value="{{user.firstName}}" />
+                    <label for="inputLGEx" class="text-light pl-5 label-text">FirstName</label>
+                </div>  
+            </div>
+
+            <div class="md-form form-lg col-12">
+                <div class="row">
+                    <i class="fas fa-user text-light fa-2x mr-3"></i>
+                    <input type="text" id="inputLGEx" class="form-control col-10" name="lastName"
+                        value="{{user.lastName}}" />
+                    <label for="inputLGEx" class="text-light pl-5 label-text">LastName</label>
+                </div>  
+            </div>
+
+             <div class="md-form form-lg col-12">
+                <div class="row">
+                    <i class="fas fa-poll text-light fa-2x mr-3"></i>
+                    <input type="text" id="inputLGEx" class="form-control col-10" name="age"
+                        value="{{user.age}}" />
+                    <label for="inputLGEx" class="text-light pl-5 label-text">Age</label>
+                </div>  
+            </div>
+
+            <div class="form-group radio-button">
+                <div class="custom-control custom-radio">
+                    <i class="fas fa-male text-light fa-2x"></i>
+                    <input type="radio" class="custom-control-input" id="customRadio1" name="gender" value="male">
+                    <label class="custom-control-label text-light" for="customRadio1">Male</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <i class="fas fa-female text-light fa-2x"></i>
+                    <input type="radio" class="custom-control-input" name="gender" id="optionsRadios2" value="female">
+                    <label class="custom-control-label text-light" for="optionsRadios2">Female</label>
+                </div> 
+            </div>
+
+         
+
+            <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox" id="customCheck1" name="checkbox">
+                    <label class="custom-control-label text-light" for="customCheck1">Agree to terms and conditions</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-createUser aqua-gradient"><i id="spinner" class="fas fa-spinner"></i> Submit</button>
+        </form>
+    </div>
+</div>

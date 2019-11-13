@@ -1,0 +1,34 @@
+.send-message {
+    h3 {
+        @include title;
+    }
+    h3:after {
+        @include line-below-title;
+    }
+    .send-message-form {
+        width: 30%;
+        margin: 0 auto 10% auto;
+        @include form-background-color;
+        @include box-shadow;
+        border: 2px solid #fff;
+        padding: 2%;
+        border-radius: 0.5rem;
+        #form1,
+        #form2 {
+            color: #fff;
+        }
+        #form1:focus,
+        #form2:focus {
+            border-color: #fff;
+            outline: none;
+            background-color: none;
+        }
+        .btn-sendMessage {
+            @include btn-submit-view;
+        }
+        .btn-sendMessage:hover {
+            @include btn-hover-shadow;
+            font-weight: bold;
+        }
+    }
+}

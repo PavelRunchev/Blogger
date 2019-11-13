@@ -1,0 +1,46 @@
+<div class="container-fluid article-delete">
+    <section class="container inner-articleDelete">
+        <h3>Delete your article now</h3>
+
+        {{> before-delete-article}}
+
+        <form method="GET">
+            <div class="row-input px-2 mb-1">
+                <div class="md-form col-12 col-md-4 ">
+                    <input type="text" id="inputLGEx" class="form-control" placeholder="Title" name="title"
+                        value="{{article.title}}" disabled/>
+                    
+                </div>
+                <div class="md-form col-12 col-md-6">
+                    <input type="text" id="form2" class="form-control" placeholder="ImageUrl" name="imageUrl"
+                        value="{{article.imageUrl}}" disabled/>
+                    
+                </div>
+            </div>
+
+            <div class="row-input px-2">
+                <div class="md-form col-12 col-md-4">
+                    <label for="exampleSelect1" class="text-light pl-4 label-select">Choose your Category</label>
+                    <select class="form-control select-option" id="exampleSelect1" name="category" disabled>
+                        {{#each categories}}
+                            <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="md-form col-12 col-md-6">
+                    <input type="text" id="form2" class="form-control" placeholder="VideoLink" name="videoLink"
+                        value="{{article.videoLink}}" disabled/>
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="label-content">Content</label>
+                <textarea type="text" class="form-control" placeholder="Content" name="content" rows="10"
+                    cols="50" disabled>{{article.content}}</textarea>
+            </div>
+        </form>
+        <a href="/article/article-details/{{article._id}}" class="mr-5 btn btn-indigo waves-effect" data-pjax="#pjax-container">Back</a>
+        <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#modalConfirmDelete">Delete</button>
+    </section>
+</div>

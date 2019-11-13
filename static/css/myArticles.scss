@@ -1,0 +1,32 @@
+.myArticles {
+    .article-list {
+        width: 100%;
+        margin: 0 auto;
+        display: block;
+        padding: 0%;
+        .card {
+            width: 70%;
+            margin: 0 auto 50px auto;
+            @include box-shadow;
+            .card-body {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            span .read-more {
+                font-size: 22px;
+                float: right;
+                font-weight: bold;
+            }
+        }
+        .empty-container {
+            @include form-background-color;
+            @include box-shadow;
+            border-radius: 0.5rem;
+            margin: 20% auto;
+            h3 {
+                color: #fff;
+                text-shadow: 1px 1px rgb(0, 0, 0);
+            }
+        }
+    }
+}

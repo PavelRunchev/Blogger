@@ -1,0 +1,22 @@
+<div class="container category-findArticlesByCategory">
+    <div class="article-list">
+        {{#each articles}}
+        <div class="card p-5">
+            <h4 class="text-right">{{categoryName}}</h4>
+            <h3 class="card-header">{{this.title}}</h3>
+            <div class="card-body">
+                <h6 class="card-subtitle text-muted text-right">Date: {{this.date}}</h6>
+            </div>
+            <img style="height: 400px; width: 100%; display: block;"
+                src="{{this.imageUrl}}"
+                alt="Card image">
+            <div class="card-body">
+                <p>{{this.intro}}</p>
+            </div>
+            <span class=""><a href="/article/article-details/{{this._id}}" class="read-more" data-pjax="#pjax-container">Read More</a></span>
+        </div>
+        {{else}}
+            <h3 class="h3 text-light text-center">No articles to current Category!</h3>
+        {{/each}}
+    </div>
+</div>

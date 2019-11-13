@@ -1,0 +1,42 @@
+<div class="container status-articles">
+    <h2 class="h2 text-center">Status for all Articles</h2>
+        <table class="table">
+            <div class="d-flex justify-content-center">
+                <legend class="text-center text-light font-weight-bold w-25 mb-0 rounded"><i class="fas fa-users-cog"></i> Admin Platform</legend>
+            </div>
+            
+            <thead class="light-blue darken-3 white-text">
+                <tr>
+                    <th scope="col" class="h6">#</th>
+                    <th scope="col" class="h6">Category</th>
+                    <th scope="col" class="h6">Date</th>
+                    <th scope="col" class="h6">Article</th>
+                    <th scope="col" class="h6">Creator</th>
+                    <th scope="col" class="h6">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each articles}}
+                <tr>
+                    <th scope="row" class="h6">{{this.index}}</th>
+                    <td class="h6">{{this.category.name}}</td>
+                    <td class="h6">{{this.date}}</td>
+                    <td class="h6">{{this.title}}</td>
+                    <td class="h6 userEmail">{{this.creator.email}}</td>
+                    {{#if this.isLock}}
+                        <form id="admin-unlock{{@index}}" action="/admin/admin-unlockArticle/{{this._id}}" method="post"></form>
+                        <td class="h6"><a class="text-info" href="javascript:document.getElementById('admin-unlock{{@index}}').submit()" data-pjax="#pjax-container"><i class="fas fa-unlock"></i> Unlock</a></td>
+                    {{else}}
+                        <form id="admin-lock{{@index}}" action="/admin/admin-lockArticle/{{this._id}}" method="post"></form>
+                        <td class="h6"><a class="text-info" href="javascript:document.getElementById('admin-lock{{@index}}').submit()" data-pjax="#pjax-container"><i class="fas fa-lock"></i> Lock</a></td>
+                    {{/if}}
+                </tr>
+                {{else}}
+                    <tr>
+                        <th scope="row" class="h6"></th>
+                        <td class="h6">No Articles</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+</div>

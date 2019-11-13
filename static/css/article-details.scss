@@ -1,0 +1,197 @@
+.article-details {
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+    @include box-shadow;
+    margin-bottom: 2%;
+    .view {
+        cursor: pointer;
+    }
+    .card-body {
+        .top-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .card-title {
+            @include title-details;
+        }
+        .card-title:after {
+            @include line-below-title;
+            height: 5px;
+        }
+        .like-unlike {
+            display: flex;
+            flex-wrap: wrap-reverse;
+            a {
+                display: block;
+                font-size: 20px;
+                color: #fff;
+            }
+            .fa-thumbs-up:hover {
+                color: rgb(49, 68, 162);
+                transform: scale(1.3);
+            }
+            .fa-thumbs-down:hover {
+                color: rgb(49, 68, 162);
+                transform: scale(1.3);
+            }
+        }
+        .card-text {
+            padding: 0.2% 11%;
+            text-align: left;
+            font-size: 18px;
+        }
+        .video {
+            margin: 4% auto;
+            max-width: 80%;
+            min-width: 50%;
+        }
+    }
+    .card-footer {
+        background: rgb(220, 220, 220);
+        .sub-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .btn-box {
+            display: flex;
+            justify-content: center;
+            .btn-nav {
+                @include btn-classic;
+                margin: 0 1%;
+            }
+            .btn-nav:hover {
+                @include btn-hover-shadow-black;
+            }
+        }
+    }
+}
+
+.message-box {
+    width: 700px;
+    @include box-shadow;
+    background: -webkit-linear-gradient(rgba(0, 98, 165, 0.9), rgba(0, 98, 165, 0.5));
+    background: linear-gradient(rgba(0, 98, 165, 0.9), rgba(0, 98, 165, 0.5));
+    border-radius: 0.3rem;
+    padding: 1%;
+    margin: 2% auto;
+    display: flex;
+    .photo {
+        display: inline-block;
+        width: 200px;
+        padding: 1%;
+        img {
+            cursor: pointer;
+            width: 150px;
+            height: 150px;
+        }
+    }
+    .message-view {
+        padding: 1% 2%;
+        background: #fff;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 3px;
+        .message-title {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .article-posts .message-box {
+        width: 600px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .article-details {
+        width: 75%;
+    }
+    .article-details .view,
+    .article-details .card-body {
+        width: 100%;
+        .card-text {
+            padding: 0.2% 5%;
+            font-size: 16px;
+        }
+    }
+    .article-posts .message-box {
+        width: 550px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .article-details {
+        width: 94%;
+    }
+    .article-posts {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media screen and (max-width: 610px) {
+    .article-details {
+        .card-body {
+            .top-info h4 {
+                font-size: 20px;
+            }
+            .card-title {
+                width: 100%;
+                font-size: 26px;
+                strong {
+                    width: 100%;
+                }
+            }
+        }
+        .card-footer {
+            .btn-box {
+                flex-wrap: wrap;
+                .btn-nav {
+                    display: inline-block;
+                    margin: 2% 1%;
+                    padding: 0.7rem 1rem;
+                }
+            }
+        }
+    }
+    .article-posts .message-box {
+        width: 94%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .article-posts .message-box {
+        width: 94%;
+        .photo {
+            width: 40%;
+            img {
+                width: 100%;
+                height: 100px;
+            }
+        }
+        .message-view .message-title {
+            flex-direction: column;
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .article-details {
+        .card-body {
+            .top-info {
+                font-size: 20px;
+            }
+            .card-text {
+                padding: 0.2% 1%;
+            }
+        }
+        .card-footer .sub-info span {
+            text-align: left;
+        }
+    }
+}

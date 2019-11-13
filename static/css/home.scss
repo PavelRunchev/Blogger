@@ -1,0 +1,8 @@
+h1 {
+    @include title;
+    padding-bottom: 0;
+}
+
+h1:after {
+    @include line-below-title;
+}

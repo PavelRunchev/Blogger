@@ -1,0 +1,48 @@
+<div class="container-fluid article-edit">
+    <section class="container inner-articleEdit">
+        <h3 class="">Edit article now</h3>
+
+        {{#if globalError}}
+        <p class="text-center text-danger font-weight-bold">{{globalError}}</p>
+        {{/if}}
+        <form action="/article/article-edit/{{article._id}}" method="POST">
+            <div class="row-input px-2 mb-1">
+                <div class="md-form col-12 col-md-4">
+                    <input type="text" id="inputLGEx" class="form-control" placeholder="Title" name="title"
+                        value="{{article.title}}" />
+                    <label for="inputLGEx" class="text-light pl-4 label-text active">Article Title</label>
+                </div>
+                <div class="md-form col-12 col-md-6">
+                    <input type="text" id="form2" class="form-control" placeholder="ImageUrl" name="imageUrl"
+                        value="{{article.imageUrl}}" />
+                    <label for="form2" class="text-light pl-4 label-text active">Article Image Url</label>
+                </div>
+            </div>
+
+            <div class="row-input px-2">
+                <div class="md-form col-12 col-md-4">
+                    <label for="exampleSelect1" class="text-light pl-4 label-select active">Choose your Category</label>
+                    <select class="form-control select-option" id="exampleSelect1" name="category">
+                        <option value="{{article.category}}" selected>Choose category</option>
+                        {{#each categories}}
+                            <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="md-form col-12 col-md-6">
+                    <input type="text" id="form2" class="form-control" placeholder="VideoLink" name="videoLink"
+                        value="{{article.videoLink}}" />
+                    <label for="form2" class="text-light pl-4 label-text active">Video Link (not required)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="label-content">Content</label>
+                <textarea type="text" class="form-control" placeholder="Content" name="content" rows="10"
+                    cols="50">{{article.content}}</textarea>
+            </div>
+            <a href="/article/article-details/{{article._id}}" class="mr-5 btn-indigo" data-pjax="#pjax-container">Back</a>
+            <button type="submit" class="btn-yellow">Edit</button>
+        </form>
+    </section>
+</div>

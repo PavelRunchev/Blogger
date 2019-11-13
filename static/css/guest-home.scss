@@ -1,0 +1,10 @@
+.guest-home {
+    width: 100%;
+    margin: 4% auto 10% auto;
+    border-radius: 1rem;
+    @include box-shadow;
+    @include main-background-color;
+    img {
+        height: 40rem;
+    }
+}

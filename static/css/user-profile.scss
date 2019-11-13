@@ -1,0 +1,55 @@
+.profile-section {
+    h2 {
+        @include title;
+        margin: 0 auto;
+        padding-bottom: 0;
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    .container {
+        padding: 1% 0;
+        @include form-horizontal-background-color;
+        @include box-shadow;
+        border-radius: 0.5rem;
+        .overlay {
+            width: 40%;
+            //margin: 3% auto;
+            background: none;
+            .img-fluid {
+                display: block;
+                width: 200px;
+                height: 200px;
+                border: 2px solid #fff;
+                margin: 2% auto;
+                @include box-shadow;
+                cursor: pointer;
+            }
+            .img-fluid:active {
+                transform: scale(1.5);
+            }
+        }
+        .profile-data {
+            width: 40%;
+        }
+        .inner-container {
+            display: flex;
+            justify-content: space-around;
+            .card {
+                width: 40%;
+            }
+        }
+        .accordion {
+            background: none;
+        }
+        .btn-saveChange {
+            margin-top: 5%;
+            @include btn-classic;
+            color: #fff;
+            border-radius: 3px;
+        }
+        .btn-saveChange:hover {
+            @include btn-hover-shadow-black;
+        }
+    }
+}

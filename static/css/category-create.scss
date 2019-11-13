@@ -1,0 +1,67 @@
+.categoryCreate {
+    h2 {
+        @include title;
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    form {
+        padding: 1%;
+        @include form-background-color;
+        @include box-shadow;
+        width: 500px;
+        height: 400px;
+        margin: 0 auto 8% auto;
+        display: block;
+        border-radius: 0.5rem;
+        h2 {
+            margin-bottom: 20%;
+        }
+        & .d-flex .md-form .label-text {
+            font-size: 24px;
+            color: #fff;
+        }
+        & .d-flex .md-form input {
+            margin-top: 20px;
+            color: #fff;
+        }
+        & .d-flex .md-form .form-control:focus {
+            border-color: #fff;
+            outline: none;
+            background-color: none;
+        }
+        & .btn-createCategory {
+            @include btn-main-view;
+            margin-top: 15%;
+        }
+        & .btn-createCategory:hover {
+            @include btn-hover-shadow;
+            font-weight: bold;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .categoryCreate {
+        h2 {
+            font-size: 26px;
+        }
+        form {
+            width: 92%;
+            overflow: hidden;
+            h3 {
+                font-size: 22px;
+            }
+            .d-flex .md-form .label-text {
+                font-size: 18px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .categoryCreate h2 {
+        width: 100%;
+        font-size: 22px;
+    }
+}

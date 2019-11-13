@@ -1,0 +1,38 @@
+<div id="slide-out" class="side-nav sn-bg-4 fixed waves-effect waves-light">
+        <ul class="custom-scrollbar nav">
+            <!-- Logo -->
+            <li class="my-5">
+                <div class="logo-wrapper waves-light">
+                    <a href="/" data-pjax="#pjax-container">
+                        <img src="/img/blog.jpg" class="img-thumbnail" alt="logo">
+                    </a>
+                </div>
+            </li>
+
+            <!--/.Search Form-->
+            <form class="form-inline my-4 search-form" action="/article/article-search" method="POST">
+                <div class="md-form form-sm my-0">
+                    <input class="form-control form-control-sm mr-sm-2 mb-0" type="text" placeholder="Search" name="name"
+                        aria-label="Search">
+                </div>
+                <button class="search" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+
+            <!-- Side navigation links -->
+            <h6 class="text-light font-italic text-left d-inline w-100">Type Categories</h6>
+            <ul class="nav flex-column lighten-4 py-4 mb-5 mr-auto">
+                {{#each categories}}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/category/category-findArticleByCategory/{{_id}}" data-pjax="#pjax-container">{{name}}</a>
+                    </li>
+                {{/each}}
+                <li class="nav-item">
+                    <a class="nav-link hide font-weight-bold"><i class="fas fa-arrow-circle-left"></i> Hide Menu</a>
+                </li>
+            </ul>
+            <!--/. Side navigation links -->
+        </ul>
+        <div class="sidenav-bg mask-strong">
+            <p class="text-center text-light font-italic">&copy; 2019 All Rights Reserved!</p>
+        </div>
+</div>

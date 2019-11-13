@@ -1,0 +1,57 @@
+.technology {
+    width: 100%;
+    padding: 5% 0;
+    h2 {
+        @include title;
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    .inner-technology {
+        background: -webkit-linear-gradient(rgba(0, 98, 165, 0.9), rgba(0, 98, 165, 0.3));
+        background: linear-gradient(rgba(0, 98, 165, 0.9), rgba(0, 98, 165, 0.3));
+        width: 100%;
+        @include box-shadow;
+        padding: 2% 0;
+        border-radius: 5px;
+        p {
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 1px 1px rgb(0, 0, 0);
+            .mongoose {
+                width: 2rem;
+                height: 2rem;
+            }
+        }
+        .express {
+            opacity: 0;
+            color: #f5d800;
+            animation: zoomInRight 15s ease-in-out 0s backwards;
+        }
+        .node {
+            opacity: 0;
+            color: #87c000;
+            animation: zoomInRight 15s ease-in 1s backwards;
+        }
+        .bootstrap {
+            opacity: 0;
+            color: #6f3cbb;
+            animation: zoomInRight 15s ease-in 2s backwards;
+        }
+        .sass {
+            opacity: 0;
+            color: #c76495;
+            animation: zoomInLeft 15s ease-in 3s backwards;
+        }
+        .html5 {
+            opacity: 0;
+            color: #ea6227;
+            animation: zoomInLeft 15s ease-in 4s backwards;
+        }
+        .mongoose {
+            opacity: 0;
+            color: #840000;
+            animation: zoomInLeft 15s ease-in 5s backwards;
+        }
+    }
+}

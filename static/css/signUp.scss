@@ -1,0 +1,88 @@
+.signUp {
+    width: 100%;
+    height: 100%;
+    //padding-bottom: 1%;
+    .h2 {
+        @include title;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .h2:after {
+        @include line-below-title;
+    }
+    & .form-signUp {
+        @include form-background-color;
+        @include box-shadow;
+        padding: 1% 2%;
+        width: 30rem;
+        margin: 0 auto;
+        border-radius: 0.4rem;
+        border: 2px solid #fff;
+        .backspace {
+            cursor: pointer;
+            float: right;
+            color: #fff;
+        }
+        h3 {
+            padding-left: 13%;
+            margin-bottom: 8%;
+        }
+        .backspace:hover {
+            color: #ddd;
+        }
+        .field {
+            display: flex;
+            justify-content: space-around;
+        }
+        input {
+            color: #fff;
+        }
+        .md-form .row .form-control:focus {
+            border-color: #fff;
+            outline: none;
+            background-color: none;
+        }
+        .radio-button {
+            display: flex;
+            justify-content: space-around;
+            .fa-male,
+            .fa-female {
+                margin-right: 35px;
+            }
+        }
+        .btn-createUser {
+            @include btn-submit-view;
+        }
+        .btn-createUser:hover {
+            @include btn-hover-shadow;
+            font-weight: bold;
+        }
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .signUp {
+        .h2 {
+            width: 100%;
+        }
+        .form-signUp {
+            width: 94%;
+        }
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .signUp {
+        .h2 {
+            font-size: 26px;
+        }
+        .form-signUp {
+            h3 {
+                font-size: 22px;
+            }
+        }
+        form .md-form .row .label-text {
+            font-size: 16px;
+        }
+    }
+}

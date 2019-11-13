@@ -1,0 +1,137 @@
+@mixin box-shadow {
+    -webkit-box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.75);
+}
+
+@mixin flash-message {
+    animation: fadeOut 5s forwards;
+    animation-delay: 1s;
+    @include box-shadow;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    font-weight: normal;
+    position: fixed;
+    float: right;
+    margin: 0.5% 0;
+    overflow: hidden;
+    display: block;
+    top: 5rem;
+    right: 1rem;
+    font-size: 18px;
+    text-shadow: 2px 2px #000;
+    z-index: 1;
+}
+
+@mixin main-background-color {
+    background: -webkit-linear-gradient(rgba(0, 98, 165, 0.9), rgba(0, 98, 165, 0.9));
+    background: linear-gradient(rgba(0, 98, 165, 0.9), rgba(0, 98, 165, 0.9));
+}
+
+@mixin image-background-color {
+    background: linear-gradient(rgba(0, 98, 165, 0.8), rgba(0, 98, 165, 0.8)), url('../img/crop.jpg');
+    background: -webkit-linear-gradient(rgba(0, 98, 165, 0.8), rgba(0, 98, 165, 0.8)), url('../img/crop.jpg');
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+@mixin form-background-color {
+    background: -webkit-linear-gradient(rgba(0, 98, 165, 0.75), rgba(0, 98, 165, 0.75));
+    background: linear-gradient(rgba(0, 98, 165, 0.75), rgba(0, 98, 165, 0.75));
+}
+
+@mixin form-horizontal-background-color {
+    background: linear-gradient(rgba(0, 98, 165, 0.8), rgba(0, 98, 165, 0.8)), url('../img/profile-image.jpg');
+    background: -webkit-linear-gradient(rgba(0, 98, 165, 0.8), rgba(0, 98, 165, 0.8)), url('../img/profile-image.jpg');
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-background-repeat: no-repeat;
+}
+
+@mixin footerIconHoverEfect {
+    -webkit-box-shadow: 0px 0px 3px 5px rgba(255, 255, 255, 0.5);
+    -moz-box-shadow: 0px 0px 3px 5px rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 0px 3px 5px rgba(255, 255, 255, 0.5);
+    color: #fff;
+}
+
+@mixin title {
+    padding: 3% 0;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 3px 3px rgb(0, 98, 165);
+    background: rgb(230, 230, 230);
+    width: 57%;
+    margin: 0 auto;
+    border-radius: 0.5rem;
+    background: none;
+    text-align: center;
+}
+
+@mixin title-details {
+    padding: 3% 0;
+    font-weight: bold;
+    color: rgb(0, 98, 165);
+    text-shadow: 3px 3px rgb(200, 200, 200);
+    background: none;
+    width: 57%;
+    margin: 0 auto;
+    border-radius: 0.5rem;
+    background: none;
+    text-align: center;
+}
+
+@mixin line-below-title {
+    content: " ";
+    width: 150px;
+    height: 2px;
+    background: rgb(0, 98, 165);
+    display: block;
+    margin: 2% auto 4% auto;
+}
+
+@mixin btn-main-view {
+    cursor: point;
+    outline: none;
+    border: none;
+    color: #fff;
+    border-radius: 0.2rem;
+    border: 1px solid #fff;
+    padding: 0.7rem 2.5rem 0.7rem 1rem;
+}
+
+@mixin btn-submit-view {
+    cursor: pointer;
+    outline: none;
+    border-radius: 4px;
+    border: none;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+@mixin btn-classic {
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    padding: 0.7rem 1.8rem;
+    border-radius: 0.2rem;
+}
+
+@mixin btn-hover-shadow {
+    -webkit-box-shadow: 0px 0px 9px 3px rgba(255, 255, 255, 0.4);
+    -moz-box-shadow: 0px 0px 9px 3px rgba(255, 255, 255, 0.4);
+    box-shadow: 0px 0px 9px 3px rgba(255, 255, 255, 0.4);
+}
+
+@mixin btn-hover-shadow-black {
+    -webkit-box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.4);
+}

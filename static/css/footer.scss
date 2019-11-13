@@ -1,0 +1,204 @@
+footer {
+    @include main-background-color;
+    padding: 1% 0%;
+    z-index: 51;
+    // Link Section
+    .custom-footer {
+        padding: 2% 0;
+        display: flex;
+        justify-content: space-around;
+        color: #fff;
+        & .contacts,
+        & .partners,
+        & .project {
+            width: 14rem;
+        }
+        h5:after {
+            width: 50px;
+            content: " ";
+            height: 1px;
+            background: #fff;
+            display: block;
+            margin: 4% auto 9% 0;
+        }
+        & .links {
+            width: 9rem;
+            .inner-links {
+                display: flex;
+                flex-direction: column;
+                a {
+                    font-size: 18px;
+                    text-decoration: none;
+                    color: #fff;
+                }
+                a:hover {
+                    color: #ddd;
+                    padding-left: 0.3rem;
+                }
+            }
+        }
+        & .partners {
+            .icons {
+                display: flex;
+                justify-content: center;
+                a {
+                    .fa-github,
+                    .fa-twitter,
+                    .fa-facebook,
+                    .fa-youtube {
+                        font-size: 50px;
+                        border-radius: 50%;
+                        padding: 10px;
+                        -webkit-box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.6);
+                        -moz-box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.6);
+                        box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.6);
+                        margin: 0 5px;
+                    }
+                    .fa-youtube {
+                        font-size: 48px;
+                        padding: 12px;
+                    }
+                    .fa-github {
+                        color: #000;
+                    }
+                    .fa-github:hover {
+                        @include footerIconHoverEfect;
+                        background: #000;
+                    }
+                    & .fa-twitter:hover {
+                        @include footerIconHoverEfect;
+                    }
+                    & .fa-facebook:hover {
+                        @include footerIconHoverEfect;
+                    }
+                    & .fa-youtube:hover {
+                        @include footerIconHoverEfect;
+                    }
+                }
+            }
+        }
+        & .project {
+            & .heroku-name {
+                color: #5721B3;
+            }
+            & .heroku-name:hover {
+                color: #5721ff;
+            }
+            & .github-icon,
+            & .heroku-icon,
+            & .mongoDb-icon {
+                width: 25px;
+                height: 25px;
+                border-radius: 0.5rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    footer {
+        .custom-footer {
+            flex-direction: column;
+            .contacts,
+            .links,
+            .partners,
+            .project {
+                width: 60%;
+                margin: 5% auto;
+                display: block;
+                padding-inline-start: 15%;
+                h5 {
+                    font-size: 24px;
+                }
+                h5:after {
+                    width: 100px;
+                }
+                div,
+                div a {
+                    font-size: 18px;
+                }
+            }
+            .contacts div {
+                font-size: 16px;
+            }
+            .links>.inner-links>a {
+                font-size: 18px;
+            }
+            .partners {
+                .icons {
+                    justify-content: left;
+                }
+            }
+            .project div,
+            .project div a {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    footer {
+        .custom-footer {
+            .contacts,
+            .links,
+            .partners,
+            .project {
+                padding-inline-start: 0;
+            }
+            .contacts h5,
+            .links h5,
+            .partners h5,
+            .project h5 {
+                font-size: 22px;
+            }
+            .links>.inner-links>a {
+                font-size: 16px;
+            }
+            .contacts div {
+                font-size: 16px;
+            }
+            .partners .icons a {
+                font-size: 20px;
+            }
+            .project div,
+            .project div a {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 350px) {
+    footer .custom-footer {
+        justify-content: left;
+        .contacts,
+        .links,
+        .partners,
+        .project {
+            width: 100%;
+            padding-left: 10%;
+            padding-right: 0;
+        }
+        .contacts div {
+            font-size: 12px;
+        }
+        .links>.inner-links>a {
+            font-size: 12px;
+        }
+        .partners .icons {
+            flex-direction: column;
+            a {
+                width: 4rem;
+                margin-bottom: 10%;
+            }
+        }
+        .project div,
+        .project div a {
+            font-size: 12px;
+        }
+    }
+    footer>p {
+        font-size: 12px;
+    }
+}

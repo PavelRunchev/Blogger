@@ -1,0 +1,34 @@
+.table-responsive {
+    padding-bottom: 5%;
+    h2 {
+        @include title;
+        padding-bottom: 0;
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    .table {
+        @include form-background-color;
+        margin: 0 auto;
+        width: 60%;
+        @include box-shadow;
+        border-radius: 0.5rem;
+        padding: 5% 3%;
+        overflow: hidden;
+        font-weight: bold;
+        color: #fff;
+        th,
+        td {
+            font-size: 22px;
+        }
+        .btn-delete {
+            background-color: none;
+            outline: none;
+            border: none;
+            color: rgb(255, 2, 25);
+        }
+        .btn-delete:hover {
+            color: rgb(200, 50, 50);
+        }
+    }
+}

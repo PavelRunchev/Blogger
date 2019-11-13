@@ -1,0 +1,50 @@
+<div class="container user-status">
+    <h2 class="h2 text-center">Status for all Users</h2>
+        <table class="table">
+            <div class="d-flex justify-content-center">
+                <legend class="text-center text-light font-weight-bold w-25 mb-0 rounded"><i class="fas fa-users-cog"></i> Admin Platform</legend>
+            </div>
+            
+            <thead class="light-blue darken-3 white-text">
+                <tr>
+                    <th scope="col" class="h6">#</th>
+                    <th scope="col" class="h6">Registration</th>
+                    <th scope="col" class="h6">Email</th>
+                    <th scope="col" class="h6">Role</th>
+                    <th scope="col" class="h6">User Info</th>
+                    <th scope="col" class="h6">User Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each allUsers}}
+                <tr>
+                    <th scope="row" class="h6">{{this.index}}</th>
+                    <td class="h6">{{this.date}}</td>
+                    <td class="h6 font-weight-bold">{{this.email}}</td>
+                    
+                    {{#if isRoleAdmin}}
+                        <td class="h6 text-warning">Admin</td>
+                    {{else}}
+                        {{#if isRoleModerator}}
+                            <td class="h6 text-primary">Moderator</td>
+                        {{else}}
+                            <td class="h6 text-danger">User</td>
+                        {{/if}}
+                    {{/if}}
+                    <td class="h6"><a class="nav-link text-default" data-toggle="popover" data-placement="top" title="email: {{this.email}}"
+                    data-content="Full name: {{this.firstName}} {{this.lastName}}">Info</a></td>
+                    <td class="h6"><a class="text-primary" href="/admin/admin-user-changeRole/{{this._id}}">Change role</a></td>
+                </tr>
+                {{else}}
+                    <tr>
+                        <th scope="row" class="h6"></th>
+                        <td class="h6">No Users</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-between px-3">
+            <p class="h6">All users: <span class="font-weight-bold">{{allAuthedUsers}}</span></p>
+            <p class="h6">last register user: <span class="font-weight-bold font-italic">{{lastRegisterUser.email}}</span></p>
+        </div>
+</div>

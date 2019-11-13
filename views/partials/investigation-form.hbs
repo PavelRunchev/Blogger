@@ -1,0 +1,76 @@
+<button type="button" class="btn blue-gradient rounded-bottom text-light font-weight-bold animated zoomIn slower infinite btn-anketa" data-toggle="modal" data-target="#modalPoll-1">Please fill this Investigation!</button>
+
+<!-- Modal: modalPoll -->
+<div class="modal fade right" id="modalPoll-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header blue-gradient">
+        <p class="heading lead">Investigation</p>
+      </div>
+
+      <!--Body-->
+      <form action="/investigation/investigation-send" method="POST">
+        <div class="modal-body">
+          <div class="text-center">
+            <img src="/img/moon.jpg" class="ing-fluid z-depth-5 moon-image rounded">
+            <p>
+              <strong>Your opinion matters</strong>
+            </p>
+            <p>Have some ideas how to improve our site?
+              <strong>Give us your feedback.</strong>
+            </p>
+          </div>
+
+          <hr>
+
+        <!-- Radio -->
+        
+          <p class="text-center">
+            <strong>Your rating</strong>
+          </p>
+          <div class="form-check mb-4">
+            <input class="form-check-input" name="rating" type="radio" id="radio-179" value="Very good" checked>
+            <label class="form-check-label" for="radio-179">Very good</label>
+          </div>
+
+          <div class="form-check mb-4">
+            <input class="form-check-input" name="rating" type="radio" id="radio-279" value="Good">
+            <label class="form-check-label" for="radio-279">Good</label>
+          </div>
+
+          <div class="form-check mb-4">
+            <input class="form-check-input" name="rating" type="radio" id="radio-379" value="Mediocre">
+            <label class="form-check-label" for="radio-379">Mediocre</label>
+          </div>
+          <div class="form-check mb-4">
+            <input class="form-check-input" name="rating" type="radio" id="radio-479" value="Bad">
+            <label class="form-check-label" for="radio-479">Bad</label>
+          </div>
+          <div class="form-check mb-4">
+            <input class="form-check-input" name="rating" type="radio" id="radio-579" value="Very bad">
+            <label class="form-check-label" for="radio-579">Very bad</label>
+          </div>
+          <!-- Radio -->
+
+          <p class="text-center">
+            <strong>What could we improve?</strong>
+          </p>
+          <!--Basic textarea-->
+          <div class="md-form">
+            <textarea type="text" id="form79textarea" class="md-textarea form-control" name="message" rows="3"></textarea>
+            <label for="form79textarea">Your message</label>
+          </div>
+
+        </div>
+
+        <!--Footer-->
+        <div class="modal-footer justify-content-center heavy-rain-gradient">
+          <button type="submit" class="btn blue-gradient waves-effect waves-light .z-depth-4">Send<i class="fa fa-paper-plane ml-1"></i></button>
+          <button type="button" class="btn winter-neva-gradient waves-effect .z-depth-4" data-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Modal: modalPoll -->

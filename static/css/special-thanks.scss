@@ -1,0 +1,39 @@
+.special-thanks {
+    width: 100%;
+    //padding: 5% 0;
+    h2 {
+        @include title;
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    .inner-support {
+        background: -webkit-linear-gradient(rgba(0, 98, 165, 0.8), rgba(0, 98, 165, 0.8)), url('../img/crop.jpg');
+        background: linear-gradient(rgba(0, 98, 165, 0.8), rgba(0, 98, 165, 0.8)), url('../img/crop.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 60%;
+        @include box-shadow;
+        border-radius: 5px;
+        margin: 0 auto;
+        padding: 5% 1%;
+        h3 {
+            font-size: 26px;
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+        }
+        p {
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .fa-mdb {
+            font-size: 50px;
+        }
+        .fa-blogger {
+            font-size: 35px;
+            color: #fff;
+        }
+    }
+}

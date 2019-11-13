@@ -1,0 +1,23 @@
+<div class="container server-errors">
+    <h2 class="h2 text-center">Server Error List</h2>
+    
+    <div class="d-flex justify-content-center">
+        <legend class="text-center text-light font-weight-bold w-25 mb-0 rounded"><i class="fas fa-users-cog"></i> Admin Platform</legend>
+    </div>
+    <div class="inner-serverErrrors">
+        {{#if isClearAll}}
+            <form id="admin-clearAllServerLogs" action="/admin/clear-serverError-logs" method="post"></form>
+            <a id="clearErrors" class="mr-5 font-weight-bold" href="javascript:document.getElementById('admin-clearAllServerLogs').submit()" data-pjax="#pjax-container">clear all</a>
+        {{/if}}
+
+        <!-- each diff elements id with index for click delete!!!-->
+        {{#each serverErrorLogs}}
+            <div>
+                <form id="admin-removeLog{{@index}}" action="/admin/admin-removeServerErrorLog/{{@index}}" method="post"></form>
+                <p class="text-left font-weight-bold">{{this.index}} {{this.row}} <a class="delete-row font-weight-bold" href="javascript:document.getElementById('admin-removeLog{{@index}}').submit()" data-pjax="#pjax-container">delete</a></p>
+            </div>
+        {{else}}
+            <h5 class="text-center font-weight-bold text-danger my-5">No Server Errors!</h5>
+        {{/each}}
+    </div>
+</div>

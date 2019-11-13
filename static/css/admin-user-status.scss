@@ -1,0 +1,28 @@
+.user-status {
+    width: 100%;
+    padding: 2% 0;
+    .h2 {
+        @include title;
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    .table {
+        width: 100%;
+        @include box-shadow;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        z-index: 0;
+        tbody {
+            background: rgba(255, 255, 255, 0.85);
+            .userEmail {
+                color: rgb(0, 98, 165)
+            }
+        }
+    }
+    div legend {
+        @include main-background-color;
+        @include box-shadow;
+        z-index: 1;
+    }
+}

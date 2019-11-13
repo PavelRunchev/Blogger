@@ -1,0 +1,16 @@
+<div class="container post-send-form">
+     {{#if globalError}}
+        <p class="text-center text-danger font-weight-bold">{{globalError}}</p>
+    {{/if}}
+
+    <form action="/post/post-form/{{fields.articleId}}" method="POST">
+        <h4 class="text-center">Write your opinion on the article</h4>
+        <input name="articleId" value="{{fields.articleId}}" hidden>
+        <div class="md-form">
+            <textarea id="text-form" class="md-textarea form-control" name="content" rows="4">{{fields.content}}</textarea>
+            <label for="text-form">Post Message</label>
+        </div>
+        <button type="submit" class="blue-gradient send"><i class="fas fa-paper-plane fa-2x"></i></button>
+    </form>
+
+</div>

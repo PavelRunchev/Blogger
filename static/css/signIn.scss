@@ -1,0 +1,92 @@
+.signIn {
+    padding: 10% 0;
+    .container {
+        @include main-background-color;
+        width: 100%;
+        border: 2px solid #fff;
+        border-radius: 1rem;
+        @include box-shadow;
+        label {
+            color: #fff;
+        }
+        .btn-signIn {
+            @include btn-main-view;
+        }
+        .btn-signIn:hover {
+            @include btn-hover-shadow;
+            font-weight: bold;
+        }
+        .banner-text {
+            width: 70%;
+            position: absolute;
+            bottom: 40px;
+            padding-left: 20px;
+        }
+        .signIn-sec h2 {
+            padding-top: 10%;
+            margin-bottom: 30px;
+            font-weight: 800;
+            font-size: 30px;
+        }
+        // bottom border
+        .signIn-sec h2:after {
+            content: " ";
+            width: 100px;
+            height: 5px;
+            background: #ffff;
+            display: block;
+            margin: 5% auto;
+            border-radius: 3px;
+        }
+        .banner-sec {
+            overflow: hidden;
+        }
+        .fa-sign-in-alt {
+            font-size: 24px;
+            color: #fff;
+        }
+        .fa-sign-in-alt:hover {
+            color: #ddd;
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .container {
+        height: auto;
+        overflow: hidden;
+        .row {
+            display: flex;
+            flex-direction: column;
+            .signIn-sec {
+                height: 100%;
+                width: 350px;
+                margin: 4% auto;
+            }
+            .banner-sec {
+                height: 398px;
+                width: 100%;
+                .carousel-inner,
+                .carousel-item {
+                    height: 398px;
+                    img {
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .signIn .container {
+        width: 94%;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .signIn .container .row .signIn-sec {
+        width: 100%;
+    }
+}
