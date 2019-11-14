@@ -2,7 +2,7 @@
     h2 {
         @include title;
         margin: 0 auto;
-        padding-bottom: 0;
+        padding-top: 1% auto;
     }
     h2:after {
         @include line-below-title;
@@ -14,7 +14,6 @@
         border-radius: 0.5rem;
         .overlay {
             width: 40%;
-            //margin: 3% auto;
             background: none;
             .img-fluid {
                 display: block;
@@ -29,8 +28,13 @@
                 transform: scale(1.5);
             }
         }
-        .profile-data {
-            width: 40%;
+        .profile-user-info {
+            display: flex;
+            justify-content: space-around;
+            margin: 10% 0;
+            .profile-data {
+                width: 40%;
+            }
         }
         .inner-container {
             display: flex;
@@ -50,6 +54,60 @@
         }
         .btn-saveChange:hover {
             @include btn-hover-shadow-black;
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .profile-section {
+        .container .user-data-change .card-body .form-elegant .row {
+            .md-form {
+                margin: 0% auto;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .profile-section {
+        h2 {
+            font-size: 26px;
+        }
+        .container .profile-user-info {
+            flex-direction: column;
+            .user-profile-image {
+                margin: 2% auto;
+                width: 60%;
+            }
+            .profile-data {
+                margin: 2% auto;
+                width: 60%;
+            }
+        }
+        .container .inner-container {
+            flex-direction: column;
+            .card {
+                margin: 2% auto;
+                width: 80%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .profile-section {
+        .container .profile-user-info {
+            .user-profile-image {
+                width: 90%;
+            }
+            .profile-data {
+                width: 90%;
+            }
+        }
+        .container .inner-container {
+            .card {
+                width: 90%;
+            }
         }
     }
 }

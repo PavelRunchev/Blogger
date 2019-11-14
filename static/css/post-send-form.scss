@@ -1,5 +1,5 @@
 .post-send-form {
-    width: 40%;
+    width: 600px;
     margin: 10% auto;
     @include box-shadow;
     border-radius: 0.5rem;
@@ -23,5 +23,20 @@
     }
     .send:hover {
         @include btn-hover-shadow-black;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .post-send-form {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .post-send-form {
+        width: 94%;
+        form h4 {
+            font-size: 18px;
+        }
     }
 }

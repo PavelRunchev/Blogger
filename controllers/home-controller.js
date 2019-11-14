@@ -5,44 +5,54 @@ const Article = require('../models/Article');
 const { convertDate } = require('../util/dateConvert');
 
 module.exports = {
-    index: async(req, res) => {
-        try {
-            const categories = await Category.find({});
+    index: (req, res) => {
+        Category.find({}).then((categories) => {
             if (res.locals.isAuthed) {
+                const userId = res.locals.currentUser.id;
                 //message user profile
-                const messages = await Message.find({ reciever: res.locals.currentUser.id, isReading: false });
-                const noReadingMessages = messages.length > 0 ? true : false;
+                Message.find({ reciever: userId, isReading: false }).then((messages) => {
+                    const noReadingMessages = messages.length > 0 ? true : false;
+                    Article.find({ isLock: false })
+                        .select('title imageUrl creator like unlike createDate')
+                        .populate({ path: 'creator', select: 'email' })
+                        .populate({ path: 'category', select: 'name' })
+                        .then((articles) => {
+                            // the article with highest likes.
+                            let secondArticles = articles.sort((a, b) => {
+                                let result = b.like.length - a.like.length
+                                if (result === 0) {
+                                    result = a.unlike.length - b.unlike.length;
+                                }
+                                return result;
+                            }).slice(0, 3);
 
-                // the article with highest likes.
-                const articles = await Article.find({ isLock: false })
-                    .select('title imageUrl creator like createDate')
-                    .populate({ path: 'creator', select: 'email' })
-                    .populate({ path: 'category', select: 'name' });
-                let secondArticles = articles.sort((a, b) => b.like.length - a.like.length).slice(0, 3);
-                if (secondArticles) {
-                    secondArticles.map(a => {
-                        a.date = convertDate(a.createDate);
-                        a.isLike = a.like.length === 0 ? 0 : a.like.length;
-                    });
-                }
+                            if (secondArticles) {
+                                secondArticles.map(a => {
+                                    a.date = convertDate(a.createDate);
+                                    a.isLike = a.like.length === 0 ? 0 : a.like.length;
+                                    a.isUnLike = a.unlike.length === 0 ? 0 : a.unlike.length;
+                                });
+                            }
 
-                res.status(200);
-                res.renderPjax('home/index', { categories, messages, secondArticles });
+                            res.status(200);
+                            res.renderPjax('home/index', { categories, messages, secondArticles });
+                        }).catch(err => errorHandler(req, res, err));
+                }).catch(err => errorHandler(req, res, err));
             } else {
-                const articles = await Article
+                Article
                     .find({ isLock: false })
                     .sort({ createDate: 'descending' })
-                    .select('title imageUrl').limit(3);
-                const art1 = articles[0];
-                const art2 = articles[1];
-                const art3 = articles[2];
-                res.status(200);
-                res.setHeader("Set-Cookie", "HttpOnly;SameSite=None");
-                res.renderPjax('home/index', { categories, art1, art2, art3 });
+                    .select('title imageUrl')
+                    .limit(3)
+                    .then((articles) => {
+                        const art1 = articles[0];
+                        const art2 = articles[1];
+                        const art3 = articles[2];
+                        res.status(200);
+                        res.renderPjax('home/index', { categories, art1, art2, art3 });
+                    }).catch(err => errorHandler(req, res, err));
             }
-        } catch (err) {
-            errorHandler(req, res, err);
-        }
+        }).catch(err => errorHandler(req, res, err));
     },
 
     serverError: (req, res) => {

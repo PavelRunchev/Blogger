@@ -6,7 +6,7 @@
         @include line-below-title;
     }
     .send-message-form {
-        width: 30%;
+        width: 600px;
         margin: 0 auto 10% auto;
         @include form-background-color;
         @include box-shadow;
@@ -25,10 +25,35 @@
         }
         .btn-sendMessage {
             @include btn-submit-view;
+            margin-bottom: 10px;
         }
         .btn-sendMessage:hover {
             @include btn-hover-shadow;
             font-weight: bold;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .send-message h3 {
+        width: 100%;
+    }
+    .send-message .send-message-form {
+        width: 80%;
+        h2 {
+            font-size: 22px;
+        }
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .send-message h3 {
+        font-size: 22px;
+    }
+    .send-message .send-message-form {
+        width: 100%;
+        h2 {
+            font-size: 20px;
         }
     }
 }

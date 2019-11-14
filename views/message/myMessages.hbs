@@ -15,20 +15,20 @@
             {{#each myMessages}}
                 {{> before-delete-message}}
                 <tr>
-                    <th scope="row">{{index}}</th>
-                    <td class="text-center font-weight-bold">{{date}}</td>
-                    <td class="text-center"><span class="font-weight-bold text-warning">{{senderEmail}}</span></td>
-                    <td class="text-center"><a class="nav-link text-info font-weight-bold" data-toggle="popover" data-placement="top" title="Message"
+                    <th scope="row" class="text-dark font-weight-bold">{{index}}</th>
+                    <td class="text-center font-weight-bold text-dark">{{date}}</td>
+                    <td class="text-center text-dark"><span class="font-weight-bold font-italic">{{senderEmail}}</span></td>
+                    <td class="text-center"><a class="nav-link text-info font-weight-bold font-italic" data-toggle="popover" data-placement="top" title="Message"
                     data-content="{{this.content}}">Reading</a></td>
                     <td class="text-center">
-                        <a class="nav-link font-weight-bold btn-delete" data-toggle="modal" data-target="#modalConfirmDelete{{index}}">Delete</a>
+                        <a class="nav-link font-weight-bold btn-delete font-italic" data-toggle="modal" data-target="#modalConfirmDelete{{index}}">Delete</a>
                     </td>
                 </tr>
             {{else}}
                  <tr>
-                    <th scope="row" class="h6">1</th>
+                    <th scope="row"></th>
                     <td></td>
-                    <td class="h6 text-center">No Messages!</td>
+                    <td class="h6 text-center text-dark">No Messages!</td>
                     <td></td>
                     <td></td>
                 </tr>

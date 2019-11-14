@@ -48,5 +48,8 @@
     .article-all {
         padding-left: 0;
         padding-right: 0;
+        .article-list .card {
+            padding: 2%;
+        }
     }
 }

@@ -20,3 +20,22 @@
         }
     }
 }
+
+@media screen and (max-width: 1199px) {
+    .category-findArticlesByCategory .article-list .card {
+        width: 83%;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .category-findArticlesByCategory .article-list .card {
+        width: 94%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .category-findArticlesByCategory {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

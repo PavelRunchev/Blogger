@@ -1,4 +1,4 @@
-<div class="container article-create">
+<div class="container-fluid article-create">
 
     <section class="container inner-articleCreate">
         <h3>Create your article now</h3>
@@ -7,7 +7,7 @@
         <p class="text-center text-danger font-weight-bold">{{globalError}}</p>
         {{/if}}
         <form action="/article/article-create" method="POST">
-            <div class="d-flex justify-content-around px-2 mb-1">
+            <div class="row-input px-2 mb-1">
                 <div class="md-form form-lg col-md-4">
                     <input type="text" id="inputLGEx" class="form-control" name="title"
                         value="{{fields.title}}" />
@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-around px-2">
+            <div class="row-input px-2">
                 <div class="md-form form-lg col-md-4">
                     <label for="exampleSelect1" class="text-light pl-4 label-select">Choose your Category</label>
                     <select class="form-control select-option" id="exampleSelect1" name="category">

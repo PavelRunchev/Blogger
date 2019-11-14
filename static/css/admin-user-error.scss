@@ -1,6 +1,6 @@
 .user-errors {
     width: 100%;
-    padding: 3% 0;
+    padding: 3% 2%;
     h2 {
         @include title;
         .fa-users-cog {
@@ -10,10 +10,15 @@
     h2:after {
         @include line-below-title;
     }
-    div legend {
-        @include main-background-color;
-        @include box-shadow;
-        z-index: 1;
+    .admin-console {
+        display: flex;
+        justify-content: center;
+        legend {
+            width: 300px;
+            @include main-background-color;
+            @include box-shadow;
+            z-index: 1;
+        }
     }
     .inner-userErrrors {
         background: rgba(255, 255, 255, 0.85);
@@ -38,6 +43,26 @@
         }
         p {
             font-size: 14px;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .user-errors {
+        h2 {
+            font-size: 26px;
+        }
+        .admin-console legend {
+            width: 200px;
+            font-size: 18px;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .user-errors {
+        h2 {
+            font-size: 22px;
         }
     }
 }

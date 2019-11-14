@@ -1,3 +1,9 @@
+.container-fluid {
+    h1 {
+        padding-top: 0;
+    }
+}
+
 @media screen and (max-width: 991px) {
     .container-fluid {
         h1 {

@@ -1,12 +1,13 @@
 .myArticles {
     .article-list {
         width: 100%;
-        margin: 0 auto;
+        margin: 2.5% auto;
         display: block;
         padding: 0%;
         .card {
             width: 70%;
             margin: 0 auto 50px auto;
+            padding: 5%;
             @include box-shadow;
             .card-body {
                 padding-left: 0;
@@ -28,5 +29,24 @@
                 text-shadow: 1px 1px rgb(0, 0, 0);
             }
         }
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .myArticles .article-list .card {
+        width: 83%;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .myArticles .article-list .card {
+        width: 94%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .myArticles {
+        padding-left: 0;
+        padding-right: 0;
     }
 }

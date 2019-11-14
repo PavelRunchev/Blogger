@@ -220,6 +220,7 @@ module.exports = app => {
     app.get('/admin/admin-user-changeRole/:id', controllers.admin.userChangeRole);
     app.post('/admin/admin-addRole/:id', controllers.admin.addRole);
     app.post('/admin/admin-removeRole/:id', controllers.admin.removeRole);
+
     //
     // Investigation Router
     //

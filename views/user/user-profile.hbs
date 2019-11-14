@@ -2,8 +2,8 @@
     <h2 class="text-center">Profile Section</h2>
 
     <div class="container">
-        <div class="d-flex justify-content-around my-5">
-            <div class="overlay d-flex justify-content-center">
+        <div class="profile-user-info">
+            <div class="overlay user-profile-image">
                 <img src="{{user.profileImage}}" alt="image" class="img-fluid rounded" />
             </div>
 
@@ -78,13 +78,13 @@
                 <div class="card-body">
                     <form class="form-elegant" action="/user/user-profile/user-changeData" method="POST">
                         <div class="row d-flex justify-content-around">
-                            <div class="md-form col-md-4">
+                            <div class="md-form col-12 col-sm-8 col-md-6 col-lg-4">
                                 <input type="text" id="Form-email" class="form-control text-light" name="email"
                                     value="{{user.email}}">
                                 <label for="Form-email" class="text-light pl-4 active">Your email</label>
                             </div>
 
-                            <div class="md-form col-md-4">
+                            <div class="md-form col-12 col-sm-8 col-md-6 col-lg-4">
                                 <input type="number" id="Form-age" class="form-control text-light" name="age"
                                     value="{{user.age}}">
                                 <label for="Form-age" class="text-light pl-4 active">Your Age</label>
@@ -92,13 +92,13 @@
                         </div>
 
                         <div class="row d-flex justify-content-around">
-                            <div class="md-form col-md-4">
+                            <div class="md-form col-12 col-sm-8 col-md-6 col-lg-4">
                                 <input type="text" id="Form-firstName" class="form-control text-light" name="firstName"
                                     value="{{user.firstName}}">
                                 <label for="Form-firstName" class="text-light pl-4 active">Your First Name</label>
                             </div>
 
-                            <div class="md-form col-md-4">
+                            <div class="md-form col-12 col-sm-8 col-md-6 col-lg-4">
                                 <input type="text" id="Form-lastName" class="form-control text-light" name="lastName"
                                     value="{{user.lastName}}">
                                 <label for="Form-lastName" class="text-light pl-4 active">Your Last Name</label>

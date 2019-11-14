@@ -8,3 +8,9 @@
         height: 40rem;
     }
 }
+
+@media screen and (max-width:575px) {
+    .guest-home {
+        width: 94%;
+    }
+}

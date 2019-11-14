@@ -1,5 +1,5 @@
 .article-create {
-    padding: 5% 0;
+    padding: 3% 2%;
     .inner-articleCreate {
         padding: 1%;
         @include form-background-color;
@@ -15,39 +15,43 @@
         h3:after {
             background: #fff;
         }
-        & form .d-flex .md-form .label-text {
+        & form .row-input {
+            display: flex;
+            justify-content: space-around;
+        }
+        & form .row-input .md-form .label-text {
             font-size: 24px;
             color: #fff;
         }
-        & form .d-flex .md-form .label-select {
+        & form .row-input .md-form .label-select {
             font-size: 20px;
             margin-bottom: 4rem;
             padding-bottom: 4rem;
         }
-        & form .d-flex .md-form .form-control:focus {
+        & form .row-input .md-form .form-control:focus {
             border-color: #fff;
             outline: none;
             background-color: none;
         }
-        & form .d-flex .md-form .select-option {
+        & form .row-input .md-form .select-option {
             color: #fff;
             margin-top: 3rem;
         }
-        & form .d-flex .md-form .select-option option {
+        & form .row-input .md-form .select-option option {
             background: none;
             color: #000;
         }
-        & form .d-flex .md-form input {
+        & form .row-input .md-form input {
             margin-top: 20px;
             color: #fff;
         }
         // placeholder color Chrome
-        & form .d-flex .md-form input::placeholder {
+        & form .row-input .md-form input::placeholder {
             color: #fff;
             font-weight: normal;
         }
         // placeholder color FireFox
-        & form .d-flex .md-form input:-ms-input-placeholder {
+        & form .row-input .md-form input:-ms-input-placeholder {
             color: #fff;
             font-weight: normal;
         }
@@ -72,26 +76,12 @@
     }
 }
 
-@media screen and (max-width: 1396px) {
-    .article-create {
-        width: 100%;
-        max-width: 100%;
-        min-width: 100%;
-        .inner-articleCreate {
-            width: 80%;
-            max-width: 80%;
-            min-width: 80%;
-            padding: 1% 0%;
-        }
-    }
-}
-
 @media screen and (max-width: 991px) {
     .article-create {
         .inner-articleCreate {
-            width: 95%;
-            min-width: 95%;
-            max-width: 95%;
+            width: 94%;
+            min-width: 94%;
+            max-width: 94%;
             form .d-flex .md-form .label-text {
                 font-size: 20px;
             }
@@ -102,14 +92,9 @@
 @media screen and (max-width: 767px) {
     .article-create {
         .inner-articleCreate {
-            form .d-flex {
+            form .row-input {
+                width: 100%;
                 flex-direction: column;
-                .md-form {
-                    width: 100%;
-                }
-            }
-            form .form-group {
-                padding: 0 2%;
             }
         }
     }
@@ -118,15 +103,12 @@
 @media screen and (max-width: 575px) {
     .article-create {
         .inner-articleCreate {
-            h3 {
-                font-size: 22px;
-            }
-            form .d-flex .md-form .label-text,
-            form .form-group .label-content {
+            width: 94%;
+            form .row-input .md-form .label-text {
                 font-size: 16px;
             }
-            form .form-group {
-                padding: 0 2%;
+            form .form-group .label-content {
+                font-size: 16px;
             }
         }
     }
