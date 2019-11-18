@@ -3,7 +3,7 @@ const path = require('path');
 
 const User = require('../models/User');
 const Article = require('../models/Article');
-const Investigation = require('../models/Investigation');
+const Survey = require('../models/Survey');
 
 const log4js = require('log4js');
 const { errorHandler, userError } = require('../config/errorHandler');
@@ -80,8 +80,8 @@ module.exports = {
         }
     },
 
-    investigationStatus: (req, res) => {
-        Investigation.find({}).then((scores) => {
+    surveyStatus: (req, res) => {
+        Survey.find({}).then((scores) => {
             let allRatings = 0;
             scores.map((e, i) => {
                 e.index = i + 1;
@@ -108,7 +108,7 @@ module.exports = {
             if (points === 6) status = 'Very good';
             if (points === 5) status = 'Good';
             if (points === 4) status = 'Mediocre';
-            res.renderPjax('admin/investigation-status', { scores, allRatings, status });
+            res.renderPjax('admin/survey-status', { scores, allRatings, status });
         }).catch(err => errorHandler(req, res, err));
     },
 

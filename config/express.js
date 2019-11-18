@@ -19,14 +19,23 @@ module.exports = app => {
         extname: '.hbs'
     }));
 
+
     app.use(cookieParser());
-
     app.use(bodyParser.urlencoded({ extended: true }));
-
     app.use(session({
-        secret: '123456',
+        secret: 'raiders',
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        HttpOnly: true,
+        secure: true
+    }));
+
+    app.use(sassMiddleware({
+        src: path.join('./static'),
+        dest: path.join('./static'),
+        debug: false,
+        outputStyle: 'compressed',
+        sourceMap: true
     }));
 
     app.use(passport.initialize());
@@ -39,15 +48,15 @@ module.exports = app => {
 
     app.use(flash());
 
-    app.use(sassMiddleware({
-        src: path.join('./static'),
-        dest: path.join('./static'),
-        debug: false,
-        outputStyle: 'compressed',
-        sourceMap: true
-    }));
+    app.use(express.static('./static'));
 
     app.use(function(req, res, next) {
+        // flash configuretion to express!
+        // delete session when is empty!!!
+        if (Object.getOwnPropertyNames(res.locals.flash).length === 0) {
+            delete req.session.flash;
+            delete res.locals.flash;
+        }
 
         if (req.header('X-PJAX')) {
             req.pjax = true;
@@ -57,12 +66,6 @@ module.exports = app => {
             res.locals.pjax = false;
         }
 
-        // flash configuretion to express!
-        // delete session when is empty!!!
-        if (Object.getOwnPropertyNames(res.locals.flash).length === 0) {
-            delete req.session.flash;
-            delete res.locals.flash;
-        }
 
         if (req.user) {
             res.locals.currentUser = req.user;
@@ -79,6 +82,4 @@ module.exports = app => {
     });
 
     app.set('view engine', '.hbs');
-
-    app.use(express.static('./static'));
 };

@@ -16,7 +16,7 @@
 @import 'navbar-left';
 @import 'info-messages';
 // Home Section
-@import 'investigation';
+@import 'survey';
 //
 // Dynamic sections
 //
@@ -42,7 +42,7 @@
 @import 'article-delete';
 // Admin Section
 @import 'admin-status-articles';
-@import 'admin-investigation-status';
+@import 'admin-survey-status';
 @import 'admin-server-error';
 @import 'admin-user-error';
 @import 'admin-user-status';
@@ -69,14 +69,14 @@ body {
         background: linear-gradient(rgba(230, 230, 230, 0.9), rgba(230, 230, 230, 0.9)), url('../img/new-york.jpg');
         background-size: cover;
         background-attachment: fixed;
-        padding: 3% 0;
+        padding: 5% 0;
         width: 100%;
         min-height: 100%;
         height: 100%;
         // main paddint-top below main navigation.
-        #pjax-container {
-            padding: 64px 0;
-        }
+        // #pjax-container {
+        //     padding: 64px 0;
+        // }
         // loading bar at click in submit button!!!
         #spinner {
             opacity: 0;

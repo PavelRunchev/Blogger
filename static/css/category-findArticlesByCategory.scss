@@ -6,6 +6,7 @@
         padding: 0%;
         .card {
             width: 70%;
+            padding: 5%;
             margin: 0 auto 50px auto;
             @include box-shadow;
             .card-body {
