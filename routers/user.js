@@ -80,7 +80,7 @@ const User = require('../models/User');
         .matches('^[A-Za-z0-9._-]+@[a-z0-9.-]+.[a-z]{2,4}$').withMessage('Email is incorrect format!')
         .custom((value, { req }) => {
             return User.findOne({ email: value }).then((userDoc) => {
-                if (userDoc && userDoc._id.toString() !== req.user._id.toString()) {
+                if (userDoc && userDoc.email !== req.session.user.email) {
                     return Promise.reject('E-Mail address already exists!');
                 }
             });
@@ -100,6 +100,8 @@ const User = require('../models/User');
         .isNumeric()
         .withMessage('Age must be number!')
     ], controllers.user.changeUserData);
+
+    router.post('/accessCookie', controllers.user.accessCookie);
 
 
 module.exports = router;

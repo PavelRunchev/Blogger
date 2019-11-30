@@ -2,12 +2,14 @@
     h2 {
         @include title;
         margin: 0 auto;
-        padding-top: 1% auto;
+        padding-bottom: 0;
     }
     h2:after {
         @include line-below-title;
     }
-    .container {
+    .profile-box {
+        width: 70%;
+        margin: 0 auto;
         padding: 1% 0;
         @include form-horizontal-background-color;
         @include box-shadow;
@@ -60,8 +62,9 @@
 
 @media screen and (max-width: 991px) {
     .profile-section {
-        .container .user-data-change .card-body .form-elegant .row {
-            .md-form {
+        .profile-box  {
+            width: 85%;
+            .user-data-change .card-body .form-elegant .row .md-form {
                 margin: 0% auto;
             }
         }
@@ -73,30 +76,44 @@
         h2 {
             font-size: 26px;
         }
-        .container .profile-user-info {
-            flex-direction: column;
-            .user-profile-image {
-                margin: 2% auto;
-                width: 60%;
+        .profile-box {
+            width: 96%;
+            .profile-user-info {
+                flex-direction: column;
+                .user-profile-image {
+                    margin: 2% auto;
+                    width: 60%;
+                }
+                .profile-data {
+                    margin: 2% auto;
+                    width: 60%;
+                }
+            } 
+
+            .inner-container {
+                flex-direction: column;
+                .card {
+                    margin: 2% auto;
+                    width: 80%;
+                }
             }
-            .profile-data {
-                margin: 2% auto;
-                width: 60%;
+
+            .user-data-change .collapse .card-body .form-elegant {
+                padding-bottom: 5%;
+            }
+
+            .user-data-change .collapse .card-body .form-elegant .row .md-form {
+                margin: 3% auto;
             }
         }
-        .container .inner-container {
-            flex-direction: column;
-            .card {
-                margin: 2% auto;
-                width: 80%;
-            }
-        }
+
+        
     }
 }
 
 @media screen and (max-width: 575px) {
     .profile-section {
-        .container .profile-user-info {
+        .profile-box .profile-user-info {
             .user-profile-image {
                 width: 90%;
             }
@@ -104,7 +121,7 @@
                 width: 90%;
             }
         }
-        .container .inner-container {
+        .profile-box .inner-container {
             .card {
                 width: 90%;
             }

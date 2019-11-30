@@ -10,7 +10,7 @@
     .table {
         @include form-background-color;
         margin: 0 auto;
-        width: 60%;
+        width: 80%;
         @include box-shadow;
         border-radius: 0.5rem;
         padding: 5% 3%;
@@ -32,6 +32,14 @@
         }
         .btn-delete:hover {
             color: rgb(200, 50, 50);
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .table-responsive {
+        .table {
+            width: 90%;
         }
     }
 }

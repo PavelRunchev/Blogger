@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const encryption = require('../util/encryption');
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const userSchema = new mongoose.Schema({
     email: { type: mongoose.Schema.Types.String, required: true, unique: true },
@@ -15,7 +15,9 @@ const userSchema = new mongoose.Schema({
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post', default: [] }],
     salt: { type: mongoose.Schema.Types.String, required: true },
     roles: [{ type: mongoose.Schema.Types.String }],
-    createDate: { type: mongoose.Schema.Types.Date, default: Date.now }
+    createDate: { type: mongoose.Schema.Types.Date, default: Date.now },
+    isOnline: { type: mongoose.Schema.Types.Boolean, default:false },
+    acceptCookie: { type: mongoose.Schema.Types.Boolean, default: false }
 });
 
 userSchema.path('email').validate(function() {
@@ -35,10 +37,25 @@ userSchema.path('gender').validate(function() {
 }, 'Gender must be Male or Female!');
 
 userSchema.method({
-    authenticate: function(password) {
-        return encryption.generateHashedPassword(this.salt, password) === this.hashedPass;
+    matchPassword: function(password) {
+        return bcrypt.compare(password, this.hashedPass);
     }
 });
+
+userSchema.pre('save', function (next) {
+    if (this.isModified('password')) {
+      bcrypt.genSalt(saltRounds, (err, salt) => {
+        if (err) { next(err); return; }
+        bcrypt.hash(this.password, salt, (err, hash) => {
+          if (err) { next(err); return; }
+          this.password = hash;
+          next();
+        });
+      });
+      return;
+    }
+    next();
+  });
 
 const User = mongoose.model('User', userSchema);
 
@@ -46,19 +63,26 @@ User.seedAdminUser = async() => {
     try {
         let users = await User.find();
         if (users.length > 0) return;
-        const salt = encryption.generateSalt();
-        const hashedPass = encryption.generateHashedPassword(salt, '123');
-        return User.create({
-            email: 'abobo@abv.bg',
-            salt,
-            hashedPass,
-            firstName: 'Abobo',
-            lastName: 'Bobchev',
-            age: 34,
-            gender: 'male',
-            profileImage: '/userProfile/Admin_20122.png',
-            messages: [],
-            roles: ['User', 'Admin']
+        bcrypt.genSalt(saltRounds, function(err, salt) {
+            if(err) { next(err); return; }
+            bcrypt.hash('123', salt, (err, hash) => {
+                if(err) { next(err); return; }
+                return User.create({
+                    email: 'abobo@abv.bg',
+                    salt,
+                    hashedPass: hash,
+                    firstName: 'Abobo',
+                    lastName: 'Bobchev',
+                    age: 34,
+                    gender: 'male',
+                    profileImage: '/userProfile/Admin_20122.png',
+                    articles: [],
+                    messages: [],
+                    posts: [],
+                    isOnline: false,
+                    roles: ['User', 'Admin']
+                });
+            });
         });
     } catch (next) {
         next();

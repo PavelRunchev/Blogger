@@ -40,7 +40,18 @@
 
 @media screen and (max-width: 991px) {
     .myArticles .article-list .card {
-        width: 94%;
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .myArticles {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        .article-list .card {
+            width: 96%;
+        }
     }
 }
 
@@ -50,3 +61,4 @@
         padding-right: 0;
     }
 }
+

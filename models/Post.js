@@ -5,7 +5,8 @@ const postSchema = mongoose.Schema({
     sender: { type: mongoose.SchemaTypes.String, required: true },
     article: { type: mongoose.SchemaTypes.ObjectId, ref: 'Article', required: true },
     createDate: { type: mongoose.SchemaTypes.Date, default: Date.now },
-    owner: { type: mongoose.SchemaTypes.ObjectId, ref: 'User', required: true }
+    owner: { type: mongoose.SchemaTypes.ObjectId, ref: 'User', required: true },
+    isLock: { type: mongoose.SchemaTypes.Boolean, default: false }
 });
 
 postSchema.path('content').validate(function() {

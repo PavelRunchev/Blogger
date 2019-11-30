@@ -1,8 +1,8 @@
 const fs = require('fs');
 const log4js = require('log4js');
 
-// for execute to express-validator library!!!
-function userError(err) {
+// executing to express-validator library!!!
+function errorUserValidator(err) {
     log4js.configure({
         appenders: { usersError: { type: 'file', filename: './controllers/logs/usersError.log' } },
         categories: { default: { appenders: ['usersError'], level: 'error' } }
@@ -12,6 +12,16 @@ function userError(err) {
     logger.error(`${err.errors[0].location} - ${err.errors[0].msg} : ${err.errors[0].value}!`);
 }
 
+// executing to other user error
+function errorUser(errMessage) {
+    log4js.configure({
+        appenders: { usersError: { type: 'file', filename: './controllers/logs/usersError.log' } },
+        categories: { default: { appenders: ['usersError'], level: 'error' } }
+    });
+
+    const logger = log4js.getLogger('usersError');
+    logger.error(`${errMessage}!`);
+}
 
 function errorHandler(req, res, err) {
     log4js.configure({
@@ -27,4 +37,5 @@ function errorHandler(req, res, err) {
     return;
 }
 
-module.exports = { userError, errorHandler };
+
+module.exports = { errorUserValidator, errorUser, errorHandler };

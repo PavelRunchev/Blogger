@@ -1,7 +1,7 @@
 <div class="container-fluid profile-section">
     <h2 class="text-center">Profile Section</h2>
 
-    <div class="container">
+    <div class="profile-box">
         <div class="profile-user-info">
             <div class="overlay user-profile-image">
                 <img src="{{user.profileImage}}" alt="image" class="img-fluid rounded" />
@@ -26,7 +26,7 @@
             </div>
         </div>
          {{#if globalError}}
-            <p class="text-center text-danger font-weight-bold">{{globalError}}</p>
+            <p class="text-center global-error">{{globalError}}</p>
         {{/if}}
 
         <div class="inner-container">

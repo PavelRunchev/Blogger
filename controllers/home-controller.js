@@ -6,11 +6,12 @@ const { convertDate } = require('../util/dateConvert');
 
 module.exports = {
     index: (req, res) => {
-        Category.find({}).then((categories) => {
+        Category.find({}).sort({ name: 'ascending'}).then((categories) => {
             if (res.locals.isAuthed) {
-                const userId = res.locals.currentUser.id;
+                const userId = res.locals.currentUser._id;
                 //message user profile
-                Message.find({ reciever: userId, isReading: false }).then((messages) => {
+                Message.find({ reciever: userId, isReading: false, isLock: false })
+                    .then((messages) => {
                     const noReadingMessages = messages.length > 0 ? true : false;
                     Article.find({ isLock: false })
                         .select('title imageUrl creator like unlike createDate')
@@ -35,7 +36,7 @@ module.exports = {
                             }
 
                             res.status(200);
-                            res.renderPjax('home/index', { categories, messages, secondArticles });
+                            res.renderPjax('home/index', { categories, messages, secondArticles, noReadingMessages });
                         }).catch(err => errorHandler(req, res, err));
                 }).catch(err => errorHandler(req, res, err));
             } else {
@@ -48,8 +49,8 @@ module.exports = {
                         const art1 = articles[0];
                         const art2 = articles[1];
                         const art3 = articles[2];
-                        res.status(200);
-                        res.renderPjax('home/index', { categories, art1, art2, art3 });
+                      
+                        res.status(200).renderPjax('home/index', { categories, art1, art2, art3 });
                     }).catch(err => errorHandler(req, res, err));
             }
         }).catch(err => errorHandler(req, res, err));

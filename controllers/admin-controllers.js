@@ -3,10 +3,11 @@ const path = require('path');
 
 const User = require('../models/User');
 const Article = require('../models/Article');
+const Category = require('../models/Category');
 const Survey = require('../models/Survey');
 
 const log4js = require('log4js');
-const { errorHandler, userError } = require('../config/errorHandler');
+const { errorHandler, errorUser, errorUserValidator } = require('../config/errorHandler');
 const { convertDateAndMinutes } = require('../util/dateConvert');
 const { validationResult } = require('express-validator');
 
@@ -14,6 +15,13 @@ const { validationResult } = require('express-validator');
 
 module.exports = {
     articlesStatus: (req, res) => {
+        if (!res.locals.isAdmin) {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('lockArticle - Invalid credentials! Unauthorized!');
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
+
         Article.find({})
             .select('createDate category creator title isLock')
             .sort({ createDate: 'descending' })
@@ -25,8 +33,8 @@ module.exports = {
                     a.index = i + 1;
                     a.date = convertDateAndMinutes(a.createDate);
                 });
-                res.status(200);
-                res.renderPjax('admin/articles-status', { articles });
+
+                res.status(200).renderPjax('admin/articles-status', { articles });
             }).catch(err => errorHandler(req, res, err));
     },
 
@@ -35,20 +43,21 @@ module.exports = {
             const articleId = req.params.id;
             if (!articleId) {
                 res.flash('danger', 'No existing article!');
-                res.status(401);
-                return res.redirect('/user/signIn');
+                errorUser('lockArticle - No existing article!')
+                res.status(401).redirect('/user/signIn');
+                return;
             }
 
             if (!res.locals.isAdmin) {
                 res.flash('danger', 'Invalid credentials! Unauthorized!');
-                res.status(401);
-                return res.redirect('/user/signIn');
+                errorUser('lockArticle - Invalid credentials! Unauthorized!');
+                res.status(401).redirect('/user/signIn');
+                return;
             }
 
             Article.findByIdAndUpdate({ _id: articleId }, { isLock: true }, { new: true }).then(() => {
                 res.flash('success', 'You locked article successfully!');
-                res.status(204);
-                res.redirect('/admin/admin-articles-status');
+                res.status(204).redirect('/admin/admin-articles-status');
             }).catch(err => errorHandler(req, res, err));
         } catch (err) {
             errorHandler(req, res, err);
@@ -60,20 +69,21 @@ module.exports = {
             const articleId = req.params.id;
             if (!articleId) {
                 res.flash('danger', 'No existing article!');
-                res.status(401);
-                return res.redirect('/user/signIn');
+                errorUser('unlockArticle - No existing article!')
+                res.status(401).redirect('/user/signIn');
+                return;
             }
 
             if (!res.locals.isAdmin) {
                 res.flash('danger', 'Invalid credentials! Unauthorized!');
-                res.status(401);
-                return res.redirect('/user/signIn');
+                errorUser('unlockArticle - Invalid credentials! Unauthorized!');
+                res.status(401).redirect('/user/signIn');
+                return;
             }
 
             Article.findByIdAndUpdate({ _id: articleId }, { isLock: false }, { new: true }).then(() => {
                 res.flash('success', 'You unlocked article successfully!');
-                res.status(204);
-                res.redirect('/admin/admin-articles-status');
+                res.status(204).redirect('/admin/admin-articles-status');
             }).catch(err => errorHandler(req, res, err));
         } catch (err) {
             errorHandler(req, res, err);
@@ -81,6 +91,13 @@ module.exports = {
     },
 
     surveyStatus: (req, res) => {
+        if (!res.locals.isAdmin) {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('lockArticle - Invalid credentials! Unauthorized!');
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
+
         Survey.find({}).then((scores) => {
             let allRatings = 0;
             scores.map((e, i) => {
@@ -112,100 +129,110 @@ module.exports = {
         }).catch(err => errorHandler(req, res, err));
     },
 
-    serverErrors: async(req, res) => {
+    serverErrors: (req, res) => {
         try {
             const filePath = path.join(__dirname, '/logs/serverError.log');
-            let logs = await fs.readFileSync(filePath, 'UTF-8');
-            let serverErrorInfo = logs
+            fs.readFile(filePath, 'UTF-8', function(err, logs) {
+                if(err) { errorHandler(req, res, err); }
+
+                let serverErrorInfo = logs
                 .split('\n').filter(t => t !== "" && t !== '\r');
-            let serverErrorLogs = new Array(serverErrorInfo.length);
-            serverErrorInfo.map((e, i) => {
-                serverErrorLogs[i] = { index: i + 1, row: e };
+                let serverErrorLogs = new Array(serverErrorInfo.length);
+                serverErrorInfo.map((e, i) => {
+                    serverErrorLogs[i] = { index: i + 1, row: e };
+                });
+                const isClearAll = serverErrorInfo.length > 0 ? true : false;
+                res.status(200).renderPjax('admin/server-errors', { serverErrorLogs, isClearAll });
             });
-            const isClearAll = serverErrorInfo.length > 0 ? true : false;
-            res.status(200);
-            res.renderPjax('admin/server-errors', { serverErrorLogs, isClearAll });
         } catch (err) {
             errorHandler(req, res, err);
         }
     },
 
-    clearServerErrors: async(req, res) => {
+    clearServerErrors: (req, res) => {
         try {
             const filePath = path.join(__dirname, '/logs/serverError.log');
-            let text = await fs.writeFileSync(filePath, "", "utf-8");
-            res.flash('danger', 'Server error logs is cleared!');
-            res.status(204);
-            res.redirect('/admin/admin-serverErrors');
+            fs.writeFile(filePath, "", "utf-8", function(err, data) {
+                if(err) { errorHandler(req, res, err); }
+                res.flash('danger', 'Server error logs is cleared!');
+                res.status(204).redirect('/admin/admin-serverErrors');
+            });
         } catch (err) {
             errorHandler(req, res, err);
         }
     },
 
-    removeServerErrorLog: async(req, res) => {
+    removeServerErrorLog: (req, res) => {
         try {
             const currentRow = Number(req.params.id);
             const filePath = path.join(__dirname, '/logs/serverError.log');
-            let logs = await fs.readFileSync(filePath, 'UTF-8');
-            let serverErrorLogs = logs.split('\n')
+            fs.readFile(filePath, 'UTF-8', function(err, logs) {
+                let serverErrorLogs = logs.split('\n')
                 .filter(t => t !== "" && t !== "\r");
-            // remove current row with splice to the array.
-            const removeLine = serverErrorLogs.splice(currentRow, 1);
+                // remove current row with splice to the array.
+                const removeLine = serverErrorLogs.splice(currentRow, 1);
+                fs.writeFile(filePath, serverErrorLogs.join('\n\r'), "UTF-8", function(err, data) {
+                    if(err) { errorHandler(req, res, err); }
 
-            await fs.writeFileSync(filePath, serverErrorLogs.join('\n\r'), "UTF-8");
-            res.flash('danger', 'The row is was erased!');
-            res.status(204);
-            res.redirect('/admin/admin-serverErrors');
-        } catch (err) {
-            errorHandler(req, res, err);
-        }
-    },
-
-    userErrors: async(req, res) => {
-        //TO DO
-        try {
-            const filePath = path.join(__dirname, '/logs/usersError.log');
-            let logs = await fs.readFileSync(filePath, 'UTF-8');
-            let userErrorInfo = logs
-                .split('\n').filter(t => t !== "" && t !== '\r');
-            let userErrorLogs = new Array(userErrorInfo.length);
-            userErrorInfo.map((e, i) => {
-                userErrorLogs[i] = { index: i + 1, row: e };
+                    res.flash('danger', 'The row is was erased!');
+                    res.status(204).redirect('/admin/admin-serverErrors');
+                });
             });
-            const isClearAll = userErrorInfo.length > 0 ? true : false;
-            res.status(200);
-            res.renderPjax('admin/user-errors', { userErrorLogs, isClearAll });
         } catch (err) {
             errorHandler(req, res, err);
         }
     },
 
-    clearUserErrors: async(req, res) => {
+    userErrors: (req, res) => {
         try {
             const filePath = path.join(__dirname, '/logs/usersError.log');
-            let text = await fs.writeFileSync(filePath, "", "utf-8");
-            res.flash('danger', 'User error logs is cleared!');
-            res.status(204);
-            res.redirect('/admin/admin-userErrors');
+            fs.readFile(filePath, 'UTF-8', function(err,  logs) {
+                if(err) { errorHandler(req, res, err); }
+                let userErrorInfo = logs
+                .split('\n').filter(t => t !== "" && t !== '\r');
+                let userErrorLogs = new Array(userErrorInfo.length);
+                userErrorInfo.map((e, i) => {
+                    userErrorLogs[i] = { index: i + 1, row: e };
+                });
+                const isClearAll = userErrorInfo.length > 0 ? true : false;
+                res.status(200).renderPjax('admin/user-errors', { userErrorLogs, isClearAll });
+            });
         } catch (err) {
             errorHandler(req, res, err);
         }
     },
 
-    removeUserErrorLog: async(req, res) => {
+    clearUserErrors: (req, res) => {
+        try {
+            const filePath = path.join(__dirname, '/logs/usersError.log');
+            fs.writeFile(filePath, "", "utf-8", function(err, data) {
+                if(err) { errorHandler(req, res, err); }
+
+                res.flash('danger', 'User error logs is cleared!');
+                res.status(204).redirect('/admin/admin-userErrors');
+            });
+          
+        } catch (err) {
+            errorHandler(req, res, err);
+        }
+    },
+
+    removeUserErrorLog: (req, res) => {
         try {
             const currentRow = Number(req.params.id);
             const filePath = path.join(__dirname, '/logs/usersError.log');
-            let logs = await fs.readFileSync(filePath, 'UTF-8');
-            let userErrorLogs = logs.split('\n')
-                .filter(t => t !== "" && t !== "\r");
-            // remove current row with splice to the array.
-            const removeLine = userErrorLogs.splice(currentRow, 1);
+            fs.readFile(filePath, 'UTF-8', function(err, logs) {
+                if(err) { errorHandler(req, res, err); }
 
-            await fs.writeFileSync(filePath, userErrorLogs.join('\n\r'), "UTF-8");
-            res.flash('danger', 'The row is was erased!');
-            res.status(204);
-            res.redirect('/admin/admin-userErrors');
+                let userErrorLogs = logs.split('\n')
+                .filter(t => t !== "" && t !== "\r");
+                // remove current row with splice to the array.
+                const removeLine = userErrorLogs.splice(currentRow, 1);
+                fs.writeFile(filePath, userErrorLogs.join('\n\r'), "UTF-8", function(err, data) {
+                    res.flash('danger', 'The row is was erased!');
+                    res.status(204).redirect('/admin/admin-userErrors');
+                });
+            });
         } catch (err) {
             errorHandler(req, res, err);
         }
@@ -213,31 +240,42 @@ module.exports = {
 
     userStatus: async(req, res) => {
         try {
-            let allUsers = await User.find({})
-                .sort({ createDate: 'descending' })
-                .select('email firstName lastName roles createDate');
-            allUsers.map((u, i) => {
-                u.index = i + 1;
-                u.date = convertDateAndMinutes(u.createDate);
-                u.isRoleAdmin = u.roles.includes('Admin');
-                u.isRoleModerator = u.roles.includes('Moderator');
-            });
-            const allAuthedUsers = allUsers.length;
-            const lastRegisterUser = allUsers[0];
-            res.status(200);
-            res.renderPjax('admin/user-status', { allUsers, allAuthedUsers, lastRegisterUser });
+            Promise.all([
+                Category.find({}).sort({ name: 'ascending'}),
+                User.find({}).sort({ createDate: 'descending' })
+                .select('email firstName lastName roles createDate')
+            ]).then(([categories, allUsers]) => {
+                    allUsers.map((u, i) => {
+                        u.index = i + 1;
+                        u.date = convertDateAndMinutes(u.createDate);
+                        u.isRoleAdmin = u.roles.includes('Admin');
+                        u.isRoleModerator = u.roles.includes('Moderator');
+                    });
+                    const allAuthedUsers = allUsers.length;
+                    const lastRegisterUser = allUsers[0];
+                    res.status(200).renderPjax('admin/user-status', { categories, allUsers, allAuthedUsers, lastRegisterUser });
+                }).catch(err => errorHandler(req,  res,  err));
         } catch (err) {
             errorHandler(req, res, err);
         }
     },
 
-    userChangeRole: async(req, res) => {
+    userChangeRole: (req, res) => {
         try {
-            // TODO validation only admin abobo change roles!!!
+            if (!res.locals.email !== 'abobo@abv.bg') {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser('change role - Invalid credentials! Unauthorized!');
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
+
             const userId = req.params.id;
-            const user = await User.findById(userId);
-            res.status(200);
-            res.renderPjax('admin/user-change-role', user);
+            Promise.all([
+                Category.find({}).sort({ name: 'ascending'}),
+                User.findById(userId)
+            ]).then(([categories, user]) => {
+                res.status(200).renderPjax('admin/user-change-role', { categories, user });
+            }).catch(err => errorHandler(req, res, err));
         } catch (err) {
             errorHandler(req, res, err);
         }
@@ -245,54 +283,71 @@ module.exports = {
 
     addRole: (req, res) => {
         try {
+
+            if (!res.locals.email !== 'abobo@abv.bg') {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser('change role - Invalid credentials! Unauthorized!');
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
+
             const userId = req.params.id;
             const { role } = req.body;
 
             if (role === "") {
-                res.flash('warning', 'You not selected role!');
-                return res.redirect('/admin/admin-user-status');
+                res.flash('warning', 'You not selected role for the user!');
+                errorUser('addRole - You not selected the role for the user!');
+                return res.status(400).redirect('/admin/admin-user-status');
             }
 
             User.findById(userId).select('roles').then((user) => {
                 if (user.roles.includes(role)) {
-                    res.flash('warning', 'You have already this role!');
+                    res.flash('warning', 'The user is have already this role!');
+                    errorUser('addRole - The user is have already this role!');
                     return res.redirect('/admin/admin-user-status');
+                } else {
+                    user.roles.push(role);
+                    return Promise.resolve(user.save());
                 }
-
-                user.roles.push(role);
-                return Promise.resolve(user.save());
             }).then(() => {
                 res.flash('success', 'You added role successfully!');
-                res.status(204);
-                res.redirect('/admin/admin-user-status');
+                res.status(204).redirect('/admin/admin-user-status');
             }).catch(err => errorHandler(req, res, err));
         } catch (err) {
             errorHandler(req, res, err);
         }
     },
 
-    removeRole: async(req, res) => {
+    removeRole: (req, res) => {
         try {
+            if (!res.locals.email !== 'abobo@abv.bg') {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser('change role - Invalid credentials! Unauthorized!');
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
+
             const userId = req.params.id;
             const { role } = req.body;
 
             if (role === "") {
                 res.flash('warning', 'You not selected role!');
-                return res.redirect('/admin/admin-user-status');
+                errorUser('RemoveRole - You not selected role!');
+                return res.status(400).redirect('/admin/admin-user-status');
             }
 
-            const user = await User.findById(userId).select('roles');
-            if (!user.roles.includes(role)) {
-                res.flash('warning', 'No exist role!');
-                res.status(400);
-                return res.redirect('/admin/admin-user-status');
-            }
+            User.findById(userId).select('roles').then((user) => {
+                if (!user.roles.includes(role)) {
+                    res.flash('warning', 'No exist role!');
+                    return res.status(400).redirect('/admin/admin-user-status');
+                }
 
-            user.roles = user.roles.filter(r => r !== role);
-            await user.save();
-            res.flash('success', 'You removed role successfully!');
-            res.status(204);
-            res.redirect('/admin/admin-user-status');
+                user.roles = user.roles.filter(r => r !== role);
+                return Promise.resolve(user.save());
+            }).then(() => {
+                res.flash('success', 'You removed role successfully!');
+                res.status(204).redirect('/admin/admin-user-status');
+            });
         } catch (err) {
             errorHandler(req, res, err);
         }

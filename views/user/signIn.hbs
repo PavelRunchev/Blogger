@@ -1,11 +1,11 @@
 <section class="signIn">
    
-    <div class="container ">
+    <div class="signIn-box">
         <div class="row">
-            <div class="col-lg-4 signIn-sec">
+            <div class="col-lg-4 mx-md-auto mx-sm-auto mx-auto signIn-sec">
                 <h2 class="text-center text-light">Sign In Now</h2>
                  {{#if globalError}}
-                    <p class="text-center text-danger font-weight-bold">{{globalError}}</p>
+                    <p class="text-center global-error">{{globalError}}</p>
                 {{/if}}
                 <form class="login-form" action="/user/signIn" method="POST">
                     <div class="form-group">

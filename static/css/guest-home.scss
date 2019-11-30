@@ -1,6 +1,6 @@
 .guest-home {
     width: 100%;
-    margin: 4% auto 10% auto;
+    margin: 1% auto 10% auto;
     border-radius: 1rem;
     @include box-shadow;
     @include main-background-color;
@@ -9,7 +9,10 @@
     }
 }
 
-@media screen and (max-width:575px) {
+@media screen and (max-width:992px) {
+    .container {
+        max-width: 94%;
+    }
     .guest-home {
         width: 94%;
     }

@@ -19,9 +19,10 @@
     "license": "MIT",
     "dependencies": {
         "babel-eslint": "^10.0.3",
+        "bcrypt": "^3.0.6",
         "body-parser": "1.18.3",
         "cookie-parser": "1.4.3",
-        "crypto": "^1.0.1",
+        "cryptr": "^6.0.1",
         "express": "4.16.4",
         "express-fileupload": "^1.1.6-alpha.6",
         "express-flash-2": "^1.0.1",
@@ -30,13 +31,12 @@
         "express-session": "1.15.6",
         "express-validator": "^6.2.0",
         "image-downloader": "^3.5.0",
+        "jsonwebtoken": "^8.5.1",
         "log4js": "^5.1.0",
         "mongodb": "^3.3.2",
         "mongoose": "^5.7.6",
         "node-sass-middleware": "^0.11.0",
         "nodemon": "^1.19.2",
-        "passport": "0.4.0",
-        "passport-local": "1.0.0",
         "shortid": "^2.2.15"
     },
     "devDependencies": {

@@ -47,6 +47,7 @@
             font-size: 26px;
         }
         .table {
+            width: 94%;
             thead tr th,
             thead tr td,
             tbody tr th,
@@ -68,7 +69,7 @@
         }
         .table,
         .all-stats {
-            width: 100%;
+            width: 94%;
         }
         .table {
             thead tr th,
@@ -86,10 +87,12 @@
 
 @media screen and (max-width: 576px) {
     .user-status {
+        overflow: hidden;
         h2 {
             font-size: 22px;
         }
         .table {
+            width: 100%;
             thead tr th,
             thead tr td,
             tbody tr th,
@@ -98,6 +101,7 @@
             }
         }
         .all-stats {
+            width: 100%;
             font-size: 12px;
         }
     }

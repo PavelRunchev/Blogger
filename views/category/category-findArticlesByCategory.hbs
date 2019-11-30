@@ -16,7 +16,10 @@
             <span class=""><a href="/article/article-details/{{this._id}}" class="read-more" data-pjax="#pjax-container">Read More</a></span>
         </div>
         {{else}}
-            <h3 class="h3 text-light text-center">No articles to current Category!</h3>
+            <div class="container-fluid py-5 empty-container">
+                <h3 class="text-center font-weight-bold mt-5 pt-5">No articles to current Category!</h3>
+                <h3 class="text-center font-weight-bold mb-5 pb-5">Please try again!</h3>
+            </div>
         {{/each}}
     </div>
 </div>

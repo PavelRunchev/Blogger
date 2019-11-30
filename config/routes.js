@@ -1,7 +1,6 @@
 const controllers = require('../controllers');
 const auth = require('./auth');
 const { body } = require('express-validator');
-const User = require('../models/User');
 
 // import sub module router!!!
 const routers = require('../routers');

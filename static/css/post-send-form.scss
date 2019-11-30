@@ -1,19 +1,48 @@
 .post-send-form {
+    background: #fff;
     width: 600px;
     margin: 10% auto;
     @include box-shadow;
     border-radius: 0.5rem;
     padding: 2%;
-    background-color: rgba(230, 230, 230, 0.6);
+    
+    h4 {
+        color: rgb(0, 98, 165);
+    }
     #text-form:focus,
     #text-form:focus~label,
     #text-form:focus~.fa-pencil-alt {
         border-color: rgb(0, 98, 165);
         color: rgb(0, 98, 165);
     }
+
+    form .md-form label {
+        font-weight: bold;
+        color: rgb(0, 98, 165);
+    }
+
+    .post-buttons {
+        display: flex;
+        justify-content: center;
+    }
+
+    .post-back {
+        display: inline-block;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        border-radius: 50%;
+        padding: 15px 17px;
+        color: #fff;
+        margin-right: 30px;
+    }
+
+    .post-back:hover {
+        @include btn-hover-shadow-black;
+    }
+
     .send {
         display: block;
-        margin: 0 auto;
         cursor: pointer;
         outline: none;
         border: none;
@@ -28,13 +57,12 @@
 
 @media screen and (max-width: 767px) {
     .post-send-form {
-        width: 85%;
+        width: 90%;
     }
 }
 
 @media screen and (max-width: 575px) {
     .post-send-form {
-        width: 94%;
         form h4 {
             font-size: 18px;
         }

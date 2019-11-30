@@ -28,15 +28,17 @@
         <h2 class="card-title"><strong>{{article.title}}</strong></h2>
 
         {{#each article.firstPartParagraph}}
-        <div class="card-text">{{this}}</div>
+            <p class="card-text">{{this}}</p>
         {{/each}}
 
-        <div class="embed-responsive embed-responsive-16by9 mb-5 video">
-            <iframe class="embed-responsive-item" src="{{article.videoLink}}" allowfullscreen></iframe>
-        </div>
+        {{#if article.videoLink}}
+            <div class="embed-responsive embed-responsive-16by9 mb-5 video">
+                <iframe class="embed-responsive-item" src="{{article.videoLink}}" allowfullscreen></iframe>
+            </div>
+        {{/if}}
 
         {{#each article.paragraphContent}}
-        <p class="card-text tab-content">{{this}}</p>
+            <p class="card-text tab-content">{{this}}</p>
         {{/each}}
     </div>
     <div class="card-footer">
@@ -51,25 +53,9 @@
                     class="fas fa-paper-plane"></i> Send Post</a>
             <a href="/article/article-edit/{{article._id}}" class="btn-yellow btn-nav" data-pjax="#pjax-container"><i
                     class="fas fa-edit"></i> Edit</a>
-            <a href="/article/article-delete/{{article._id}}" class="btn-danger btn-nav"><i
+            <a href="/article/article-delete/{{article._id}}" class="btn-danger btn-nav" data-pjax="#pjax-container"><i
                     class="fas fa-trash-alt"></i> Delete</a>
         </div>
     </div>
 </div>
-<div class="container-fluid article-posts">
-    {{#each articleMessages}}
-    <div class="message-box">
-        <div class="photo">
-            <img src="{{this.owner.profileImage}}" class="rounded-circle" alt="logo-image">
-        </div>
-        <div class="message-view">
-            <p class="message-title">
-                <span class="font-weight-bold">{{this.sender}}</span>
-                <span>{{this.date}}</span>
-                <span class="font-weight-bold">#{{this.index}}</span>
-            </p>
-            <p class="content">{{this.content}}</p>
-        </div>
-    </div>
-    {{/each}}
-</div>
+{{> article-posts}}

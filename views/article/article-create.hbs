@@ -4,7 +4,7 @@
         <h3>Create your article now</h3>
 
         {{#if globalError}}
-        <p class="text-center text-danger font-weight-bold">{{globalError}}</p>
+       <p class="text-center global-error">{{globalError}}</p>
         {{/if}}
         <form action="/article/article-create" method="POST">
             <div class="row-input px-2 mb-1">
@@ -42,7 +42,7 @@
                 <textarea type="text" class="form-control" placeholder="Content" name="content" rows="10"
                     cols="50">{{fields.content}}</textarea>
             </div>
-            <button type="submit" class="btn-createArticle d-block mx-auto aqua-gradient"><i id="spinner" class="fas fa-spinner"></i> Submit</button>
+            <button type="submit" class="btn-createArticle d-block mx-auto blue-gradient"><i id="spinner" class="fas fa-spinner"></i> Submit</button>
         </form>
     </section>
 </div>

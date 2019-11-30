@@ -1,25 +1,25 @@
 <div class="container article-all">
     <div class="article-list">
         {{#each articles}}
-        <div class="card">
-            <h4 class="text-right">{{categoryName}}</h4>
-            <h3 class="card-header">{{this.title}}</h3>
-            <div class="card-body">
-                <h6 class="card-subtitle text-muted text-right">Date: {{this.date}}</h6>
+            <div class="card">
+                <h4 class="text-right">{{categoryName}}</h4>
+                <h3 class="card-header">{{this.title}}</h3>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted text-right">Date: {{this.date}}</h6>
+                </div>
+                <img style="height: 400px; width: 100%; display: block;"
+                    src="{{this.imageUrl}}"
+                    alt="Card image">
+                <div class="card-body">
+                    <p>{{this.intro}}</p>
+                </div>
+                <span class=""><a href="/article/article-details/{{this._id}}" class="read-more" data-pjax="#pjax-container">Read More</a></span>
             </div>
-            <img style="height: 400px; width: 100%; display: block;"
-                src="{{this.imageUrl}}"
-                alt="Card image">
-            <div class="card-body">
-                <p>{{this.intro}}</p>
-            </div>
-            <span class=""><a href="/article/article-details/{{this._id}}" class="read-more" data-pjax="#pjax-container">Read More</a></span>
-        </div>
         {{else}}
-        <div class="container py-5 empty-container">
-            <h3 class="text-center font-weight-bold mt-5 pt-5">No articles to current Category!</h3>
-            <h3 class="text-center font-weight-bold mb-5 pb-5">Please try again!</h3>
-        </div>
+            <div class="container-fluid py-5 empty-container">
+                <h3 class="text-center text-primary font-weight-bold mt-5 pt-5">No articles to current Category!</h3>
+                <h4 class="text-center text-primary font-weight-bold mb-5 pb-5">Please try again!</h4>
+            </div>
         {{/each}}
     </div>
 </div>

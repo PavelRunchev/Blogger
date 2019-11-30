@@ -16,4 +16,8 @@ const { body } = require('express-validator');
         .withMessage('Post must be least at 2 to 255 chars long!')
     ], controllers.post.postFormPost);
 
+    router.post('/postLock/:id', controllers.post.postLock);
+
+    router.post('/postRemove/:id', controllers.post.removePost);
+
 module.exports = router;

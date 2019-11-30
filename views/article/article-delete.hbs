@@ -40,7 +40,8 @@
                     cols="50" disabled>{{article.content}}</textarea>
             </div>
         </form>
-        <a href="/article/article-details/{{article._id}}" class="mr-5 btn btn-indigo waves-effect" data-pjax="#pjax-container">Back</a>
-        <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#modalConfirmDelete">Delete</button>
+        <a href="/article/article-details/{{article._id}}" class="btn btn-indigo btn-nav" data-pjax="#pjax-container"><i
+                    class="far fa-arrow-alt-circle-left"></i> Back</a>
+        <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#modalConfirmDelete"><i class="fas fa-trash-alt"></i> Delete</button>
     </section>
 </div>

@@ -39,8 +39,10 @@
         }
         .card-text {
             padding: 0.2% 11%;
-            text-align: left;
             font-size: 18px;
+            text-align: left;
+            word-wrap: break-word;
+            white-space: pre-wrap;
         }
         .video {
             margin: 4% auto;
@@ -69,34 +71,64 @@
     }
 }
 
-.message-box {
-    width: 700px;
-    @include box-shadow;
-    background: -webkit-linear-gradient(rgba(0, 98, 165, 0.9), rgba(0, 98, 165, 0.5));
-    background: linear-gradient(rgba(0, 98, 165, 0.9), rgba(0, 98, 165, 0.5));
-    border-radius: 0.3rem;
-    padding: 1%;
-    margin: 2% auto;
-    display: flex;
-    .photo {
-        display: inline-block;
-        width: 200px;
+.article-posts {
+    .message-card {
+        width: 700px;
+        @include box-shadow;
+        background: -webkit-linear-gradient(rgba(0, 98, 165, 0.9), rgba(0, 98, 165, 0.5));
+        background: linear-gradient(rgba(0, 98, 165, 0.9), rgba(0, 98, 165, 0.5));
+        border-radius: 0.3rem;
         padding: 1%;
-        img {
-            cursor: pointer;
-            width: 150px;
-            height: 150px;
-        }
-    }
-    .message-view {
-        padding: 1% 2%;
-        background: #fff;
-        width: 100%;
-        overflow: hidden;
-        border-radius: 3px;
-        .message-title {
+        margin: 2% auto;
+
+        .admin-options {
+            width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
+            .fa-lock {
+                color: rgb(43,187,173);
+                margin-right: 10px;
+            }
+
+            .fa-lock:hover {
+                color: rgb(40,153,153);
+         
+            }
+
+            .fa-trash {
+                color: rgb(255,53,71);
+            }
+
+            .fa-trash:hover {
+                color: rgb(199, 28, 34);
+            }
+        }
+   
+        .message-box {
+            width: 100%;
+            display: flex;
+
+            .photo {
+                display: inline-block;
+                width: 200px;
+                padding: 1%;
+                img {
+                    cursor: pointer;
+                    width: 150px;
+                    height: 150px;
+                }
+            }
+            .message-view {
+                padding: 1% 2%;
+                background: #fff;
+                width: 100%;
+                overflow: hidden;
+                border-radius: 3px;
+                .message-title {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
         }
     }
 }
@@ -104,6 +136,12 @@
 @media screen and (max-width: 1199px) {
     .article-posts .message-box {
         width: 600px;
+    }
+}
+
+@media screen and (max-width: 1170px) {
+    .article-posts .message-card {
+        width: 61.5%;
     }
 }
 
@@ -119,18 +157,22 @@
             font-size: 16px;
         }
     }
-    .article-posts .message-box {
-        width: 550px;
+    .article-posts .message-card {
+        width: 77.5%;
     }
 }
 
 @media screen and (max-width: 767px) {
     .article-details {
-        width: 94%;
+        width: 92%;
     }
     .article-posts {
         padding-left: 0;
         padding-right: 0;
+    }
+
+    .article-posts .message-card {
+        width: 90%;
     }
 }
 
@@ -159,19 +201,16 @@
             }
         }
     }
-    .article-posts .message-box {
-        width: 94%;
-    }
 }
 
 @media screen and (max-width: 550px) {
-    .article-posts .message-box {
+    .article-posts .message-card {
         width: 94%;
-        .photo {
-            width: 40%;
+        .message-box .photo {
+            width: 30%;
             img {
                 width: 100%;
-                height: 100px;
+                height: 100%;
             }
         }
         .message-view .message-title {

@@ -1,17 +1,17 @@
 module.exports = {
     contactUs: (req, res) => {
-        res.renderPjax('others/contact-us');
+        res.status(200).renderPjax('others/contact-us');
     },
 
     specialThanks: (req, res) => {
-        res.renderPjax('others/special-thanks');
+        res.status(200).renderPjax('others/special-thanks');
     },
 
     technology: (req, res) => {
-        res.renderPjax('others/technology');
+        res.status(200).renderPjax('others/technology');
     },
 
     support: (req, res) => {
-        res.renderPjax('others/support');
+        res.status(200).renderPjax('others/support');
     }
 };

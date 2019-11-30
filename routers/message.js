@@ -23,5 +23,6 @@ const { body } = require('express-validator');
     ], controllers.message.messageFormPost);
     router.get('/myMessages', controllers.message.myMessages);
     router.post('/message-delete/:id', controllers.message.messageDelete);
+    router.get('/message-reading/:id', controllers.message.readSettingMessage);
 
 module.exports = router;

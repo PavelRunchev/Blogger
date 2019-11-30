@@ -4,7 +4,7 @@
     padding: 5% 0%;
     .inner-articleDelete {
         padding: 1%;
-        @include form-background-color;
+        @include form-horizontal-background-color;
         @include box-shadow;
         border-radius: 0.5rem;
         border: 2px solid #fff;
@@ -66,18 +66,11 @@
 @media screen and (max-width: 767px) {
     .article-delete {
         .inner-articleDelete {
+            width: 92%;
             form .row-input {
                 width: 100%;
                 flex-direction: column;
             }
-        }
-    }
-}
-
-@media screen and (max-width: 575px) {
-    .article-delete {
-        .inner-articleDelete {
-            width: 94%;
         }
     }
 }

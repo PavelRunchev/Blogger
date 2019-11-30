@@ -4,13 +4,17 @@
     {{/if}}
 
     <form action="/post/post-form/{{fields.articleId}}" method="POST">
-        <h4 class="text-center">Write your opinion on the article</h4>
+        <h4 class="text-center"><i class="fas fa-clipboard"></i> Write your opinion for the article!</h4>
         <input name="articleId" value="{{fields.articleId}}" hidden>
         <div class="md-form">
             <textarea id="text-form" class="md-textarea form-control" name="content" rows="4">{{fields.content}}</textarea>
             <label for="text-form">Post Message</label>
         </div>
-        <button type="submit" class="blue-gradient send"><i class="fas fa-paper-plane fa-2x"></i></button>
+        <div class="post-buttons">
+            <a href="/article/article-details/{{fields.articleId}}" class="blue-gradient post-back" data-pjax="#pjax-container"><i class="fas fa-arrow-left fa-2x"></i></a>
+            <button type="submit" class="blue-gradient send"><i class="fas fa-paper-plane fa-2x"></i></button>
+        </div>
+      
     </form>
 
 </div>

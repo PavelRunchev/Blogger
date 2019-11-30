@@ -1,5 +1,5 @@
 <div class="container-fluid article-edit">
-    <section class="container inner-articleEdit">
+    <section class="inner-articleEdit">
         <h3 class="">Edit article now</h3>
 
         {{#if globalError}}
@@ -41,8 +41,11 @@
                 <textarea type="text" class="form-control" placeholder="Content" name="content" rows="10"
                     cols="50">{{article.content}}</textarea>
             </div>
-            <a href="/article/article-details/{{article._id}}" class="mr-5 btn-indigo" data-pjax="#pjax-container">Back</a>
-            <button type="submit" class="btn-yellow">Edit</button>
+           
+            <a href="/article/article-details/{{article._id}}" class="btn btn-indigo btn-nav" data-pjax="#pjax-container"><i
+                    class="far fa-arrow-alt-circle-left"></i> Back</a>
+            <button type="submit" class="btn btn-yellow"><i
+                    class="fas fa-edit"></i> Edit</button>
         </form>
     </section>
 </div>

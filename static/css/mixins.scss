@@ -61,7 +61,7 @@
 }
 
 @mixin title {
-    padding: 3% 0;
+    padding-top: 60px;
     font-weight: bold;
     color: #fff;
     text-shadow: 3px 3px rgb(0, 98, 165);
@@ -102,7 +102,7 @@
     color: #fff;
     border-radius: 0.2rem;
     border: 1px solid #fff;
-    padding: 0.7rem 2.5rem 0.7rem 1rem;
+    padding: 0.7rem 2.5rem 0.7rem 0.8rem;
 }
 
 @mixin btn-submit-view {

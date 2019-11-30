@@ -4,7 +4,7 @@
     padding: 3%;
     .inner-articleEdit {
         padding: 1%;
-        @include form-background-color;
+        @include form-horizontal-background-color;
         @include box-shadow;
         border-radius: 0.5rem;
         border: 2px solid #fff;
@@ -78,21 +78,25 @@
     }
 }
 
+@media screen and (max-width: 992px) {
+    .article-edit {
+        padding-left: 0;
+        padding-right: 0;
+        .inner-articleEdit {
+           width: 92%;
+           margin: 0 auto;
+        }
+    }
+}
+
 @media screen and (max-width: 767px) {
     .article-edit {
+       
         .inner-articleEdit {
             form .row-input {
                 width: 100%;
                 flex-direction: column;
             }
-        }
-    }
-}
-
-@media screen and (max-width: 575px) {
-    .article-edit {
-        .inner-articleEdit {
-            width: 94%;
         }
     }
 }

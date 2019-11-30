@@ -1,17 +1,14 @@
 .signUp {
-    width: 100%;
-    height: 100%;
-    //padding-bottom: 1%;
     .h2 {
         @include title;
-        padding-top: 0;
+        padding-top: 2rem;
         padding-bottom: 0;
     }
     .h2:after {
         @include line-below-title;
     }
     & .form-signUp {
-        @include form-background-color;
+        @include form-horizontal-background-color;
         @include box-shadow;
         padding: 1% 2%;
         width: 30rem;
@@ -30,18 +27,24 @@
         .backspace:hover {
             color: #ddd;
         }
+
         .field {
             display: flex;
             justify-content: space-around;
         }
-        input {
+        .md-form .row .form-control {
+            margin-top: 0.7rem;
             color: #fff;
         }
         .md-form .row .form-control:focus {
             border-color: #fff;
             outline: none;
-            background-color: none;
+            background: none;
+            -webkit-appearance: none;
+            appearance: none;
+            
         }
+       
         .radio-button {
             display: flex;
             justify-content: space-around;
@@ -52,6 +55,7 @@
         }
         .btn-createUser {
             @include btn-submit-view;
+            margin-bottom: 20px;
         }
         .btn-createUser:hover {
             @include btn-hover-shadow;
@@ -66,7 +70,7 @@
             width: 100%;
         }
         .form-signUp {
-            width: 94%;
+            width: 90%;
         }
     }
 }

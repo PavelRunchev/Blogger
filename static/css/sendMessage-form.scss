@@ -7,19 +7,26 @@
     }
     .send-message-form {
         width: 600px;
-        margin: 0 auto 10% auto;
-        @include form-background-color;
+        margin: 0 auto 20px auto;
+        background: #fff;
+        //@include form-background-color;
         @include box-shadow;
-        border: 2px solid #fff;
+        border: 2px solid rgb(0, 98, 165);
         padding: 2%;
         border-radius: 0.5rem;
+
+        h2 {
+            color: rgb(0, 98, 165);
+        }
         #form1,
         #form2 {
-            color: #fff;
+            color: rgb(0, 98, 165);
         }
         #form1:focus,
-        #form2:focus {
-            border-color: #fff;
+        #form2:focus,
+        #label-form1:focus,
+        #label-form2:focus {
+            border-color: rgb(0, 98, 165);
             outline: none;
             background-color: none;
         }
@@ -28,32 +35,68 @@
             margin-bottom: 10px;
         }
         .btn-sendMessage:hover {
-            @include btn-hover-shadow;
+            @include btn-hover-shadow-black;
             font-weight: bold;
+        }
+
+        form .md-form label,
+        form .info-text {
+            color: rgb(0, 98, 165);
+            font-weight: bold;
+        }
+    }
+
+    .admin-online {
+        width: 600px;
+        padding: 2%;
+        background: #fff;
+        margin: 0 auto 5% auto;
+        border-radius: 0.5rem;
+        @include box-shadow;
+        border: 2px solid rgb(0, 98, 165);
+        display: flex;
+        flex-direction: column;
+
+        p {
+            margin: 0 auto;
         }
     }
 }
 
 @media screen and (max-width: 767px) {
-    .send-message h3 {
-        width: 100%;
-    }
-    .send-message .send-message-form {
-        width: 80%;
-        h2 {
-            font-size: 22px;
+    .send-message {
+        h3 {
+            width: 100%;
+        }
+
+        .send-message-form {
+            width: 94%;
+            h2 {
+                font-size: 22px;
+            }
+        }
+
+        .admin-online {
+            width: 94%;
         }
     }
 }
 
 @media screen and (max-width: 575px) {
-    .send-message h3 {
-        font-size: 22px;
-    }
-    .send-message .send-message-form {
-        width: 100%;
-        h2 {
-            font-size: 20px;
+    .send-message {
+        h3 {
+            font-size: 22px;
+        }
+
+        .send-message-form {
+            width: 100%;
+            h2 {
+                font-size: 20px;
+            }
+        }
+
+        .admin-online {
+            width: 100%;
         }
     }
 }

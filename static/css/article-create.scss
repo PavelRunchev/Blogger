@@ -2,7 +2,7 @@
     padding: 3% 2%;
     .inner-articleCreate {
         padding: 1%;
-        @include form-background-color;
+        @include form-horizontal-background-color;
         @include box-shadow;
         border-radius: 0.5rem;
         border: 2px solid #fff;

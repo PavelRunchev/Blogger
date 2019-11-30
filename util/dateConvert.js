@@ -12,14 +12,13 @@ function convertDate(value) {
 }
 
 function convertDateAndMinutes(value) {
-    const weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     let day = new Date(value).getUTCDate();
     let month = new Date(value).getUTCMonth() + 1;
     let year = new Date(value).getUTCFullYear();
     let seconds = new Date(value).getUTCSeconds();
     let minutes = new Date(value).getUTCMinutes();
     let hours = new Date(value).getUTCHours();
-    let week = weeks[new Date(value).getDay()];
+    
     if (day < 10)
         day = '0' + day;
     if (month < 10)

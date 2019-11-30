@@ -62,13 +62,27 @@
         {{/if}}
         {{/if}}
 
+
+      
+
+
         <div class="d-flex flex-column col-lg-12 col-sm-12 px-0">
             <section id="pjax-container" class="col-md-12">
-                <div class="investigation">
+                <div class="survey">
                     {{> survey-form}}
                 </div>
                 {{{body}}}
             </section>
+
+            {{#if currentUser.accessCookie}}
+
+                {{else}}
+                    {{#if isAccessCookie}}
+
+                    {{else}}
+                    {{> accessCookies}}
+                    {{/if}}
+            {{/if}}
 
             <aside class="col-md-12 px-md-0">
                 {{> video-links}}
@@ -103,64 +117,7 @@
     <script src="/fontawesome/js/solid.js"></script>
     <script src="/fontawesome/js/v4-shims.js"></script>
 
-    <script stc="/js/app.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script type="text/javascript">
-        // show left menu
-        $('.button-collapse').on('click', function () {
-            let slide = document.getElementById('slide-out')
-            slide.style.animation = "leasyNavigationOf 0.8s linear forwards";
-        });
-
-        // hide left menu
-        $('.hide').on('click', function () {
-            document.getElementById('slide-out').style.animation = "leasyNavigationOn 0.8s linear forwards";
-        });
-
-        // pjax document!!!
-        $(document).pjax('a[data-pjax]', '#pjax-container');
-
-        // popovers initialization - on click
-        $('[data-toggle="popover-click"]').popover({
-            html: true,
-            trigger: 'click',
-            placement: 'bottom',
-            content: function () { return '<img src="' + $(this).data('img') + '" />'; }
-        });
-
-        // popovers Initialization
-        $(function () {
-            $('[data-toggle="popover"]').popover()
-        });
-
-        $(function () {
-            $('.example-popover').popover({
-                container: 'body'
-            })
-        });
-
-        //loading click button
-        $('.btn-createUser').on('click', function () {
-            document.getElementById('spinner').style.opacity = "1";
-        });
-
-        $('.btn-signIn').on('click', function () {
-            document.getElementById('spinner').style.opacity = "1";
-        });
-
-        $('.btn-createCategory').on('click', function () {
-            document.getElementById('spinner').style.opacity = "1";
-        });
-
-        $('.btn-createArticle').on('click', function () {
-            document.getElementById('spinner').style.opacity = "1";
-        });
-
-        $('.btn-sendMessage').on('click', function () {
-            document.getElementById('spinner').style.opacity = "1";
-        });
-    </script>
+    <script src="/js/app.js"></script>
 </body>
 
 </html>
