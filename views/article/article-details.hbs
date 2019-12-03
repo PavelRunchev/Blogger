@@ -49,12 +49,16 @@
         <div class="btn-box mb-2">
             <a href="/article/article-all" class="btn-indigo btn-nav" data-pjax="#pjax-container"><i
                     class="far fa-arrow-alt-circle-left"></i> Back</a>
+            {{#if isAuthed}}
             <a href="/post/post-form/{{article._id}}" class="btn-default btn-nav" data-pjax="#pjax-container"><i
                     class="fas fa-paper-plane"></i> Send Post</a>
-            <a href="/article/article-edit/{{article._id}}" class="btn-yellow btn-nav" data-pjax="#pjax-container"><i
-                    class="fas fa-edit"></i> Edit</a>
-            <a href="/article/article-delete/{{article._id}}" class="btn-danger btn-nav" data-pjax="#pjax-container"><i
-                    class="fas fa-trash-alt"></i> Delete</a>
+            {{/if}}
+            {{#if article.isOwnerOrAdmin}}
+                <a href="/article/article-edit/{{article._id}}" class="btn-yellow btn-nav" data-pjax="#pjax-container"><i
+                        class="fas fa-edit"></i> Edit</a>
+                <a href="/article/article-delete/{{article._id}}" class="btn-danger btn-nav" data-pjax="#pjax-container"><i
+                        class="fas fa-trash-alt"></i> Delete</a>
+            {{/if}}
         </div>
     </div>
 </div>

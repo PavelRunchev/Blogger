@@ -15,9 +15,9 @@ const { validationResult } = require('express-validator');
 
 module.exports = {
     articlesStatus: (req, res) => {
-        if (!res.locals.isAdmin) {
+        if ((!res.locals.isAdmin) && (!res.locals.isModerator)) {
             res.flash('danger', 'Invalid credentials! Unauthorized!');
-            errorUser('lockArticle - Invalid credentials! Unauthorized!');
+            errorUser('Article Status - Invalid credentials! Unauthorized!');
             res.status(401).redirect('/user/signIn');
             return;
         }
@@ -39,6 +39,12 @@ module.exports = {
     },
 
     lockArticle: (req, res) => {
+        if (!res.locals.isAdmin) {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('lockArticle - Invalid credentials! Unauthorized!');
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
         try {
             const articleId = req.params.id;
             if (!articleId) {
@@ -65,6 +71,12 @@ module.exports = {
     },
 
     unlockArticle: (req, res) => {
+        if (!res.locals.isAdmin) {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('UnlockArticle - Invalid credentials! Unauthorized!');
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
         try {
             const articleId = req.params.id;
             if (!articleId) {
@@ -91,9 +103,9 @@ module.exports = {
     },
 
     surveyStatus: (req, res) => {
-        if (!res.locals.isAdmin) {
+        if ((!res.locals.isAdmin) && (!res.locals.isModerator)) {
             res.flash('danger', 'Invalid credentials! Unauthorized!');
-            errorUser('lockArticle - Invalid credentials! Unauthorized!');
+            errorUser('Survey Status - Invalid credentials! Unauthorized!');
             res.status(401).redirect('/user/signIn');
             return;
         }
@@ -130,6 +142,12 @@ module.exports = {
     },
 
     serverErrors: (req, res) => {
+        if (!res.locals.isAdmin) {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('Server Error - Invalid credentials! Unauthorized!');
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
         try {
             const filePath = path.join(__dirname, '/logs/serverError.log');
             fs.readFile(filePath, 'UTF-8', function(err, logs) {
@@ -150,6 +168,12 @@ module.exports = {
     },
 
     clearServerErrors: (req, res) => {
+        if (!res.locals.isAdmin) {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('clear Server Errors - Invalid credentials! Unauthorized!');
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
         try {
             const filePath = path.join(__dirname, '/logs/serverError.log');
             fs.writeFile(filePath, "", "utf-8", function(err, data) {
@@ -163,6 +187,12 @@ module.exports = {
     },
 
     removeServerErrorLog: (req, res) => {
+        if (!res.locals.isAdmin) {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('Remove Server Errors - Invalid credentials! Unauthorized!');
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
         try {
             const currentRow = Number(req.params.id);
             const filePath = path.join(__dirname, '/logs/serverError.log');
@@ -184,6 +214,12 @@ module.exports = {
     },
 
     userErrors: (req, res) => {
+        if (!res.locals.isAdmin) {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('User Errors - Invalid credentials! Unauthorized!');
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
         try {
             const filePath = path.join(__dirname, '/logs/usersError.log');
             fs.readFile(filePath, 'UTF-8', function(err,  logs) {
@@ -203,6 +239,12 @@ module.exports = {
     },
 
     clearUserErrors: (req, res) => {
+        if (!res.locals.isAdmin) {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('Clear User Errors - Invalid credentials! Unauthorized!');
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
         try {
             const filePath = path.join(__dirname, '/logs/usersError.log');
             fs.writeFile(filePath, "", "utf-8", function(err, data) {
@@ -218,6 +260,12 @@ module.exports = {
     },
 
     removeUserErrorLog: (req, res) => {
+        if (!res.locals.isAdmin) {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('Remove User Error Log - Invalid credentials! Unauthorized!');
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
         try {
             const currentRow = Number(req.params.id);
             const filePath = path.join(__dirname, '/logs/usersError.log');
@@ -239,6 +287,12 @@ module.exports = {
     },
 
     userStatus: async(req, res) => {
+        if ((!res.locals.isAdmin) && (!res.locals.isModerator)) {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('Article Status - Invalid credentials! Unauthorized!');
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
         try {
             Promise.all([
                 Category.find({}).sort({ name: 'ascending'}),
@@ -262,7 +316,7 @@ module.exports = {
 
     userChangeRole: (req, res) => {
         try {
-            if (!res.locals.email !== 'abobo@abv.bg') {
+            if (res.locals.isAdmin !== true || res.locals.currentUser.email !== 'abobo@abv.bg') {
                 res.flash('danger', 'Invalid credentials! Unauthorized!');
                 errorUser('change role - Invalid credentials! Unauthorized!');
                 res.status(401).redirect('/user/signIn');
@@ -284,9 +338,9 @@ module.exports = {
     addRole: (req, res) => {
         try {
 
-            if (!res.locals.email !== 'abobo@abv.bg') {
+            if (res.locals.isAdmin !== true || res.locals.currentUser.email !== 'abobo@abv.bg') {
                 res.flash('danger', 'Invalid credentials! Unauthorized!');
-                errorUser('change role - Invalid credentials! Unauthorized!');
+                errorUser('Add role - Invalid credentials! Unauthorized!');
                 res.status(401).redirect('/user/signIn');
                 return;
             }
@@ -320,9 +374,9 @@ module.exports = {
 
     removeRole: (req, res) => {
         try {
-            if (!res.locals.email !== 'abobo@abv.bg') {
+            if (res.locals.isAdmin !== true || res.locals.currentUser.email !== 'abobo@abv.bg') {
                 res.flash('danger', 'Invalid credentials! Unauthorized!');
-                errorUser('change role - Invalid credentials! Unauthorized!');
+                errorUser('Remove role - Invalid credentials! Unauthorized!');
                 res.status(401).redirect('/user/signIn');
                 return;
             }

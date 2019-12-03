@@ -126,7 +126,6 @@ module.exports = {
     },
 
     articleDetails: (req, res) => {
-        // TODO article content with white space abzac(\r\n\r\n)!
         try {
             const articleId = req.params.id;
             Promise.all([
@@ -141,7 +140,14 @@ module.exports = {
                 article.publisher = article.creator.email;
                 article.isLike = article.like.length;
                 article.isUnlike = article.unlike.length;
+                article.isOwnerOrAdmin = false;
 
+                if(res.locals.isAdmin) {
+                    article.isOwnerOrAdmin = true;
+                } else if(res.locals.currentUser !== undefined && res.locals.currentUser._id.toString() === article.creator._id.toString()) {
+                    article.isOwnerOrAdmin = true;
+                }
+                
                 let paragraphContent = [];
                 article.content.split('\r\n').forEach(el => {
                     if(el !== '' && el !== '\t' && el !== ' ' 
@@ -159,6 +165,8 @@ module.exports = {
                 article.posts.map((el, i) => {
                     el.index = i + 1;
                     el.date = convertDateAndMinutes(el.createDate);
+                    el.Admin = res.locals.isAdmin;
+                    el.Moderator = res.locals.isModerator;
                 });
                 // posts sorted to descending order
                 let articleMessages = article.posts.sort((a, b) => b.createDate - a.createDate);
@@ -172,27 +180,50 @@ module.exports = {
 
     articleEditGet: (req, res) => {
         try {
+            if(!res.locals.currentUser) {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser(`Edit Article not login user - Invalid credentials! Unauthorized!`);
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
+
             const articleId = req.params.id;
             Promise.all([
                 Article.findById(articleId),
                 Category.find({}).sort({ name: 'ascending'})
             ]).then(([article, categories]) => {
-                res.status(200).renderPjax('article/article-edit', { article, categories });
+                const isUpLevel = res.locals.isAdmin;
+                const isCreator = res.locals.currentUser._id.toString() === article.creator._id.toString();
+                if(isUpLevel || isCreator) {
+                    res.status(200).renderPjax('article/article-edit', { article, categories });
+                } else {
+                    res.flash('danger', 'Invalid credentials! Unauthorized!');
+                    errorUser(`Edit Article with ${article.id} - Invalid credentials! Unauthorized!`);
+                    res.status(401).redirect('/user/signIn');
+                    return;
+                }
             }).catch(err => errorHandler(req, res, err));
         } catch (err) { errorHandler(req, res, err); }
     },
 
     articleEditPost: (req, res) => {
         try {
+            if(!res.locals.currentUser) {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser(`Edit Delete not login user - Invalid credentials! Unauthorized!`);
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
             const articleId = req.params.id;
             Article.findById(articleId)
                 .then((article) => {
                     const { title, imageUrl, category, videoLink, content } = req.body;
 
-                    //check for creator or admin!
-                    if ((article.creator.toString() !== res.locals.currentUser._id.toString()) &&
-                        (!res.locals.isAdmin)) {
+                     //check for creator or admin!
+                    if ((!res.locals.isAdmin) 
+                    || (article.creator._id.toString() !== res.locals.currentUser._id.toString())) {
                         res.flash('danger', 'Invalid credentials! Unauthorized!');
+                        errorUser(`Article Edit post with id ${article._id} - Invalid credentials! Unauthorized!`);
                         res.status(401).redirect('/users/signIn');
                         return;
                     }
@@ -215,12 +246,27 @@ module.exports = {
 
     articleDeleteGet: (req, res) => {
         try {
+            if(!res.locals.currentUser) {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser(`Delete Article not login user - Invalid credentials! Unauthorized!`);
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
             const articleId = req.params.id;
             Promise.all([
                 Article.findById(articleId),
                 Category.find({}).sort({ name: 'ascending'})
             ]).then(([article, categories]) => {
-                res.status(200).renderPjax('article/article-delete', { article, categories });
+                const isUpLevel = res.locals.isAdmin;
+                const isCreator = res.locals.currentUser._id.toString() === article.creator._id.toString();
+                if(isUpLevel || isCreator) {
+                    res.status(200).renderPjax('article/article-delete', { article, categories });
+                } else {
+                    res.flash('danger', 'Invalid credentials! Unauthorized!');
+                    errorUser(`Delete Article with ${article.id} - Invalid credentials! Unauthorized!`);
+                    res.status(401).redirect('/user/signIn');
+                    return;
+                }
             }).catch(err => errorHandler(req, res, err));
         } catch (err) {
             errorHandler(req, res, err);
@@ -231,23 +277,34 @@ module.exports = {
         try {
             const articleId = req.params.id;
             const userId = res.locals.currentUser._id;
-            Promise.all([
-                //find category with articleId
-                Category.findOne({ articles: articleId }),
-                //remove article
-                Article.findByIdAndRemove({ _id: articleId }),
-                //find cretor to the article
-                User.findById(userId).select('articles')
-            ]).then(([category, article, user]) => {
-                 //remove article from category
-                 category.articles.pull(articleId);
-                 //remove article from user
-                 user.articles.pull(articleId);
-                 // save changes!!!
-                 return Promise.all([category.save(), user.save()]);
-            }).then(() => {
-                res.flash('danger', 'Article deleted successfully!');
-                res.status(204).redirect('/article/article-all');
+            Article.findById(articleId).select('creator').then((article) => {
+                //check for creator or admin!
+                if ((!res.locals.isAdmin) 
+                || (article.creator._id.toString() !== res.locals.currentUser._id.toString())) {
+                    res.flash('danger', 'Invalid credentials! Unauthorized!');
+                    errorUser(`Article delete post with id ${article._id} - Invalid credentials! Unauthorized!`);
+                    res.status(401).redirect('/users/signIn');
+                    return;
+                }
+            
+                Promise.all([
+                    //find category with articleId
+                    Category.findOne({ articles: articleId }),
+                    //remove article
+                    Article.findByIdAndRemove({ _id: articleId }),
+                    //find cretor to the article
+                    User.findById(userId).select('articles')
+                ]).then(([category, article, user]) => {
+                    //remove article from category
+                    category.articles.pull(articleId);
+                    //remove article from user
+                    user.articles.pull(articleId);
+                    // save changes!!!
+                    return Promise.all([category.save(), user.save()]);
+                }).then(() => {
+                    res.flash('danger', 'Article deleted successfully!');
+                    res.status(204).redirect('/article/article-all');
+                }).catch(err => errorHandler(req, res, err));
             }).catch(err => errorHandler(req, res, err));
         } catch (err) { errorHandler(req, res, err); }
     },
@@ -339,6 +396,7 @@ module.exports = {
             } else {
                 res.flash('danger', 'Invalid credentials! Unauthorized!');
                 res.status(401).redirect('/');
+                return;
             }
         } catch (err) {
             errorHandler(req, res, err);

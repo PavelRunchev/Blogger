@@ -20,10 +20,11 @@
             }
         }
         .empty-container {
+            width: 60%;
             @include form-background-color;
             @include box-shadow;
             border-radius: 0.5rem;
-            margin: 20% auto;
+            margin: 15% auto;
             h3 {
                 color: #fff;
                 text-shadow: 1px 1px rgb(0, 0, 0);

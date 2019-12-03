@@ -64,16 +64,16 @@ const User = require('../models/User');
     router.get('/signIn', controllers.user.signInGet);
     router.post('/signIn', controllers.user.signInPost);
 
-    router.post('/logout', controllers.user.logout);
+    router.post('/logout', auth.isAuthed, controllers.user.logout);
 
-    router.get('/user-profile', controllers.user.userProfile);
+    router.get('/user-profile', auth.isAuthed, controllers.user.userProfile);
     router.post('/user-profile/changeProfileImageUrl', [
         body('imageUrl')
         .matches('^(http).*(.png|.jpg)$')
         .withMessage('Image URL must be starts HTTP and end with .JPG or .PNG!'),
-    ], controllers.user.changeProfileImageUrl);
+    ], auth.isAuthed, controllers.user.changeProfileImageUrl);
 
-    router.post('/user-profile/changeUploadImage', controllers.user.changeProfileUploadImage);
+    router.post('/user-profile/changeUploadImage', auth.isAuthed, controllers.user.changeProfileUploadImage);
     router.post('/user-profile/user-changeData', [
         body('email')
         .trim()

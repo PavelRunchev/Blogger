@@ -18,16 +18,21 @@
                 <a href="/" class="nav-link"><i class="fas fa-home mr-1"></i><span
                         class="clearfix d-sm-inline-block"> Home</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/article/article-create" data-pjax="#pjax-container"><i
-                        class="fas fa-chart-pie mr-1"></i><span class="clearfix d-sm-inline-block"> Create
-                        Article</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/category/category-create" data-pjax="#pjax-container"><i
-                        class="fas fa-chart-pie mr-1"></i> <span class="clearfix d-sm-inline-block"> Create
-                        Category</span></a>
-            </li>
+            {{#if isAuthed}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/article/article-create" data-pjax="#pjax-container"><i
+                            class="fas fa-chart-pie mr-1"></i><span class="clearfix d-sm-inline-block"> Create
+                            Article</span></a>
+                </li>
+            {{/if}}
+
+            {{#if isAdmin}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/category/category-create" data-pjax="#pjax-container"><i
+                            class="fas fa-chart-pie mr-1"></i> <span class="clearfix d-sm-inline-block"> Create
+                            Category</span></a>
+                </li>
+            {{/if}}
 
             <li class="nav-item">
                 <a class="nav-link" href="/article/article-all" data-pjax="#pjax-container"><i
@@ -35,76 +40,97 @@
                         Articles</span></a>
             </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false" data-pjax="#pjax-container">Admin Options
-                </a>
-                <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                    <a class="dropdown-item" href="/admin/admin-userErrors" data-pjax="#pjax-container"><i
-                        class="fas fa-info-circle"></i> <span class="clearfix d-sm-inline-block">User
-                        Error</span></a>
-                    <a class="dropdown-item" href="/admin/admin-serverErrors" data-pjax="#pjax-container"><i
-                        class="fas fa-info-circle"></i> <span class="clearfix d-sm-inline-block">Server Error</span></a>
-                    <a class="dropdown-item" href="/admin/admin-articles-status" data-pjax="#pjax-container"><i
-                        class="fab fa-staylinked"></i> <span class="clearfix d-sm-inline-block">Articles Stats</span></a>
-                    <a class="dropdown-item" href="/admin/admin-survey-status" data-pjax="#pjax-container"><i
-                        class="fab fa-staylinked"></i> <span class="clearfix d-sm-inline-block">Survey Stats</span></a>
-                    <a class="dropdown-item" href="/admin/admin-user-status" data-pjax="#pjax-container"><i
-                        class="fab fa-staylinked"></i> <span class="clearfix d-sm-inline-block">User Stats</span></a>
-                </div>
-            </li>
+            {{#if isAdmin}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" data-pjax="#pjax-container">Admin Options
+                    </a>
+                    <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                        <a class="dropdown-item" href="/admin/admin-userErrors" data-pjax="#pjax-container"><i
+                            class="fas fa-info-circle"></i> <span class="clearfix d-sm-inline-block">User
+                            Error</span></a>
+                        <a class="dropdown-item" href="/admin/admin-serverErrors" data-pjax="#pjax-container"><i
+                            class="fas fa-info-circle"></i> <span class="clearfix d-sm-inline-block">Server Error</span></a>
+                        <a class="dropdown-item" href="/admin/admin-articles-status" data-pjax="#pjax-container"><i
+                            class="fab fa-staylinked"></i> <span class="clearfix d-sm-inline-block">Articles Stats</span></a>
+                        <a class="dropdown-item" href="/admin/admin-survey-status" data-pjax="#pjax-container"><i
+                            class="fab fa-staylinked"></i> <span class="clearfix d-sm-inline-block">Survey Stats</span></a>
+                        <a class="dropdown-item" href="/admin/admin-user-status" data-pjax="#pjax-container"><i
+                            class="fab fa-staylinked"></i> <span class="clearfix d-sm-inline-block">User Stats</span></a>
+                    </div>
+                </li>
+            {{/if}}
+            {{#if isModerator}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" data-pjax="#pjax-container">Admin Options
+                    </a>
+                    <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                        <a class="dropdown-item" href="/admin/admin-articles-status" data-pjax="#pjax-container"><i
+                            class="fab fa-staylinked"></i> <span class="clearfix d-sm-inline-block">Articles Stats</span></a>
+                        <a class="dropdown-item" href="/admin/admin-survey-status" data-pjax="#pjax-container"><i
+                            class="fab fa-staylinked"></i> <span class="clearfix d-sm-inline-block">Survey Stats</span></a>
+                        <a class="dropdown-item" href="/admin/admin-user-status" data-pjax="#pjax-container"><i
+                            class="fab fa-staylinked"></i> <span class="clearfix d-sm-inline-block">User Stats</span></a>
+                    </div>
+                </li>
+            {{/if}}
         </ul>
 
         <ul class="nav navbar-nav right-items">
             {{#if isAuthed}}
-            {{#if isAdmin}}
-            <li class="nav-link font-italic pt-md-3">Welcome, Admin {{currentUser.firstName}}</li>
-            {{else}}
-            <li class="nav-link font-italic pt-md-3">Welcome, {{currentUser.firstName}}</li>
-            {{/if}}
-            {{#if noReadingMessages}}
-                <a class="pt-md-3 mx-3" href="/message/myMessages" data-pjax="#pjax-container"><i class="fas fa-comment"></i></a>
-            {{/if}}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false" data-pjax="#pjax-container">
-                    <img src="{{currentUser.profileImage}}" class="profile" alt="profile">
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/user/user-profile" data-pjax="#pjax-container">
-                        <i class="fas fa-user"></i> 
-                        <span class="clearfix d-sm-inline-block">Profile</span>
+                {{#if isAdmin}}
+                    <li class="nav-link font-italic pt-md-3">Welcome, <span class="text-warning font-italic font-weight-bold">Admin</span> {{currentUser.firstName}}</li>
+                {{else}}
+                    {{#if isModerator}}
+                    <li class="nav-link font-italic pt-md-3">Welcome, <span class="text-info font-italic font-weight-bold">Moderator</span> {{currentUser.firstName}}</li>
+                    {{else}}
+                        <li class="nav-link font-italic pt-md-3">Welcome, {{currentUser.firstName}}</li>
+                    {{/if}}
+                {{/if}}
+                {{#if noReadingMessages}}
+                    <a class="pt-md-3 mx-3" href="/message/myMessages" data-pjax="#pjax-container"><i class="fas fa-comment"></i></a>
+                {{/if}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" data-pjax="#pjax-container">
+                        <img src="{{currentUser.profileImage}}" class="profile" alt="profile">
                     </a>
-                   
-                     <a class="dropdown-item" data-pjax="#pjax-container" href="/message/message-send">
-                        <i class="fas fa-pencil-alt"></i>
-                        <span class="clearfix d-sm-inline-block">Send message</span>
-                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/user/user-profile" data-pjax="#pjax-container">
+                            <i class="fas fa-user"></i> 
+                            <span class="clearfix d-sm-inline-block">Profile</span>
+                        </a>
                     
-                    <a class="dropdown-item" href="/message/myMessages" data-pjax="#pjax-container">
-                        <i class="fas fa-comments"></i>
-                        <span class="clearfix d-sm-inline-block">My messages</span>
-                    </a>
-                    <a class="dropdown-item" href="/article/article-myArticles" data-pjax="#pjax-container">
-                        <i class="far fa-list-alt"></i>
-                        <span class="clearfix d-sm-inline-block">My Articles</span>
-                    </a>
-                    <form id="logout-form" action="/user/logout" method="post"></form>
-                    <a class="dropdown-item" href="javascript:document.getElementById('logout-form').submit()" data-pjax="#pjax-container">
-                        <i class="fas fa-sign-out-alt"></i> 
-                        <span class="clearfix d-sm-inline-block">Log Out</span>
-                    </a>
-                </div>
-            </li>
+                        <a class="dropdown-item" data-pjax="#pjax-container" href="/message/message-send">
+                            <i class="fas fa-pencil-alt"></i>
+                            <span class="clearfix d-sm-inline-block">Send message</span>
+                        </a>
+                        
+                        <a class="dropdown-item" href="/message/myMessages" data-pjax="#pjax-container">
+                            <i class="fas fa-comments"></i>
+                            <span class="clearfix d-sm-inline-block">My messages</span>
+                        </a>
+                        <a class="dropdown-item" href="/article/article-myArticles" data-pjax="#pjax-container">
+                            <i class="far fa-list-alt"></i>
+                            <span class="clearfix d-sm-inline-block">My Articles</span>
+                        </a>
+                        <form id="logout-form" action="/user/logout" method="post"></form>
+                        <a class="dropdown-item" href="javascript:document.getElementById('logout-form').submit()" data-pjax="#pjax-container">
+                            <i class="fas fa-sign-out-alt"></i> 
+                            <span class="clearfix d-sm-inline-block">Log Out</span>
+                        </a>
+                    </div>
+                </li>
             {{else}}
-            <li class="nav-item mx-2">
-                <a class="nav-link" href="/user/signIn" ><i class="fas fa-sign-in-alt"></i>
-                    <span class="clearfix d-sm-inline-block">Sign In</span></a>
-            </li>
-            <li class="nav-item mx-2">
-                <a class="nav-link" href="/user/signUp" data-pjax="#pjax-container"><i class="fas fa-user"></i> <span
-                        class="clearfix d-sm-inline-block">Sign Up</span></a>
-            </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="/user/signIn" ><i class="fas fa-sign-in-alt"></i>
+                        <span class="clearfix d-sm-inline-block">Sign In</span></a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="/user/signUp" data-pjax="#pjax-container"><i class="fas fa-user"></i> <span
+                            class="clearfix d-sm-inline-block">Sign Up</span></a>
+                </li>
             {{/if}}
         </ul>
     </div>

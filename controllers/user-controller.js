@@ -151,8 +151,8 @@ module.exports = {
     },
 
     userProfile: (req, res) => {
-        // todo user id change!!!
-        Category.find({}).sort({ name: 'ascending'})
+        if(res.locals.currentUser !== undefined) {
+            Category.find({}).sort({ name: 'ascending'})
             .then((categories) => {
                 return Promise.all([categories, User.findById(res.locals.currentUser._id)]);
             }).then(([categories, user]) => {
@@ -161,87 +161,107 @@ module.exports = {
 
                 res.status(200).renderPjax('user/user-profile', { categories, user });
             }).catch(err => errorHandler(req, res, err));
+        } else {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('user profile - Invalid credentials! Unauthorized!')
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
     },
 
     changeProfileImageUrl: (req, res) => {
-        if (validateUser(req, res)) {
-            try {
-                const { imageUrl } = req.body;
-                const image = shortid.generate();
-                const userId = res.locals.currentUser._id;
-                // library for download image url
-                download.image({ url: imageUrl, dest: `static/userProfile/${image}.jpg` })
-                    .then(() => {
-                        return Promise.resolve(User.findById(userId));
-                    }).then((user) => {
-                        //check if file profileImage exist and removed!!!
-                        const existProfile = user.profileImage.split('/').pop();
-                        if (existProfile !== 'guestMale.png' && existProfile !== 'guestFemale.jpg' && existProfile !== 'Admin_20122.png') {
-                            if (fs.existsSync(`static/userProfile/${existProfile}`)) {
-                                fs.unlinkSync(`static/userProfile/${existProfile}`);
+        if(res.locals.currentUser !== undefined) {
+            if (validateUser(req, res)) {
+                try {
+                    const { imageUrl } = req.body;
+                    const image = shortid.generate();
+                    const userId = res.locals.currentUser._id;
+                    // library for download image url
+                    download.image({ url: imageUrl, dest: `static/userProfile/${image}.jpg` })
+                        .then(() => {
+                            return Promise.resolve(User.findById(userId));
+                        }).then((user) => {
+                            //check if file profileImage exist and removed!!!
+                            const existProfile = user.profileImage.split('/').pop();
+                            if (existProfile !== 'guestMale.png' && existProfile !== 'guestFemale.jpg' && existProfile !== 'Admin_20122.png') {
+                                if (fs.existsSync(`static/userProfile/${existProfile}`)) {
+                                    fs.unlinkSync(`static/userProfile/${existProfile}`);
+                                }
                             }
-                        }
 
-                        user.profileImage = `/userProfile/${image}.jpg`;
-                        req.session.user = user;
-                        return Promise.resolve(user.save());
-                    }).then(() => {
-                        res.flash('success', 'You change profile successfully!');
-                        res.status(204).redirect('/user/user-profile');
-                    })
-            } catch (err) {
-                errorHandler(req, res, err);
+                            user.profileImage = `/userProfile/${image}.jpg`;
+                            req.session.user = user;
+                            return Promise.resolve(user.save());
+                        }).then(() => {
+                            res.flash('success', 'You change profile successfully!');
+                            res.status(204).redirect('/user/user-profile');
+                        })
+                } catch (err) {
+                    errorHandler(req, res, err);
+                }
             }
+        } else {
+            res.flash('danger', 'Invalid credentials! Unauthorized!');
+            errorUser('user profile (Change profile image url) - Invalid credentials! Unauthorized!')
+            res.status(401).redirect('/user/signIn');
+            return;
         }
     },
 
     changeProfileUploadImage: (req, res) => {
         try {
-            const userId = res.locals.currentUser._id;
-            // empty file to User Error!
-            if (!req.files) {
-                res.locals.globalError = 'No file were uploaded!';
-                errorUser('No file were uploaded!');
-                reloadUserData(req, res);
-                return;
-            }
-
-            const image = req.files.uploadImage;
-
-            if ((!image.name.endsWith('.jpg')) && (!image.name.endsWith('.png'))) {
-                res.locals.globalError = 'Profile image must be end with .JPG or .PNG!';
-                errorUser('Profile image must be end with .JPG or .PNG!');
-                reloadUserData(req, res);
-                return;
-            }
-
-            User.findById(userId).then((user) => {
-                // If user is null
-                if (!user) {
-                    res.locals.globalError = 'Invalid user';
-                    errorUser('Invalid user');
-                    res.status(400).renderPjax('user/signIn', req.body);
+            if(res.locals.currentUser !== undefined) {
+                const userId = res.locals.currentUser._id;
+                // empty file to User Error!
+                if (!req.files) {
+                    res.locals.globalError = 'No file were uploaded!';
+                    errorUser('No file were uploaded!');
+                    reloadUserData(req, res);
                     return;
                 }
 
-                //check if file profileImage exist and removed!!!
-                const existProfile = user.profileImage.split('/').pop();
-                if (existProfile !== 'guestMale.png' && existProfile !== 'guestFemale.jpg' && existProfile !== 'Admin_20122.png') {
-                    if (fs.existsSync(`static/userProfile/${existProfile}`)) {
-                        fs.unlinkSync(`static/userProfile/${existProfile}`);
-                    }
+                const image = req.files.uploadImage;
+
+                if ((!image.name.endsWith('.jpg')) && (!image.name.endsWith('.png'))) {
+                    res.locals.globalError = 'Profile image must be end with .JPG or .PNG!';
+                    errorUser('Profile image must be end with .JPG or .PNG!');
+                    reloadUserData(req, res);
+                    return;
                 }
 
-                
-                // save new profileImage
-                image.mv(`static/userProfile/${image.name}`, function (err) { });
-                user.profileImage = `/userProfile/${image.name}`;
-                return Promise.resolve(user.save());
-            }).then((user) => {
-                req.session.user = user;
-                res.flash('success', 'You change profile successfully!');
-                res.status(204).redirect('/user/user-profile');
-            }).catch(err => errorHandler(req, res, err));
+                User.findById(userId).then((user) => {
+                    // If user is null
+                    if (!user) {
+                        res.locals.globalError = 'Invalid user';
+                        errorUser('Invalid user');
+                        res.status(400).renderPjax('user/signIn', req.body);
+                        return;
+                    }
+
+                    //check if file profileImage exist and removed!!!
+                    const existProfile = user.profileImage.split('/').pop();
+                    if (existProfile !== 'guestMale.png' && existProfile !== 'guestFemale.jpg' && existProfile !== 'Admin_20122.png') {
+                        if (fs.existsSync(`static/userProfile/${existProfile}`)) {
+                            fs.unlinkSync(`static/userProfile/${existProfile}`);
+                        }
+                    }
+
+                    
+                    // save new profileImage
+                    image.mv(`static/userProfile/${image.name}`, function (err) { });
+                    user.profileImage = `/userProfile/${image.name}`;
+                    return Promise.resolve(user.save());
+                }).then((user) => {
+                    req.session.user = user;
+                    res.flash('success', 'You change profile successfully!');
+                    res.status(204).redirect('/user/user-profile');
+                }).catch(err => errorHandler(req, res, err));
+            } else {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser('user profile (Change upload profile image) - Invalid credentials! Unauthorized!')
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
         } catch (err) {
             errorHandler(req, res, err);
         }
@@ -249,38 +269,45 @@ module.exports = {
 
     changeUserData: (req, res) => {
         try {
-            const userId = res.locals.currentUser._id;
-            const { email, age, firstName, lastName } = req.body;
+            if(res.locals.currentUser !== undefined) {
+                const userId = res.locals.currentUser._id;
+                const { email, age, firstName, lastName } = req.body;
 
-            if(email.endsWith('.js') || age.endsWith('.js') 
-                || firstName.endsWith('.js') || lastName.endsWith('.js')
-                || email.endsWith('.exe') || age.endsWith('.exe') 
-                || firstName.endsWith('.exe') || lastName.endsWith('.exe')
-                || email.endsWith('.bat') || age.endsWith('.bat') 
-                || firstName.endsWith('.bat') || lastName.endsWith('.bat')
-                || email.endsWith('.php') || age.endsWith('.php') 
-                || firstName.endsWith('.php') || lastName.endsWith('.php')) {
-                res.flash('danger', 'Not allow input data!');
-                errorUser(`Session - user profile, changeUserDate - ${req.body}`);
-                res.status(400).redirect('/user/signIn');
+                if(email.endsWith('.js') || age.endsWith('.js') 
+                    || firstName.endsWith('.js') || lastName.endsWith('.js')
+                    || email.endsWith('.exe') || age.endsWith('.exe') 
+                    || firstName.endsWith('.exe') || lastName.endsWith('.exe')
+                    || email.endsWith('.bat') || age.endsWith('.bat') 
+                    || firstName.endsWith('.bat') || lastName.endsWith('.bat')
+                    || email.endsWith('.php') || age.endsWith('.php') 
+                    || firstName.endsWith('.php') || lastName.endsWith('.php')) {
+                    res.flash('danger', 'Not allow input data!');
+                    errorUser(`Session - user profile, changeUserDate - ${req.body}`);
+                    res.status(400).redirect('/user/signIn');
+                    return;
+                }
+
+                if (validateChangeUserData(req, res)) {
+                    User
+                        .findOne({ _id: userId })
+                        .select('email age firstName lastName')
+                        .then((user) => {
+                            if (email !== '') user.email = email;
+                            if (age !== '') user.age = Number(age);
+                            if (firstName !== '') user.firstName = firstName;
+                            if (lastName !== '') user.lastName = lastName;
+        
+                            return Promise.resolve(user.save());
+                        }).then(() => {
+                            res.flash('success', 'You change profile successfully!');
+                            res.redirect('/user/user-profile');
+                        }).catch(err => errorHandler(req, res, err));
+                }
+            } else {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser('Change user data - Invalid credentials! Unauthorized!')
+                res.status(401).redirect('/user/signIn');
                 return;
-            }
-
-            if (validateChangeUserData(req, res)) {
-                User
-                    .findOne({ _id: userId })
-                    .select('email age firstName lastName')
-                    .then((user) => {
-                        if (email !== '') user.email = email;
-                        if (age !== '') user.age = Number(age);
-                        if (firstName !== '') user.firstName = firstName;
-                        if (lastName !== '') user.lastName = lastName;
-    
-                        return Promise.resolve(user.save());
-                    }).then(() => {
-                        res.flash('success', 'You change profile successfully!');
-                        res.redirect('/user/user-profile');
-                    }).catch(err => errorHandler(req, res, err));
             }
         } catch(err) {
             errorHandler(req, res, err);
@@ -349,8 +376,6 @@ function validateChangeUserData(req, res) {
     }   
 }
 
-
-
 // executing to signIn and signUp
 function saveingToSessionAndCookie(req, res, userObject) {
     // create new token
@@ -361,12 +386,13 @@ function saveingToSessionAndCookie(req, res, userObject) {
     if (userObject.roles.includes('Admin'))
         res.cookie('_ro_le_', encryptCookie('Admin'));
     else if (userObject.roles.includes('Moderator'))
-        res.cookie('_ro_le_', encryptCookie('Moderaotr'));
+        res.cookie('_ro_le_', encryptCookie('Moderator'));
 
     //add to Session cookie!
     req.session.auth_cookie = token;
     req.session.user = userObject;
     req.session.isAdmin = userObject.roles.includes('Admin');
+    req.session.isModerator = userObject.roles.includes('Moderator');
     req.session.save();
 }
 

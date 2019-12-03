@@ -1,12 +1,14 @@
 const controllers = require('../controllers');
 const router = require('express').Router();
 const { body } = require('express-validator');
+const auth = require('../config/auth');
     
     //
     // Category Router
     //
-    router.get('/category-create', controllers.category.categoryCreateGet);
-    router.post('/category-create', [
+    // only Admin or Moderator can do it!
+    router.get('/category-create', auth.roleUpLevel, controllers.category.categoryCreateGet);
+    router.post('/category-create', auth.roleUpLevel, [
         body('name')
         .trim()
         .not()
@@ -17,6 +19,7 @@ const { body } = require('express-validator');
         .matches('^[A-Z][a-z- ]+$')
         .withMessage('Name must be start with capital letter!')
     ], controllers.category.categoryCreatePost);
+    // All can do  it!
     router.get('/category-findArticleByCategory/:id', controllers.category.findArticlesByCategory);
 
 module.exports = router;

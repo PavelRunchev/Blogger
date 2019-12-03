@@ -51,29 +51,23 @@ module.exports = app => {
         next();
     });
 
-    app.use(function(err, req, res, next) {
-        if(err) { 
-            errorHandler(req, res, err);
-        }
-        next();
-    });
-
     app.use(function(req, res, next) {
         // flash configuretion to express!
-        // delete session when is empty!!!
+        // delete flash in session when is empty!!!
         if (Object.getOwnPropertyNames(res.locals.flash).length === 0) {
             delete req.session.flash;
             delete res.locals.flash;
         }
 
-        // res.setHeader('Access-Control-Allow-Origin', '*');
-        // res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
-        // res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-        // res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
         next();
     });
 
     app.use(function(req, res, next) {
+        delete req.host;
         // checking for valid token
         if(req.cookies[authCookieName] === req.session.auth_cookie) {
             res.locals.currentUser = req.session.user;
@@ -97,9 +91,6 @@ module.exports = app => {
         if(req.cookies['_ss_coo%_']) {
             res.locals.isAccessCookie = true;
         }
-
-        delete req.host;
-        
         next();
     });
 

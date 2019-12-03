@@ -1,4 +1,4 @@
-<div class="container-fluid myArticles">
+<div class="container myArticles">
     <div class="article-list">
         {{#each articles}}
         <div class="card mb-3">
@@ -16,7 +16,9 @@
             <a href="/article/article-details/{{this._id}}" class="card-link text-right h5" data-pjax="#pjax-container">Read More</a>
         </div>
         {{else}}
-            <h3 class="h3 text-light text-center">No published articles!</h3>
+            <div class="container-fluid py-5 empty-container">
+                <h3 class="h3 text-light text-center">No you published articles!</h3>
+            </div>
         {{/each}}
     </div>
 </div>

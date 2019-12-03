@@ -1,9 +1,11 @@
 const controllers = require('../controllers');
 const router = require('express').Router();
+const auth = require('../config/auth');
 
     //
     // Survey Router
     //
-    router.post('/survey-send', controllers.survey.surveySend);
+    // Only authentication user can do it!
+    router.post('/survey-send', auth.isAuthed, controllers.survey.surveySend);
 
 module.exports = router;

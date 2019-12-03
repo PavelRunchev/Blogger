@@ -21,8 +21,15 @@ function validatePost(req, res) {
     return true;
 }
 
+// TODO check post and remove from autorization uplevel roles!!!
 module.exports = {
     postformGet: (req, res) => {
+        if(!res.locals.currentUser) {
+            res.flash('danger', 'You not are Logged!');
+            errorUser('get post form to Article - You not are Logged!');
+            res.status(401).redirect('/user/signIn');
+            return;
+        }
         Category.find({}).sort({ name: 'ascending'}).then((categories) => {
             let fields = {};
             fields.articleId = req.params.id;
@@ -33,12 +40,12 @@ module.exports = {
 
     postFormPost: (req, res) => {
         try {
-            if(res.locals.currentUser === undefined) {
+            if(!res.locals.currentUser) {
                 res.flash('danger', 'You not are Logged!');
-                errorUser('post to article - You not are Logged!')
+                errorUser('create post to Article - You not are Logged!');
                 res.status(401).redirect('/user/signIn');
                 return;
-            } 
+            }
     
             if (validatePost(req, res)) {
                 const sender = res.locals.currentUser.email;
@@ -64,12 +71,19 @@ module.exports = {
 
     postLock: (req,  res) => {
         try {
+            if(!res.locals.isAdmin && !res.locals.isModerator) {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser('Post lock to Article - Invalid credentials! Unauthorized!');
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
+
             const postId = req.params.id;
             Post.findById(postId)
                 .select('isLock article')
                 .populate('article')
                 .then((post) => {
-                post.isLock = post.idzlock === false ? true : false;
+                post.isLock = post.isLock === false ? true : false;
                 return Promise.resolve(post.save());
             }).then((post) => {
                 res.flash('success', 'Post is Lock/Unlock!');
@@ -80,9 +94,14 @@ module.exports = {
         }
     },
 
-    // todo testing
     removePost: (req, res) => {
         try {
+            if(!res.locals.isAdmin || !res.locals.isModerator) {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser('Post remove to Article - Invalid credentials! Unauthorized!');
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
             const postId = req.params.id;
            
             Post.findByIdAndRemove({ _id: postId}).then((post) => {

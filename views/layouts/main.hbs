@@ -68,9 +68,11 @@
 
         <div class="d-flex flex-column col-lg-12 col-sm-12 px-0">
             <section id="pjax-container" class="col-md-12">
-                <div class="survey">
-                    {{> survey-form}}
-                </div>
+                {{#if isAuthed}}
+                    <div class="survey">
+                        {{> survey-form}}
+                    </div>
+                {{/if}}
                 {{{body}}}
             </section>
 
@@ -99,9 +101,9 @@
     <script src="/bootstrap/js/jquery.pjax.js"></script>
 
     <!-- Loading Bootstrap js files -->
+    <script src="/bootstrap/js/popper.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/bootstrap/js/popper.min.js"></script>
     <script src="/bootstrap/js/scrolling.js"></script>
     <script src="/bootstrap/js/scrolling-navbar.js"></script>
     <script src="/bootstrap/js/mdb.min.js"></script>

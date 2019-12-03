@@ -6,7 +6,8 @@ const { body } = require('express-validator');
     //
     // User Message Router
     //
-    router.get('/message-send', controllers.message.messageFormGet);
+    // Only authentication user can do it!
+    router.get('/message-send', auth.isAuthed, controllers.message.messageFormGet);
     router.post('/message-send', [
         body('recieverName')
         .trim()
@@ -20,9 +21,9 @@ const { body } = require('express-validator');
         .withMessage("You can't sending empty message!")
         .isLength({ min: 5, max: 300 })
         .withMessage('Content must be at least 5 to 300 chars long!')
-    ], controllers.message.messageFormPost);
-    router.get('/myMessages', controllers.message.myMessages);
-    router.post('/message-delete/:id', controllers.message.messageDelete);
-    router.get('/message-reading/:id', controllers.message.readSettingMessage);
+    ], auth.isAuthed, controllers.message.messageFormPost);
+    router.get('/myMessages', auth.isAuthed, controllers.message.myMessages);
+    router.post('/message-delete/:id', auth.isAuthed, controllers.message.messageDelete);
+    router.get('/message-reading/:id',  auth.isAuthed, controllers.message.readSettingMessage);
 
 module.exports = router;

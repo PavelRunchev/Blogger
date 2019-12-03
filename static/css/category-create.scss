@@ -7,7 +7,7 @@
     }
     form {
         padding: 1%;
-        @include form-background-color;
+        @include form-horizontal-background-color;
         @include box-shadow;
         width: 500px;
         height: 400px;

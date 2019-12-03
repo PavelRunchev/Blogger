@@ -1,11 +1,12 @@
 const controllers = require('../controllers');
 const router = require('express').Router();
 const { body } = require('express-validator');
+const auth = require('../config/auth');
 
     //
     // Article Router
     //
-    router.get('/article-create', controllers.article.articleCreateGet);
+    router.get('/article-create', auth.isAuthed , controllers.article.articleCreateGet);
     router.post('/article-create', [
         body('title')
         .trim()
@@ -29,7 +30,7 @@ const { body } = require('express-validator');
         .not()
         .isEmpty()
         .withMessage('Category is required!')
-    ], controllers.article.articleCreatePost);
+    ], auth.isAuthed, controllers.article.articleCreatePost);
 
     // all articles
     router.get('/article-all', controllers.article.articleAll);
@@ -39,15 +40,15 @@ const { body } = require('express-validator');
     router.get('/article-details/:id', controllers.article.articleDetails);
     // article Edit
     router.get('/article-edit/:id', controllers.article.articleEditGet);
-    router.post('/article-edit/:id', controllers.article.articleEditPost);
+    router.post('/article-edit/:id', auth.isAuthed, controllers.article.articleEditPost);
     // article Delete
     router.get('/article-delete/:id', controllers.article.articleDeleteGet);
-    router.post('/article-delete/:id', controllers.article.articleDeletePost);
+    router.post('/article-delete/:id', auth.isAuthed, controllers.article.articleDeletePost);
     // article like
-    router.post('/article-like/:id', controllers.article.articleLike);
+    router.post('/article-like/:id', auth.isAuthed, controllers.article.articleLike);
     // article unlike
-    router.post('/article-unlike/:id', controllers.article.articleUnLike);
+    router.post('/article-unlike/:id', auth.isAuthed, controllers.article.articleUnLike);
     // article my articles
-    router.get('/article-myArticles', controllers.article.myArticles);
+    router.get('/article-myArticles', auth.isAuthed, controllers.article.myArticles);
 
 module.exports = router;
