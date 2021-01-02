@@ -28,7 +28,7 @@
         "cookie-parser": "1.4.3",
         "cryptr": "^6.0.1",
         "express": "4.16.4",
-        "express-fileupload": "^1.1.6-alpha.6",
+        "express-fileupload": "^1.1.10",
         "express-flash-2": "^1.0.1",
         "express-handlebars": "^3.0.0",
         "express-pjax": "0.0.1",
