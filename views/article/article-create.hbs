@@ -1,10 +1,10 @@
 <div class="container-fluid article-create">
 
     <section class="container inner-articleCreate">
-        <h3>Create your article now</h3>
+        <h3>Create article section</h3>
 
         {{#if globalError}}
-       <p class="text-center global-error">{{globalError}}</p>
+        <p class="text-center global-error">{{globalError}}</p>
         {{/if}}
         <form action="/article/article-create" method="POST">
             <div class="row-input px-2 mb-1">
@@ -25,7 +25,7 @@
                     <label for="exampleSelect1" class="text-light pl-4 label-select">Choose your Category</label>
                     <select class="form-control select-option" id="exampleSelect1" name="category">
                         {{#each categories}}
-                            <option value="{{_id}}">{{name}}</option>
+                            <option value="{{this._doc._id}}">{{this._doc.name}}</option>
                         {{/each}}
                     </select>
                 </div>
@@ -33,7 +33,7 @@
                     <input type="text" id="form2" class="form-control" name="videoLink"
                         value="{{fields.videoLink}}" />
                     <label for="form2" class="text-light pl-4 label-text">Video Link (not required)</label>
-                    <p class="info text-light">Adding video url that contains "embed" not "watch", otherwise it won't wotk!</p>
+                    <p class="info text-light">You are adding video url that contains "embed" not "watch", otherwise it won't work! Example: 'https://www.youtube.com/embed/hpXxzzLOw00'.</p>
                 </div>
             </div>
 

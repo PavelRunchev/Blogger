@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const fs = require('fs');
+//const spdy = require('spdy');
 
 const User = require('../models/User');
 
@@ -12,7 +13,7 @@ module.exports = config => {
         useFindAndModify: false,
         useUnifiedTopology: true
     });
-    const db = mongoose.connection;
+    const db = mongoose.createConnection();
     db.once('open', err => {
         if (err) throw err;
         User.seedAdminUser().then(() => {

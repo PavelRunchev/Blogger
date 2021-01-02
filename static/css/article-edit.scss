@@ -78,7 +78,7 @@
     }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 999px) {
     .article-edit {
         padding-left: 0;
         padding-right: 0;
@@ -89,10 +89,9 @@
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 800px) {
     .article-edit {
         .inner-articleEdit {
-            width: 92%;
             form .row-input {
                 width: 100%;
                 flex-direction: column;
@@ -100,3 +99,23 @@
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    .article-edit {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: 100%;
+        .inner-articleEdit {
+            width: 98%;
+            max-width: 98%;
+            form .row-input .md-form .label-text {
+                font-size: 16px;
+            }
+            form .form-group .label-content {
+                font-size: 16px;
+            }
+        }
+    }
+}
+

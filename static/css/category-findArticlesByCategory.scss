@@ -45,9 +45,15 @@
     }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 600px) {
     .category-findArticlesByCategory {
         padding-left: 0;
         padding-right: 0;
+        & .article-list {
+            & .card {
+                max-width: 98%;
+                width: 98%;
+            }
+        }
     }
 }

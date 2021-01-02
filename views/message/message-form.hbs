@@ -1,5 +1,5 @@
 <div class="container-fluid send-message">
-    <h3>Send message to user or admin.</h3>
+    <h3>You send message to user or admin.</h3>
     <div class="send-message-form">
         <h2 class="text-center"><i class="fas fa-comment mr-3"></i>Send Message</h2>
 
@@ -18,8 +18,8 @@
                 <label for="form2" id="label-form2">Content</label>
             </div>
 
-            <div class="row d-flex justify-content-center">
-                <button type="submit" class="btn-sendMessage d-block mx-auto blue-gradient"><i id="spinner" class="fas fa-spinner"></i> Send</button>
+            <div class="row d-flex justify-content-center btn-div">
+                <button type="submit" class="btn-sendMessage blue-gradient"><i id="spinner" class="fas fa-spinner"></i> Send</button>
             </div>
         </form>
     </div>
@@ -27,7 +27,7 @@
         <p class="font-weight-bold">Admins online: {{adminOnline}}</p>
         <p class="font-weight-bold">Name: 
             {{#each users}}
-                <span class="font-italic text-warning">{{email}}, </span>
+                <span class="font-italic text-warning">{{this._doc.email}}, </span>
                 {{else}}
                 <span class="font-italic text-danger">No admins online!</span>
             {{/each}}

@@ -12,7 +12,7 @@
             <!--/.Search Form-->
             <form class="form-inline my-4 search-form" action="/article/article-search" method="POST">
                 <div class="md-form form-sm my-0">
-                    <input class="form-control form-control-sm mr-sm-2 mb-0" type="text" placeholder="Search" name="name"
+                    <input class="form-control form-control-sm mr-sm-2 mb-0" type="text" placeholder="Search Article" name="name"
                         aria-label="Search">
                 </div>
                 <button class="search" type="submit"><i class="fas fa-search"></i></button>
@@ -23,7 +23,7 @@
             <ul class="nav flex-column lighten-4 py-4 mb-5 mr-auto">
                 {{#each categories}}
                     <li class="nav-item">
-                        <a class="nav-link active" href="/category/category-findArticleByCategory/{{_id}}" data-pjax="#pjax-container">{{name}}</a>
+                        <a class="nav-link active" href="/category/category-findArticleByCategory/{{_doc._id}}" data-pjax="#pjax-container">{{_doc.name}}</a>
                     </li>
                 {{/each}}
                 <li class="nav-item">

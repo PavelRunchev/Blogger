@@ -20,7 +20,7 @@
             z-index: 1;
         }
     }
-    .inner-serverErrrors {
+    .inner-serverErrors {
         overflow: hidden;
         background: rgba(255, 255, 255, 0.85);
         width: 100%;
@@ -48,22 +48,16 @@
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 999px) {
     .server-errors {
-        h2 {
-            font-size: 26px;
-        }
-        .admin-console legend {
-            width: 200px;
-            font-size: 18px;
-        }
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .server-errors {
-        h2 {
-            font-size: 22px;
+        width: 100%;
+        max-width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+        & .inner-serverErrors {
+            width: 98%;
+            max-width: 98%;
+            margin: 0 auto;
         }
     }
 }

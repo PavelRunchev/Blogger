@@ -38,6 +38,7 @@ const auth = require('../config/auth');
     router.post('/article-search', controllers.article.articleSearch);
     // article details
     router.get('/article-details/:id', controllers.article.articleDetails);
+    router.get('/article-details-home/:id', controllers.article.articleDetailsHome);
     // article Edit
     router.get('/article-edit/:id', controllers.article.articleEditGet);
     router.post('/article-edit/:id', auth.isAuthed, controllers.article.articleEditPost);
@@ -47,8 +48,9 @@ const auth = require('../config/auth');
     // article like
     router.post('/article-like/:id', auth.isAuthed, controllers.article.articleLike);
     // article unlike
-    router.post('/article-unlike/:id', auth.isAuthed, controllers.article.articleUnLike);
+    router.post('/article-unlike/:id', auth.isAuthed, controllers.article.articleDislike);
     // article my articles
     router.get('/article-myArticles', auth.isAuthed, controllers.article.myArticles);
+    router.get('/article-details-myArticle/:id', auth.isAuthed, controllers.article.articleDetailsMyArticle);
 
 module.exports = router;

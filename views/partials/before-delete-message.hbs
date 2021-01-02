@@ -18,7 +18,7 @@
 
       <!--Footer-->
       <div class="modal-footer flex-center">
-        <form id="remove-message{{index}}" action="/message/message-delete/{{_id}}" method="POST"></form>
+        <form id="remove-message{{index}}" action="/message/message-delete/{{this._doc._id}}" method="POST"></form>
         <a href="javascript:document.getElementById('remove-message{{index}}').submit()" class="btn  btn-outline-danger">Yes</a>
         <a class="btn btn-danger waves-effect" href="/message/myMessages" data-dismiss="modal">No</a>
       </div>

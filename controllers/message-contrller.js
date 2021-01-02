@@ -10,7 +10,6 @@ function validateMessage(req, res) {
     if (!errors.isEmpty()) {
         res.locals.globalError = errors.errors[0]['msg'];
         errorUserValidator(errors);
-        reloadMessageData(req, res);
         return false;
     }
 
@@ -31,16 +30,14 @@ module.exports = {
                     User.findOne({ email: recieverName }).select('email messages')
                         .then((reciever) => {
                             if (!reciever) {
-                                res.locals.globalError = 'Not exist user with that email!';
-                                errorUser('send user message - Not exist user with that email!');
-                                reloadMessageData(req, res);
+                                res.locals.globalError = 'No exist user with that email!';
+                                errorUser('send user message - No exist user with that email!');
                                 return;
                             }
 
                             if (reciever.email === res.locals.currentUser.email) {
-                                res.locals.globalError = 'You cannot sending message to yourself!';
-                                errorUser('message - You cannot sending message to yourself!')
-                                reloadMessageData(req, res);
+                                res.locals.globalError = `You are can't sending message to yourself!`;
+                                errorUser(`message - You are can't sending message to yourself!`);
                                 return;
                             }
 
@@ -54,7 +51,7 @@ module.exports = {
                             reciever.messages.push(message._id);
                             return Promise.resolve(reciever.save());   
                         }).then(() => {                   
-                            res.flash('success', 'You sending message succesfully!')
+                            res.flash('success', 'Message sent successfully!')
                             res.status(201).redirect('/');
                     }).catch(err => errorHandler(req, res, err));
                 }
@@ -71,10 +68,8 @@ module.exports = {
 
     myMessages: (req, res) => {
         try {
-            if(res.locals.currentUser !== undefined) {
-                const userId = res.locals.currentUser._id;
-
-                if (userId) {
+            const userId = res.locals.currentUser._id;
+            if(userId !== undefined) {
                     Message
                         .find({ reciever: userId })
                         .sort({ createDate: 'descending' })
@@ -88,7 +83,6 @@ module.exports = {
                             });
                             res.status(200).renderPjax('message/myMessages', { myMessages });
                         }).catch(err => errorHandler(req, res, err));
-                }
             } else {
                 res.flash('danger', 'Invalid credentials! Unauthorized!');
                 errorUser('My messages - Invalid credentials! Unauthorized!')
@@ -102,9 +96,9 @@ module.exports = {
 
     messageDelete: (req, res) => {
         try {
-            if(res.locals.currentUser !== undefined) {
-                const messageId = req.params.id;
-                const userId = res.locals.currentUser._id;
+            const userId = res.locals.currentUser._id;
+            if(userId !== undefined) {
+                const messageId = req.params.id;             
                 if (messageId) {
                     Promise.all([
                         Message.findByIdAndRemove(messageId), 
@@ -115,7 +109,7 @@ module.exports = {
                         user.messages.pull(removedMessage._id);
                         return Promise.resolve(user.save());
                     }).then(() => {
-                        res.flash('success', 'You deleted message successfully!')
+                        res.flash('success', 'The message deleted successfully!')
                         res.status(204);
                         res.redirect('/message/myMessages');
                     }).catch(err => errorHandler(req, res, err));
@@ -133,7 +127,8 @@ module.exports = {
 
     readSettingMessage: (req, res) => {
         try {
-            if(res.locals.currentUser !== undefined) {
+            const userId = res.locals.currentUser;
+            if(userId !== undefined) {
                 const messageId = req.params.id;
                 Message.findByIdAndUpdate({ _id: messageId}, { isReading: true })
                 .then(() => {

@@ -4,17 +4,19 @@
      <div class="admin-console">
         <legend class="text-center text-light font-weight-bold mb-0 rounded"><i class="fas fa-users-cog"></i> Admin Platform</legend>
     </div>
-    <div class="inner-serverErrrors">
+    <div class="inner-serverErrors">
         {{#if isClearAll}}
             <form id="admin-clearAllServerLogs" action="/admin/clear-serverError-logs" method="post"></form>
             <a id="clearErrors" class="mr-5 font-weight-bold" href="javascript:document.getElementById('admin-clearAllServerLogs').submit()" data-pjax="#pjax-container">clear all</a>
         {{/if}}
 
+        <h5 class="text-center font-weight-bold"><i class="fas fa-exclamation-triangle text-danger"></i> Only admins can access options!</h5>
+
         <!-- each diff elements id with index for click delete!!!-->
-        {{#each serverErrorLogs}}
+        {{#each serverErrors}}
             <div>
-                <form id="admin-removeLog{{@index}}" action="/admin/admin-removeServerErrorLog/{{@index}}" method="post"></form>
-                <p class="text-left font-weight-bold">{{this.index}} {{this.row}} <a class="delete-row font-weight-bold" href="javascript:document.getElementById('admin-removeLog{{@index}}').submit()" data-pjax="#pjax-container">delete</a></p>
+                <form id="admin-removeLog{{@index}}" action="/admin/admin-removeServerErrorLog/{{this._doc._id}}" method="post"></form>
+                <p class="text-left font-weight-bold">{{this.index}} {{this.logContent}} <a class="delete-row font-weight-bold" href="javascript:document.getElementById('admin-removeLog{{@index}}').submit()" data-pjax="#pjax-container">delete</a></p>
             </div>
         {{else}}
             <h5 class="text-center font-weight-bold text-danger my-5">No Server Errors!</h5>

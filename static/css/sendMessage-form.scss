@@ -6,10 +6,9 @@
         @include line-below-title;
     }
     .send-message-form {
-        width: 600px;
+        width: 70%;
         margin: 0 auto 20px auto;
         background: #fff;
-        //@include form-background-color;
         @include box-shadow;
         border: 2px solid rgb(0, 98, 165);
         padding: 2%;
@@ -30,13 +29,18 @@
             outline: none;
             background-color: none;
         }
-        .btn-sendMessage {
-            @include btn-submit-view;
-            margin-bottom: 10px;
-        }
-        .btn-sendMessage:hover {
-            @include btn-hover-shadow-black;
-            font-weight: bold;
+
+        .btn-div {
+            width: 100%;
+            max-width: 100%;
+            margin: 3% 0;
+            & .btn-sendMessage {
+                @include btn-submit-view;
+            }
+            & .btn-sendMessage:hover {
+                @include btn-hover-shadow-black;
+                font-weight: bold;
+            }
         }
 
         form .md-form label,
@@ -63,40 +67,43 @@
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 900px) {
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: 100%;
+    }
     .send-message {
-        h3 {
-            width: 100%;
-        }
-
-        .send-message-form {
-            width: 94%;
-            h2 {
-                font-size: 22px;
-            }
-        }
-
-        .admin-online {
-            width: 94%;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+        & .send-message-form,
+        & .admin-online {
+            width: 90%;
+            max-width: 90%;
         }
     }
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 600px) {
     .send-message {
         h3 {
             font-size: 22px;
         }
 
         .send-message-form {
-            width: 100%;
+            width: 98%;
+            max-width: 98%;
+            
             h2 {
                 font-size: 20px;
             }
         }
 
         .admin-online {
-            width: 100%;
+            width: 98%;
+            max-width: 98%;
         }
     }
 }

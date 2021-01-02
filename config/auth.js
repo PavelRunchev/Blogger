@@ -7,7 +7,8 @@ module.exports = {
         const token = req.cookies['auth_cookie'] || '';
         const userId = decryptCookie(req.cookies['_u_i%d%_']);
         const data = await jwt.verifyToken(token);
-        if (data !== undefined && data.id === userId) { next();
+        if (data !== undefined && data.id === userId) { 
+            next();
         } else {
             res.flash('danger', 'Invalid credentials! Unauthorized!');
             res.status(401).redirect('/user/signIn');

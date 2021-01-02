@@ -111,19 +111,35 @@
     }
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 600px) {
+
     .profile-section {
-        .profile-box .profile-user-info {
-            .user-profile-image {
+        & .profile-box {
+            width: 100%;
+            max-width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        & .profile-user-info {
+            & .user-profile-image {
                 width: 90%;
             }
-            .profile-data {
+            & .profile-data {
                 width: 90%;
             }
         }
-        .profile-box .inner-container {
-            .card {
+  
+        & .inner-container {
+            max-width: 100%;
+            width: 100%;
+            & .card {
                 width: 90%;
+            }
+
+            & #inputGroupFile02 {
+                width: 100%;
+                max-width: 100%;
+                overflow: scroll;
             }
         }
     }

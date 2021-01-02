@@ -7,6 +7,7 @@ const saltRounds = 10;
 
 const User = require('mongoose').model('User');
 const Category = require('../models/Category');
+const Message = require('../models/Message');
 
 const { validationResult } = require('express-validator');
 const { errorHandler, errorUser, errorUserValidator } = require('../config/errorHandler');
@@ -30,9 +31,9 @@ module.exports = {
 
             if (validateUser(req, res)) {
                 if (!checkbox) {
-                    res.locals.globalError = `You must agree before submitting!`;
+                    res.locals.globalError = `You must agree before submit your data!`;
                     const user = req.body;
-                    errorUser('You must agree before submitting!');
+                    errorUser('You must agree before submit your data!!');
                     res.status(400).renderPjax('user/signUp', { user });
                     return;
                 }
@@ -80,7 +81,7 @@ module.exports = {
                         // Saving user data to session and cookie
                         saveingToSessionAndCookie(req, res, user);
 
-                        res.flash('success', 'You registered successfully!');
+                        res.flash('success', 'You were registered successfully!');
                         res.status(201).redirect('/');
                     }).catch(err => errorHandler(req, res, err));
             }
@@ -92,7 +93,7 @@ module.exports = {
     logout: (req, res) => {
         try {
             const userId = res.locals.currentUser._id;
-            res.flash('info', 'Logout successfully!');
+            res.flash('info', 'You were logged out successfully!');
             // clear cookie and redirect to home page and watch message!
             res.clearCookie(authCookieName);
             res.clearCookie('_ro_le_');
@@ -121,8 +122,7 @@ module.exports = {
     signInPost: async (req, res) => {
         try {
             const { email, password } = req.body;
-            const user = await User.
-                findOneAndUpdate({ email: email }, { isOnline: true });
+            const user = await User.findOneAndUpdate({ email: email }, { isOnline: true });
 
             if (!user) {
                 res.locals.globalError = 'Invalid user';
@@ -139,10 +139,22 @@ module.exports = {
                 return;
             }
 
+            let isNoReading = false;
+            let messages = await Message
+                .find({ reciever: user._id })
+                .sort({ createDate: 'descending' })
+                .select('isReading');      
+            for (const m of messages) {
+                if(m.isReading === false) {
+                    isNoReading = true;
+                    break;
+                }
+            }
+            user['isNoReading'] = isNoReading;
             // Saving user data to session and cookie
             saveingToSessionAndCookie(req, res, user);
-
-            res.flash('info', 'You logged successfully!');
+            
+            res.flash('info', 'You have logged successfully!');
             res.status(200).redirect('/');
 
         } catch (err) {
@@ -193,7 +205,7 @@ module.exports = {
                             req.session.user = user;
                             return Promise.resolve(user.save());
                         }).then(() => {
-                            res.flash('success', 'You change profile successfully!');
+                            res.flash('success', 'The profile changed successfully!');
                             res.status(204).redirect('/user/user-profile');
                         })
                 } catch (err) {
@@ -214,8 +226,8 @@ module.exports = {
                 const userId = res.locals.currentUser._id;
                 // empty file to User Error!
                 if (!req.files) {
-                    res.locals.globalError = 'No file were uploaded!';
-                    errorUser('No file were uploaded!');
+                    res.locals.globalError = 'No file for upload!';
+                    errorUser('No file for upload!');
                     reloadUserData(req, res);
                     return;
                 }
@@ -253,7 +265,7 @@ module.exports = {
                     return Promise.resolve(user.save());
                 }).then((user) => {
                     req.session.user = user;
-                    res.flash('success', 'You change profile successfully!');
+                    res.flash('success', 'The profile changed successfully!');
                     res.status(204).redirect('/user/user-profile');
                 }).catch(err => errorHandler(req, res, err));
             } else {
@@ -281,7 +293,7 @@ module.exports = {
                     || firstName.endsWith('.bat') || lastName.endsWith('.bat')
                     || email.endsWith('.php') || age.endsWith('.php') 
                     || firstName.endsWith('.php') || lastName.endsWith('.php')) {
-                    res.flash('danger', 'Not allow input data!');
+                    res.flash('danger', 'No allow input data!');
                     errorUser(`Session - user profile, changeUserDate - ${req.body}`);
                     res.status(400).redirect('/user/signIn');
                     return;
@@ -299,7 +311,7 @@ module.exports = {
         
                             return Promise.resolve(user.save());
                         }).then(() => {
-                            res.flash('success', 'You change profile successfully!');
+                            res.flash('success', 'The profile changed successfully!');
                             res.redirect('/user/user-profile');
                         }).catch(err => errorHandler(req, res, err));
                 }
@@ -353,7 +365,6 @@ function reloadUserData(req, res) {
     }).catch(err => errorHandler(req, res, err));
 }
 
-
 function validateChangeUserData(req, res) {
     try {
         const userId = res.locals.currentUser._id;
@@ -389,6 +400,7 @@ function saveingToSessionAndCookie(req, res, userObject) {
         res.cookie('_ro_le_', encryptCookie('Moderator'));
 
     //add to Session cookie!
+    req.session.isNoReading = userObject.isNoReading;
     req.session.auth_cookie = token;
     req.session.user = userObject;
     req.session.isAdmin = userObject.roles.includes('Admin');

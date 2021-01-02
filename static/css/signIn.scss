@@ -98,6 +98,7 @@
                 .signIn-sec {
                     width: 350px;
                     padding-bottom: 5%;
+                    order: 1;
                 }
 
                 .banner-sec {
@@ -117,8 +118,29 @@
     }
 }
 
+@media screen and (max-width: 600px) {
+    .signIn .signIn-box {
+        width: 96%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .signIn .signIn-box .row .signIn-sec {
+        width: 100%;
+    }
+    .signIn .signIn-box {
+        width: 100%;
+    }
+
+    .login-form {
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 390px) {
     .signIn .signIn-box .row .signIn-sec {
         width: 100%;
     }
+
+   
 }

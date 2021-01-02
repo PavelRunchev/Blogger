@@ -38,30 +38,24 @@
     }
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 900px) {
     .article-all .article-list .card {
-        width: 94%;
+        width: 100%;
+        max-width: 100%;
     }
 }
 
-@media screen and (max-width: 767px) {
-    .container {
-        max-width: 94%;
-    }
+@media screen and (max-width: 600px) {
     .article-all {
-        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
         padding-left: 0;
         padding-right: 0;
-        .article-list .card {
-            width: 98%;
-        }
     }
-}
 
-@media screen and (max-width: 576px) {
-    .article-all {
-        .article-list .card {
-            width: 95%;
-        }
+    .article-all .article-list .card {
+        width: 98%;
+        max-width: 98%;
     }
 }

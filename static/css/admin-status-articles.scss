@@ -32,77 +32,40 @@
     }
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 899px) {
     .status-articles {
-        .table {
-            thead tr th,
-            thead tr td,
-            tbody tr th,
-            tbody tr td {
-                font-size: 14px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .status-articles {
+        width: 100%;
+        max-width: 100%;
         padding-left: 0;
         padding-right: 0;
-        h2 {
-            font-size: 26px;
-        }
-        .admin-console legend {
-            width: 200px;
-            font-size: 18px;
-        }
         .table {
-            thead tr th,
-            thead tr td,
-            tbody tr th,
-            tbody tr td {
-                font-size: 12px;
+            width: 98%;
+            max-width: 98%;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .status-articles {
+        & .table {
+            & thead,
+            & tbody {
+                & tr {
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: start;
+                padding-left: 5%;
+                    & th,
+                    & td {
+                        display: flex;
+                        text-align: left;
+                        flex-grow: 1;
+                        font-size: 18px;
+                    }
+                }
             }
         }
     }
 }
 
-@media screen and (max-width: 576px) {
-    .status-articles {
-        h2 {
-            font-size: 22px;
-        }
-        .admin-console legend {
-            width: 200px;
-            font-size: 18px;
-        }
-        .table {
-            thead tr th,
-            thead tr td,
-            tbody tr th,
-            tbody tr td {
-                font-size: 10px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 420px) {
-    .status-articles {
-        h2 {
-            font-size: 18px;
-        }
-        .admin-console legend {
-            width: 150px;
-            font-size: 16px;
-        }
-        .table {
-            thead tr th,
-            thead tr td,
-            tbody tr th,
-            tbody tr td {
-                font-size: 8px;
-            }
-        }
-    }
-}

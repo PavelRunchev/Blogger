@@ -40,8 +40,19 @@
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 999px) {
     .survey-status {
+        & .table {
+            width: 96%;
+            max-width: 96%;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .survey-status {
+        padding-left: 0;
+        padding-right: 0;
         h2 {
             font-size: 26px;
         }
@@ -49,50 +60,43 @@
             width: 200px;
             font-size: 18px;
         }
-        .table,
-        .all-stats {
-            width: 100%;
+
+        & .table,
+        & .all-stats {
+          width: 98%;
+          max-width: 98%;
+          & thead .h6,
+          & tbody .h6,
+          & tbody .h6 a {
+            padding-right: 0;
+            padding-left: 0;
+          }
         }
-        .table {
-            thead tr th,
-            thead tr td,
-            tbody tr th,
-            tbody tr td {
-                font-size: 14px;
+    
+        & .table {
+            & thead,
+            & tbody {
+                & tr {
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: start;
+                padding-left: 5%;
+                    & th,
+                    & td {
+                        display: flex;
+                        text-align: left;
+                        flex-grow: 1;
+                        font-size: 18px;
+                    }
+                }
             }
         }
-        .all-stats {
-            font-size: 14px;
-        }
-    }
-}
 
-@media screen and (max-width: 576px) {
-    .survey-status {
-        h2 {
-            font-size: 22px;
-        }
-        .table {
-            thead tr th,
-            thead tr td,
-            tbody tr th,
-            tbody tr td {
-                font-size: 10px;
-            }
-        }
-        .all-stats {
-            font-size: 12px;
-        }
-    }
-}
-
-@media screen and (max-width: 350px) {
-    .survey-status {
-        h2 {
-            font-size: 20px;
-        }
-        .all-stats {
-            flex-direction: column;
-        }
+        & .all-stats {
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+            align-items: center;
+          }
     }
 }

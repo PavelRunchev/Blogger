@@ -19,8 +19,8 @@ module.exports = {
         try {
             // Check user is authed!!!
             if(res.locals.currentUser === undefined) {
-                res.flash('danger', 'You not are Logged!');
-                errorUser('survey - You not are Logged!')
+                res.flash('danger', `You aren't Logged!`);
+                errorUser(`survey - You aren't Logged!`)
                 res.status(401).redirect('/user/signIn');
                 return;
             } 
@@ -30,8 +30,8 @@ module.exports = {
 
             Survey.findOne({ sender: sender }).then((survey) => {
                 if (survey) {
-                    res.flash('warning', 'You have already fill the survey!');
-                    errorUser('survey - You have already fill the survey!');
+                    res.flash('warning', 'You have already filled the survey!');
+                    errorUser('survey - You have already filled the survey!');
                     res.status(400).redirect('/user/signIn');
                     return;
                 }

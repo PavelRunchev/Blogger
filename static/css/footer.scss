@@ -11,7 +11,7 @@ footer {
         & .contacts,
         & .partners,
         & .project {
-            width: 14rem;
+            max-width: 16rem;
         }
         h5:after {
             width: 50px;
@@ -22,7 +22,7 @@ footer {
             margin: 4% auto 9% 0;
         }
         & .links {
-            width: 9rem;
+            max-width: 9rem;
             .inner-links {
                 display: flex;
                 flex-direction: column;
@@ -95,43 +95,30 @@ footer {
     }
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 900px) {
     footer {
         .custom-footer {
+            padding-right: 0;
             flex-direction: column;
             .contacts,
             .links,
             .partners,
             .project {
-                width: 60%;
                 margin: 5% auto;
-                display: block;
-                padding-inline-start: 15%;
-                h5 {
-                    font-size: 24px;
-                }
+                padding-inline-start: 5%;
                 h5:after {
                     width: 100px;
                 }
-                div,
-                div a {
-                    font-size: 18px;
-                }
             }
-            .contacts div {
-                font-size: 16px;
+
+            .links {
+                padding-inline-start: 0%;
             }
-            .links>.inner-links>a {
-                font-size: 18px;
-            }
+
             .partners {
                 .icons {
                     justify-content: left;
                 }
-            }
-            .project div,
-            .project div a {
-                font-size: 16px;
             }
         }
     }
@@ -140,30 +127,16 @@ footer {
 @media screen and (max-width: 600px) {
     footer {
         .custom-footer {
+            display: block;
+            padding-left: 10%;
             .contacts,
             .links,
             .partners,
             .project {
                 padding-inline-start: 0;
-            }
-            .contacts h5,
-            .links h5,
-            .partners h5,
-            .project h5 {
-                font-size: 22px;
-            }
-            .links>.inner-links>a {
-                font-size: 16px;
-            }
-            .contacts div {
-                font-size: 16px;
-            }
-            .partners .icons a {
-                font-size: 20px;
-            }
-            .project div,
-            .project div a {
-                font-size: 16px;
+                max-width: 300px;
+                margin-left: 0;
+                margin-right: auto;
             }
         }
     }

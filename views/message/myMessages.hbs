@@ -19,9 +19,9 @@
                     <th scope="row" class="text-dark font-weight-bold">{{index}}</th>
                     <td class="text-center font-weight-bold text-dark">{{date}}</td>
                     <td class="text-center text-dark"><span class="font-weight-bold font-italic">{{senderEmail}}</span></td>
-                    <td class="text-center"><a href="/message/message-reading/{{_id}}" class="nav-link font-weight-bold text-secondary">{{isRead}}</a></td>
+                    <td class="text-center"><a href="/message/message-reading/{{this._doc._id}}" class="nav-link font-weight-bold text-secondary">{{isRead}}</a></td>
                     <td class="text-center"><a class="nav-link text-info font-weight-bold font-italic" data-toggle="popover" data-placement="top" title="Message"
-                    data-content="{{this.content}}">Reading</a></td>
+                    data-content="{{this._doc.content}}">Reading</a></td>
                     <td class="text-center">
                         <a class="nav-link font-weight-bold btn-delete font-italic" data-toggle="modal" data-target="#modalConfirmDelete{{index}}">Delete</a>
                     </td>

@@ -30,7 +30,7 @@ module.exports = {
             if (validateInvestigation(req, res)) {
                 const investigation = await Investigation.create({ rating, message, sender });
                 res.status(201);
-                res.flash('success', 'You have investigation successfully!');
+                res.flash('success', 'You have filled the survey successfully!');
                 res.redirect('/');
             }
         } catch (err) {

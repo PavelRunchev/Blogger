@@ -14,6 +14,20 @@
         max-width: 94%;
     }
     .guest-home {
-        width: 94%;
+        max-width: 94%;
+    }
+}
+
+
+@media screen and (max-width:600px) {
+    .container {
+        max-width: 100%;
+    }
+    .guest-home {
+        
+        max-width: 100%;
+        width: 100%;
+        margin: 0 0;
+        h4 { font-size: 18px; }
     }
 }

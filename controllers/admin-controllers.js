@@ -5,13 +5,13 @@ const User = require('../models/User');
 const Article = require('../models/Article');
 const Category = require('../models/Category');
 const Survey = require('../models/Survey');
+const UserError = require('../models/UserError');
+const ServerError = require('../models/ServerError');
 
 const log4js = require('log4js');
 const { errorHandler, errorUser, errorUserValidator } = require('../config/errorHandler');
 const { convertDateAndMinutes } = require('../util/dateConvert');
 const { validationResult } = require('express-validator');
-
-
 
 module.exports = {
     articlesStatus: (req, res) => {
@@ -28,10 +28,11 @@ module.exports = {
             .populate({ path: 'category', select: 'name' })
             .populate({ path: 'creator', select: 'email' })
             .then((articles) => {
-
                 articles.map((a, i) => {
                     a.index = i + 1;
                     a.date = convertDateAndMinutes(a.createDate);
+                    a.categoryName = a.category.name;
+                    a.creatorName = a.creator.email;
                 });
 
                 res.status(200).renderPjax('admin/articles-status', { articles });
@@ -48,8 +49,8 @@ module.exports = {
         try {
             const articleId = req.params.id;
             if (!articleId) {
-                res.flash('danger', 'No existing article!');
-                errorUser('lockArticle - No existing article!')
+                res.flash('danger', 'The article does not exist!');
+                errorUser('lockArticle - The article does not exist!')
                 res.status(401).redirect('/user/signIn');
                 return;
             }
@@ -62,7 +63,7 @@ module.exports = {
             }
 
             Article.findByIdAndUpdate({ _id: articleId }, { isLock: true }, { new: true }).then(() => {
-                res.flash('success', 'You locked article successfully!');
+                res.flash('success', 'The article was locked successfully!');
                 res.status(204).redirect('/admin/admin-articles-status');
             }).catch(err => errorHandler(req, res, err));
         } catch (err) {
@@ -80,8 +81,8 @@ module.exports = {
         try {
             const articleId = req.params.id;
             if (!articleId) {
-                res.flash('danger', 'No existing article!');
-                errorUser('unlockArticle - No existing article!')
+                res.flash('danger', 'The article does not exist!');
+                errorUser('unlockArticle - The article does not exist!')
                 res.status(401).redirect('/user/signIn');
                 return;
             }
@@ -94,7 +95,7 @@ module.exports = {
             }
 
             Article.findByIdAndUpdate({ _id: articleId }, { isLock: false }, { new: true }).then(() => {
-                res.flash('success', 'You unlocked article successfully!');
+                res.flash('success', 'The article was unlocked successfully!');
                 res.status(204).redirect('/admin/admin-articles-status');
             }).catch(err => errorHandler(req, res, err));
         } catch (err) {
@@ -142,26 +143,25 @@ module.exports = {
     },
 
     serverErrors: (req, res) => {
-        if (!res.locals.isAdmin) {
-            res.flash('danger', 'Invalid credentials! Unauthorized!');
-            errorUser('Server Error - Invalid credentials! Unauthorized!');
-            res.status(401).redirect('/user/signIn');
-            return;
-        }
         try {
-            const filePath = path.join(__dirname, '/logs/serverError.log');
-            fs.readFile(filePath, 'UTF-8', function(err, logs) {
-                if(err) { errorHandler(req, res, err); }
-
-                let serverErrorInfo = logs
-                .split('\n').filter(t => t !== "" && t !== '\r');
-                let serverErrorLogs = new Array(serverErrorInfo.length);
-                serverErrorInfo.map((e, i) => {
-                    serverErrorLogs[i] = { index: i + 1, row: e };
-                });
-                const isClearAll = serverErrorInfo.length > 0 ? true : false;
-                res.status(200).renderPjax('admin/server-errors', { serverErrorLogs, isClearAll });
-            });
+            if (res.locals.isAdmin || res.locals.isModerator) {
+                ServerError.find({})
+                .then((serverErrors) => {
+                    serverErrors.map((e, i) => {
+                        e.logContent = `Date - [${convertDateAndMinutes(e.createDate)}], ${e.log}!`;
+                        e.index = i + 1;
+                    });
+                    //sorted logs by index to descending order
+                    serverErrors.sort((a,b) => b.index - a.index);
+                    const isClearAll = serverErrors.length > 0 ? true : false;
+                    res.status(200).renderPjax('admin/server-errors', { serverErrors, isClearAll });
+                }).catch(err => errorHandler(req, res, err));
+            } else {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser('Server Error - Invalid credentials! Unauthorized!');
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
         } catch (err) {
             errorHandler(req, res, err);
         }
@@ -175,12 +175,10 @@ module.exports = {
             return;
         }
         try {
-            const filePath = path.join(__dirname, '/logs/serverError.log');
-            fs.writeFile(filePath, "", "utf-8", function(err, data) {
-                if(err) { errorHandler(req, res, err); }
+            ServerError.deleteMany({}).then(() => {
                 res.flash('danger', 'Server error logs is cleared!');
                 res.status(204).redirect('/admin/admin-serverErrors');
-            });
+            }).catch(err => errorHandler(req, res, err));
         } catch (err) {
             errorHandler(req, res, err);
         }
@@ -194,47 +192,45 @@ module.exports = {
             return;
         }
         try {
-            const currentRow = Number(req.params.id);
-            const filePath = path.join(__dirname, '/logs/serverError.log');
-            fs.readFile(filePath, 'UTF-8', function(err, logs) {
-                let serverErrorLogs = logs.split('\n')
-                .filter(t => t !== "" && t !== "\r");
-                // remove current row with splice to the array.
-                const removeLine = serverErrorLogs.splice(currentRow, 1);
-                fs.writeFile(filePath, serverErrorLogs.join('\n\r'), "UTF-8", function(err, data) {
-                    if(err) { errorHandler(req, res, err); }
-
-                    res.flash('danger', 'The row is was erased!');
+            const serverLogId = req.params.id;
+            if(serverLogId !== undefined) {
+                ServerError.findByIdAndRemove({ _id: serverLogId }).then(() => {
+                    res.flash('danger', 'The row was cleared successfully!');
                     res.status(204).redirect('/admin/admin-serverErrors');
-                });
-            });
+                }).catch(err => errorHandler(req, res, err));
+            } else {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser('Remove User Error Log - Invalid credentials! Unauthorized!');
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
         } catch (err) {
             errorHandler(req, res, err);
         }
     },
 
     userErrors: (req, res) => {
-        if (!res.locals.isAdmin) {
-            res.flash('danger', 'Invalid credentials! Unauthorized!');
-            errorUser('User Errors - Invalid credentials! Unauthorized!');
-            res.status(401).redirect('/user/signIn');
-            return;
-        }
         try {
-            const filePath = path.join(__dirname, '/logs/usersError.log');
-            fs.readFile(filePath, 'UTF-8', function(err,  logs) {
-                if(err) { errorHandler(req, res, err); }
-                let userErrorInfo = logs
-                .split('\n').filter(t => t !== "" && t !== '\r');
-                let userErrorLogs = new Array(userErrorInfo.length);
-                userErrorInfo.map((e, i) => {
-                    userErrorLogs[i] = { index: i + 1, row: e };
-                });
-                const isClearAll = userErrorInfo.length > 0 ? true : false;
-                res.status(200).renderPjax('admin/user-errors', { userErrorLogs, isClearAll });
-            });
-        } catch (err) {
-            errorHandler(req, res, err);
+            if (res.locals.isAdmin || res.locals.isModerator) {
+                UserError.find({})
+                    .then((userErrors) => {
+                        userErrors.map((e, i) => {
+                            e.logContent = `Date - [${convertDateAndMinutes(e.createDate)}], message - [${e.log}]`;
+                            e.index = i + 1;
+                        });
+                        //sorted logs by index to descending order
+                        userErrors.sort((a,b) => b.index - a.index);
+                        const isClearAll = userErrors.length > 0 ? true : false;
+                        res.status(200).renderPjax('admin/user-errors', { userErrors, isClearAll });
+                    }).catch(err => errorHandler(req, res, err));
+            } else {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser('User Errors - Invalid credentials! Unauthorized!');
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
+        } catch (err) { 
+            errorHandler(req, res, err); 
         }
     },
 
@@ -246,14 +242,10 @@ module.exports = {
             return;
         }
         try {
-            const filePath = path.join(__dirname, '/logs/usersError.log');
-            fs.writeFile(filePath, "", "utf-8", function(err, data) {
-                if(err) { errorHandler(req, res, err); }
-
+            UserError.deleteMany({}).then(() => {
                 res.flash('danger', 'User error logs is cleared!');
                 res.status(204).redirect('/admin/admin-userErrors');
-            });
-          
+            }).catch(err => errorHandler(req, res, err));
         } catch (err) {
             errorHandler(req, res, err);
         }
@@ -267,20 +259,18 @@ module.exports = {
             return;
         }
         try {
-            const currentRow = Number(req.params.id);
-            const filePath = path.join(__dirname, '/logs/usersError.log');
-            fs.readFile(filePath, 'UTF-8', function(err, logs) {
-                if(err) { errorHandler(req, res, err); }
-
-                let userErrorLogs = logs.split('\n')
-                .filter(t => t !== "" && t !== "\r");
-                // remove current row with splice to the array.
-                const removeLine = userErrorLogs.splice(currentRow, 1);
-                fs.writeFile(filePath, userErrorLogs.join('\n\r'), "UTF-8", function(err, data) {
-                    res.flash('danger', 'The row is was erased!');
+            const userLogId = req.params.id;
+            if(userLogId !== undefined) {
+                UserError.findByIdAndRemove({ _id: userLogId }).then(() => {
+                    res.flash('danger', 'The row was cleared successfully!');
                     res.status(204).redirect('/admin/admin-userErrors');
-                });
-            });
+                }).catch(err => errorHandler(req, res, err));
+            } else {
+                res.flash('danger', 'Invalid credentials! Unauthorized!');
+                errorUser('Remove User Error Log - Invalid credentials! Unauthorized!');
+                res.status(401).redirect('/user/signIn');
+                return;
+            }
         } catch (err) {
             errorHandler(req, res, err);
         }
@@ -316,7 +306,7 @@ module.exports = {
 
     userChangeRole: (req, res) => {
         try {
-            if (res.locals.isAdmin !== true || res.locals.currentUser.email !== 'abobo@abv.bg') {
+            if (!res.locals.isAdmin) {
                 res.flash('danger', 'Invalid credentials! Unauthorized!');
                 errorUser('change role - Invalid credentials! Unauthorized!');
                 res.status(401).redirect('/user/signIn');
@@ -337,8 +327,7 @@ module.exports = {
 
     addRole: (req, res) => {
         try {
-
-            if (res.locals.isAdmin !== true || res.locals.currentUser.email !== 'abobo@abv.bg') {
+            if (!res.locals.isAdmin) {
                 res.flash('danger', 'Invalid credentials! Unauthorized!');
                 errorUser('Add role - Invalid credentials! Unauthorized!');
                 res.status(401).redirect('/user/signIn');
@@ -349,22 +338,22 @@ module.exports = {
             const { role } = req.body;
 
             if (role === "") {
-                res.flash('warning', 'You not selected role for the user!');
-                errorUser('addRole - You not selected the role for the user!');
+                res.flash('warning', `You didn't select role to the user!`);
+                errorUser(`addRole - You didn't select role to the user!`);
                 return res.status(400).redirect('/admin/admin-user-status');
             }
 
             User.findById(userId).select('roles').then((user) => {
                 if (user.roles.includes(role)) {
-                    res.flash('warning', 'The user is have already this role!');
-                    errorUser('addRole - The user is have already this role!');
+                    res.flash('warning', 'The user have already this role!');
+                    errorUser('addRole - The user have already this role!');
                     return res.redirect('/admin/admin-user-status');
                 } else {
                     user.roles.push(role);
                     return Promise.resolve(user.save());
                 }
             }).then(() => {
-                res.flash('success', 'You added role successfully!');
+                res.flash('success', 'The role added successfully!');
                 res.status(204).redirect('/admin/admin-user-status');
             }).catch(err => errorHandler(req, res, err));
         } catch (err) {
@@ -374,7 +363,7 @@ module.exports = {
 
     removeRole: (req, res) => {
         try {
-            if (res.locals.isAdmin !== true || res.locals.currentUser.email !== 'abobo@abv.bg') {
+            if (!res.locals.isAdmin) {
                 res.flash('danger', 'Invalid credentials! Unauthorized!');
                 errorUser('Remove role - Invalid credentials! Unauthorized!');
                 res.status(401).redirect('/user/signIn');
@@ -385,21 +374,21 @@ module.exports = {
             const { role } = req.body;
 
             if (role === "") {
-                res.flash('warning', 'You not selected role!');
-                errorUser('RemoveRole - You not selected role!');
+                res.flash('warning', `You didn't select role to the user!`);
+                errorUser(`RemoveRole - You didn't select role to the user!`);
                 return res.status(400).redirect('/admin/admin-user-status');
             }
 
             User.findById(userId).select('roles').then((user) => {
                 if (!user.roles.includes(role)) {
-                    res.flash('warning', 'No exist role!');
+                    res.flash('warning', 'The role does not exist!');
                     return res.status(400).redirect('/admin/admin-user-status');
                 }
 
                 user.roles = user.roles.filter(r => r !== role);
                 return Promise.resolve(user.save());
             }).then(() => {
-                res.flash('success', 'You removed role successfully!');
+                res.flash('success', 'The role removed successfully!');
                 res.status(204).redirect('/admin/admin-user-status');
             });
         } catch (err) {

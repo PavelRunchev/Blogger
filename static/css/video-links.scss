@@ -19,6 +19,16 @@
     }
 }
 
+@media (max-width: 600px) {
+    .carousel-multi-item-2 .col-md-3 {
+        width: 100%;
+        max-width: 100%;
+        .video-box {
+            width: 100%;
+        }
+    }
+}
+
 .carousel-multi-item-2 .video-box iframe {
     border-radius: 5px;
 }

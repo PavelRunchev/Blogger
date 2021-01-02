@@ -74,16 +74,29 @@
     }
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 600px) {
     .table-responsive {
         h2 {
             font-size: 18px;
         }
         .table {
+            width: 100%;
+            max-width: 100%;
             th,
             td {
                 font-size: 10px;
             }
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .table-responsive {
+        h2 {
+            font-size: 18px;
+        }
+        .table {
+              opacity: 0;
         }
     }
 }

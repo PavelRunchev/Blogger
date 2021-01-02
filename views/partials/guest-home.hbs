@@ -1,5 +1,5 @@
 <div class="container guest-home">
-    <h4 class="text-center font-italic py-2 text-light">This are last three created blogs!</h4>
+    <h4 class="text-center font-italic py-2 text-light">The last three articles were published here!</h4>
     <!--Carousel Wrapper-->
     <div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half" data-ride="carousel">
         <!--Indicators-->
@@ -13,34 +13,34 @@
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
                 <div class="view">
-                    <img class="d-block w-100" src="{{art1.imageUrl}}"
+                    <img class="d-block w-100" src="{{art1._doc.imageUrl}}"
                         alt="First slide">
                     <div class="mask rgba-black-light waves-effect waves-light"></div>
                 </div>
                 <div class="carousel-caption">
-                    <h3 class="h3-responsive">{{art1.title}}</h3>
+                    <h3 class="h3-responsive">{{art1._doc.title}}</h3>
                 </div>
             </div>
             <div class="carousel-item">
                 <!--Mask color-->
                 <div class="view">
-                    <img class="d-block w-100" src="{{art2.imageUrl}}"
+                    <img class="d-block w-100" src="{{art2._doc.imageUrl}}"
                         alt="Second slide">
                     <div class="mask rgba-black-light waves-effect waves-light"></div>
                 </div>
                 <div class="carousel-caption">
-                    <h3 class="h3-responsive">{{art2.title}}</h3>
+                    <h3 class="h3-responsive">{{art2._doc.title}}</h3>
                 </div>
             </div>
             <div class="carousel-item">
                 <!--Mask color-->
                 <div class="view">
-                    <img class="d-block w-100" src="{{art3.imageUrl}}"
+                    <img class="d-block w-100" src="{{art3._doc.imageUrl}}"
                         alt="Third slide">
                     <div class="mask rgba-black-light waves-effect waves-light"></div>
                 </div>
                 <div class="carousel-caption">
-                    <h3 class="h3-responsive">{{art3.title}}</h3>
+                    <h3 class="h3-responsive">{{art3._doc.title}}</h3>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 .post-send-form {
     background: #fff;
-    width: 600px;
+    width: 70%;
     margin: 10% auto;
     @include box-shadow;
     border-radius: 0.5rem;
@@ -55,16 +55,9 @@
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 900px) {
     .post-send-form {
-        width: 90%;
-    }
-}
-
-@media screen and (max-width: 575px) {
-    .post-send-form {
-        form h4 {
-            font-size: 18px;
-        }
+       width: 98%;
+       max-width: 98%;
     }
 }

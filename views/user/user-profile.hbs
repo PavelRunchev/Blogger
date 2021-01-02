@@ -4,23 +4,23 @@
     <div class="profile-box">
         <div class="profile-user-info">
             <div class="overlay user-profile-image">
-                <img src="{{user.profileImage}}" alt="image" class="img-fluid rounded" />
+                <img src="{{user._doc.profileImage}}" alt="image" class="img-fluid rounded" />
             </div>
 
             <div class="profile-data d-flex flex-column justify-content-center">
                 <div class="mx-auto">
                     <h6 class="text-light">User profile data</h6>
                     <div class="text-left font-weight-bold text-dark">Email: <span
-                        class="font-weight-bold text-light">{{user.email}}</span></div>
+                        class="font-weight-bold text-light">{{user._doc.email}}</span></div>
                     <div class="text-left font-weight-bold text-dark">First Name: <span
-                        class="font-weight-bold text-light">{{user.firstName}}</span></div>
+                        class="font-weight-bold text-light">{{user._doc.firstName}}</span></div>
                     <div class="text-left font-weight-bold text-dark">Last Name: <span
-                    class="font-weight-bold text-light">{{user.lastName}}</span></div>
+                    class="font-weight-bold text-light">{{user._doc.lastName}}</span></div>
                     <div class="text-left font-weight-bold text-dark">Age: <span
-                    class="font-weight-bold text-light">{{user.age}}</span></div>
+                    class="font-weight-bold text-light">{{user._doc.age}}</span></div>
                     <div class="text-left font-weight-bold text-dark">Gendere: <span
-                    class="font-weight-bold text-light">{{user.gender}}</span></div>
-                    <div class="text-left font-weight-bold text-dark">publisher articles: <span
+                    class="font-weight-bold text-light">{{user._doc.gender}}</span></div>
+                    <div class="text-left font-weight-bold text-dark">published articles: <span
                     class="font-weight-bold text-light">{{user.articlesCount}}</span></div>
                 </div>
             </div>
@@ -44,12 +44,8 @@
                                     class="fas fa-upload mr-2"></i> Save</button>
                         </div>
                     </form>
-
-
                 </div>
             </div>
-
-
 
             <div class="card border-dark text-dark mb-3" style="max-width: 20rem;">
                 <div class="card-header">Profile image from URL</div>
@@ -80,13 +76,13 @@
                         <div class="row d-flex justify-content-around">
                             <div class="md-form col-12 col-sm-8 col-md-6 col-lg-4">
                                 <input type="text" id="Form-email" class="form-control text-light" name="email"
-                                    value="{{user.email}}">
+                                    value="{{user._doc.email}}">
                                 <label for="Form-email" class="text-light pl-4 active">Your email</label>
                             </div>
 
                             <div class="md-form col-12 col-sm-8 col-md-6 col-lg-4">
                                 <input type="number" id="Form-age" class="form-control text-light" name="age"
-                                    value="{{user.age}}">
+                                    value="{{user._doc.age}}">
                                 <label for="Form-age" class="text-light pl-4 active">Your Age</label>
                             </div>
                         </div>
@@ -94,13 +90,13 @@
                         <div class="row d-flex justify-content-around">
                             <div class="md-form col-12 col-sm-8 col-md-6 col-lg-4">
                                 <input type="text" id="Form-firstName" class="form-control text-light" name="firstName"
-                                    value="{{user.firstName}}">
+                                    value="{{user._doc.firstName}}">
                                 <label for="Form-firstName" class="text-light pl-4 active">Your First Name</label>
                             </div>
 
                             <div class="md-form col-12 col-sm-8 col-md-6 col-lg-4">
                                 <input type="text" id="Form-lastName" class="form-control text-light" name="lastName"
-                                    value="{{user.lastName}}">
+                                    value="{{user._doc.lastName}}">
                                 <label for="Form-lastName" class="text-light pl-4 active">Your Last Name</label>
                             </div>
                         </div>

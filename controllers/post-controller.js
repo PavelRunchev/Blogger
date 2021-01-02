@@ -25,8 +25,8 @@ function validatePost(req, res) {
 module.exports = {
     postformGet: (req, res) => {
         if(!res.locals.currentUser) {
-            res.flash('danger', 'You not are Logged!');
-            errorUser('get post form to Article - You not are Logged!');
+            res.flash('danger', `You aren't Logged!`);
+            errorUser(`get post form to Article - You aren't Logged!`);
             res.status(401).redirect('/user/signIn');
             return;
         }
@@ -41,8 +41,8 @@ module.exports = {
     postFormPost: (req, res) => {
         try {
             if(!res.locals.currentUser) {
-                res.flash('danger', 'You not are Logged!');
-                errorUser('create post to Article - You not are Logged!');
+                res.flash('danger', `You aren't Logged!`);
+                errorUser(`create post to Article - You aren't Logged!`);
                 res.status(401).redirect('/user/signIn');
                 return;
             }
@@ -60,7 +60,7 @@ module.exports = {
                     user.posts.push(post._id);
                     return Promise.all([article.save(), user.save()]);
                 }).then(() => {
-                    res.flash('success', 'You posted successfully!');
+                    res.flash('success', 'You have posted successfully!');
                     res.status(201).redirect(`/article/article-details/${articleId}`);
                 }).catch(err =>errorHandler(req, res, err)); 
             }
@@ -86,7 +86,7 @@ module.exports = {
                 post.isLock = post.isLock === false ? true : false;
                 return Promise.resolve(post.save());
             }).then((post) => {
-                res.flash('success', 'Post is Lock/Unlock!');
+                res.flash('success', 'The post is Lock/Unlock!');
                 res.status(204).redirect(`/article/article-details/${post.article._id}`);
             }).catch(err => errorHandler(req, res, err));
         } catch(err) {
@@ -96,28 +96,30 @@ module.exports = {
 
     removePost: (req, res) => {
         try {
-            if(!res.locals.isAdmin || !res.locals.isModerator) {
+            const isAdmins = res.locals.isAdmin;
+            const isModerators = res.locals.isModerator;
+            if(isAdmins || isModerators) {
+                const postId = req.params.id;
+                Post.findByIdAndRemove({ _id: postId}).then((post) => {
+                    return Promise.all([
+                        post,
+                        Article.findById(post.article),
+                        User.findById(post.owner)
+                    ])
+                }).then(([post, article, user]) => {
+                    article.posts.pull(post._id);
+                    user.posts.pull(post._id);
+                    return Promise.all([article.save(), user.save()])
+                }).then(([article, user]) => {
+                    res.flash('success', 'The post deleted successfully!');
+                    res.status(204).redirect(`/article/article-details/${article._id}`);
+                }).catch(err => errorHandler(req, res, err));
+            } else {
                 res.flash('danger', 'Invalid credentials! Unauthorized!');
                 errorUser('Post remove to Article - Invalid credentials! Unauthorized!');
                 res.status(401).redirect('/user/signIn');
                 return;
             }
-            const postId = req.params.id;
-           
-            Post.findByIdAndRemove({ _id: postId}).then((post) => {
-                return Promise.all([
-                    post,
-                    Article.findById(post.article),
-                    User.findById(post.owner)
-                ])
-            }).then(([post, article, user]) => {
-                article.posts.pull(post._id);
-                user.posts.pull(post._id);
-                return Promise.all([article.save(), user.save()])
-            }).then(([article, user]) => {
-                res.flash('success', 'Post is delete successfully!');
-                res.status(204).redirect(`/article/article-details/${article._id}`);
-            }).catch(err => errorHandler(req, res, err));
         } catch(err) {
             errorHandler(req, res, err);
         }

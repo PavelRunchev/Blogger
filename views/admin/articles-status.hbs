@@ -1,5 +1,7 @@
 <div class="container status-articles">
     <h2 class="h2 text-center">Status for all Articles</h2>
+
+    <h5 class="text-center font-weight-bold"><i class="fas fa-exclamation-triangle text-danger"></i> Only admins can access options!</h5>
         <table class="table">
             <div class="admin-console">
                 <legend class="text-center text-light font-weight-bold mb-0 rounded"><i class="fas fa-users-cog"></i> Admin Platform</legend>
@@ -19,15 +21,15 @@
                 {{#each articles}}
                 <tr>
                     <th scope="row" class="h6">{{this.index}}</th>
-                    <td class="h6">{{this.category.name}}</td>
+                    <td class="h6">{{this.categoryName}}</td>
                     <td class="h6">{{this.date}}</td>
-                    <td class="h6">{{this.title}}</td>
-                    <td class="h6 userEmail">{{this.creator.email}}</td>
-                    {{#if this.isLock}}
-                        <form id="admin-unlock{{@index}}" action="/admin/admin-unlockArticle/{{this._id}}" method="post"></form>
+                    <td class="h6">{{this._doc.title}}</td>
+                    <td class="h6 userEmail">{{this.creatorName}}</td>
+                    {{#if this._doc.isLock}}
+                        <form id="admin-unlock{{@index}}" action="/admin/admin-unlockArticle/{{this._doc._id}}" method="post"></form>
                         <td class="h6"><a class="text-info" href="javascript:document.getElementById('admin-unlock{{@index}}').submit()" data-pjax="#pjax-container"><i class="fas fa-unlock"></i> Unlock</a></td>
                     {{else}}
-                        <form id="admin-lock{{@index}}" action="/admin/admin-lockArticle/{{this._id}}" method="post"></form>
+                        <form id="admin-lock{{@index}}" action="/admin/admin-lockArticle/{{this._doc._id}}" method="post"></form>
                         <td class="h6"><a class="text-info" href="javascript:document.getElementById('admin-lock{{@index}}').submit()" data-pjax="#pjax-container"><i class="fas fa-lock"></i> Lock</a></td>
                     {{/if}}
                 </tr>

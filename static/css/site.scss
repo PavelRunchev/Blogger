@@ -62,10 +62,16 @@
 @import 'support';
 // footer 
 @import 'footer';
-body {
+html {
+    width: 100%;
+}
+body { 
     //font is Roboto style!
+    * {
+        box-sizing: border-box;
+    }
     font-family: "Roboto";
-    max-width: 100%;
+    width: 100%;
     //main home
     main {
         background: linear-gradient(rgba(230, 230, 230, 0.9), rgba(230, 230, 230, 0.9)), url('../img/new-york.jpg');
@@ -89,12 +95,11 @@ body {
             ;
             z-index: 100;
         }
-
+ 
         .global-error {
             font-size: 20px;
             color: rgb(172,7,7);
             font-weight: bold;
-            //text-shadow: 1px 1px rgba(255,255,255,1);
         }
     }
 }

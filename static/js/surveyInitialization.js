@@ -9,7 +9,6 @@ $('[data-toggle="popover-click"]').popover({
 // popovers Initialization
 $(function () {
     $('[data-toggle="popover"]').popover();
-    console.log('popover');
 });
 
 $(function () {

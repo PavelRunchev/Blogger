@@ -1,21 +1,21 @@
 <div class="container-fluid authed">
-    <h5 class="text-center font-weight-bold">This are top articles with highest likes!</h5>
+    <h5 class="text-center font-weight-bold">The top articles with highest likes is here!</h5>
 
     <section class="container-cards">
         {{#each secondArticles}}
             <div class="card card-image waves-effect waves-light"
-            style="background-image: url({{imageUrl}});">
+            style="background-image: url({{this._doc.imageUrl}});">
 
                 <!-- Content -->
                 <div class="content text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
                     <div class="d-block mx-auto">
-                        <h5 class="grey-text font-weight-bold"><i class="fas fa-chart-pie"></i> {{category.name}}</h5>
-                        <h3 class="card-title pt-2 blue-text"> <strong class="font-weight-bold">{{title}}</strong></h3>
-                        <p class="grey-text">published by <strong class="font-italic text-light">{{creator.email}}</strong></p>
-                        <p class="grey-text">created by: <span class="font-italic text-light">{{date}}</span></p>
+                        <h5 class="grey-text font-weight-bold"><i class="fas fa-chart-pie"></i> {{this.articleCategory}}</h5>
+                        <h3 class="card-title pt-2 blue-text"> <strong class="font-weight-bold">{{this._doc.title}}</strong></h3>
+                        <p class="grey-text">publisher by <strong class="font-italic text-light">{{this.own}}</strong></p>
+                        <p class="grey-text">published in: <span class="font-italic text-light">{{date}}</span></p>
                         <p class="grey-text"><i class="fas fa-thumbs-up"></i> Like: <span class="text-light">{{isLike}}</span></p>
-                        <p class="grey-text"><i class="fas fa-thumbs-down"></i> UnLike: <span class="text-light">{{isUnLike}}</span></p>
-                        <a class="reading-more" href="/article/article-details/{{_id}}" data-pjax="#pjax-container"><i class="fas fa-clone left"></i> Read More</a>
+                        <p class="grey-text"><i class="fas fa-thumbs-down"></i> Dislike: <span class="text-light">{{isUnLike}}</span></p>
+                        <a class="reading-more" href="/article/article-details-home/{{this._doc._id}}" data-pjax="#pjax-container"><i class="fas fa-clone left"></i> Read More</a>
                     </div>
                 </div>
 

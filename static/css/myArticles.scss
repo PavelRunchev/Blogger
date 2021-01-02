@@ -1,4 +1,7 @@
 .myArticles {
+    h2 {
+        @include title;
+    }
     .article-list {
         width: 100%;
         margin: 2.5% auto;
@@ -39,27 +42,28 @@
     }
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 999px) {
     .myArticles .article-list .card {
         width: 80%;
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 900px) {
     .myArticles {
         width: 100%;
         padding-left: 0;
         padding-right: 0;
         .article-list .card {
-            width: 96%;
+            width: 92%;
         }
     }
 }
 
-@media screen and (max-width: 576px) {
-    .myArticles {
-        padding-left: 0;
-        padding-right: 0;
+@media screen and (max-width: 600px) {
+    .myArticles .article-list .card {
+        width: 98%;
+        max-width: 98%;
+        margin: 0 auto;
     }
 }
 

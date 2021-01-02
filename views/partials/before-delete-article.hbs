@@ -18,9 +18,9 @@
 
       <!--Footer-->
       <div class="modal-footer flex-center">
-        <form id="remove-article" action="/article/article-delete/{{article._id}}" method="POST"></form>
+        <form id="remove-article" action="/article/article-delete/{{article._doc._id}}" method="POST"></form>
         <a href="javascript:document.getElementById('remove-article').submit()" class="btn  btn-outline-danger">Yes</a>
-        <a class="btn  btn-danger waves-effect" href="/article/article-details/{{article._id}}">No</a>
+        <a class="btn  btn-danger waves-effect" href="/article/article-details/{{article._doc._id}}">No</a>
       </div>
     </div>
     <!--/.Content-->

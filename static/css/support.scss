@@ -72,6 +72,35 @@
     }
 }
 
+@media screen and (max-width: 600px) {
+    .support {
+        & .inner-support { 
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .support {
+        & .inner-support { 
+            & h5 {
+                width: 100%;
+                max-width: 100%;
+                margin: 0 0;
+                text-align: left;
+                padding-left: 5%;
+                
+            }
+
+            & .android, .linux, .windows, .chrome, .firefox, .edge {
+                padding-left: 5%;
+                max-width: 100%;
+            } 
+        }
+    }
+}
+
 @keyframes flipInX {
     from {}
     to {

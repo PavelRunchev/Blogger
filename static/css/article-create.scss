@@ -76,11 +76,10 @@
     }
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 999px) {
     .article-create {
         .inner-articleCreate {
             width: 94%;
-            min-width: 94%;
             max-width: 94%;
             form .d-flex .md-form .label-text {
                 font-size: 20px;
@@ -89,7 +88,7 @@
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 800px) {
     .article-create {
         .inner-articleCreate {
             form .row-input {
@@ -100,10 +99,15 @@
     }
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 600px) {
     .article-create {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: 100%;
         .inner-articleCreate {
-            width: 94%;
+            width: 98%;
+            max-width: 98%;
             form .row-input .md-form .label-text {
                 font-size: 16px;
             }

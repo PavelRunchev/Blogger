@@ -13,10 +13,17 @@ const { authCookieName } = require('../util/app-config');
 const { errorHandler, userError } = require('../config/errorHandler');
 const { decryptCookie } = require('../util/encryptCookie');
 
+//If you have problem!
+//Possible EventEmitter memory leak detected to increase limit
+//Solution problem below!
+const EventEmitter = require('events');
+const emitter = new EventEmitter();
+emitter.setMaxListeners(100);
+
 module.exports = app => {
     app.engine('.hbs', handlebars({
         defaultLayout: 'main',
-        extname: '.hbs'
+        extname: '.hbs',
     }));
 
     app.use(cookieParser());
@@ -40,40 +47,15 @@ module.exports = app => {
     app.use(flash());
 
     app.use(function(req, res, next) {
-        if (req.header('X-PJAX')) {
-            req.pjax = true;
-            res.locals.pjax = true;
-        } else {
-            req.pjax = false;
-            res.locals.pjax = false;
-        }
-
-        next();
-    });
-
-    app.use(function(req, res, next) {
-        // flash configuretion to express!
-        // delete flash in session when is empty!!!
-        if (Object.getOwnPropertyNames(res.locals.flash).length === 0) {
-            delete req.session.flash;
-            delete res.locals.flash;
-        }
-
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-        res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
-        next();
-    });
-
-    app.use(function(req, res, next) {
         delete req.host;
         // checking for valid token
         if(req.cookies[authCookieName] === req.session.auth_cookie) {
             res.locals.currentUser = req.session.user;
+            
             const u_id = decryptCookie(req.cookies['_u_i%d%_']);
             // checking for valid user id
             if(u_id && res.locals.currentUser._id) {
+                res.locals.isNoReading = req.session.isNoReading;
                 // checking for valid Authentication
                 res.locals.isAuthed = req.cookies[authCookieName] === req.session.auth_cookie;
                 // check for valid Admin
@@ -91,6 +73,28 @@ module.exports = app => {
         if(req.cookies['_ss_coo%_']) {
             res.locals.isAccessCookie = true;
         }
+
+        // flash configuretion to express!
+        // delete flash in session when is empty!!!
+        if (Object.getOwnPropertyNames(res.locals.flash).length === 0) {
+            delete req.session.flash;
+            delete res.locals.flash;
+        }
+
+        if (req.header('X-PJAX')) {
+            req.pjax = true;
+            res.locals.pjax = true;
+        } else {
+            req.pjax = false;
+            res.locals.pjax = false;
+        }
+
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        res.setHeader('Set-Cookie', 'HttpOnly;Secure;SameSite=Strict');
+        res.setHeader('Access-Control-Allow-Credentials', true); 
+        res.setHeader('AccessControlAllowHeaders', 'Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name'); 
         next();
     });
 

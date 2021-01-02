@@ -32,9 +32,10 @@ module.exports = {
                                     a.date = convertDate(a.createDate);
                                     a.isLike = a.like.length === 0 ? 0 : a.like.length;
                                     a.isUnLike = a.unlike.length === 0 ? 0 : a.unlike.length;
+                                    a.own = a.creator.email;
+                                    a.articleCategory = a.category.name;
                                 });
                             }
-
                             res.status(200);
                             res.renderPjax('home/index', { categories, messages, secondArticles, noReadingMessages });
                         }).catch(err => errorHandler(req, res, err));
@@ -49,7 +50,6 @@ module.exports = {
                         const art1 = articles[0];
                         const art2 = articles[1];
                         const art3 = articles[2];
-                      
                         res.status(200).renderPjax('home/index', { categories, art1, art2, art3 });
                     }).catch(err => errorHandler(req, res, err));
             }

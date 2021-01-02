@@ -22,4 +22,6 @@ const auth = require('../config/auth');
     // All can do  it!
     router.get('/category-findArticleByCategory/:id', controllers.category.findArticlesByCategory);
 
+    router.get('/category-details-article/:id', controllers.category.categoryDetailsArticle);
+
 module.exports = router;

@@ -3,10 +3,14 @@
     "version": "1.0.0",
     "description": "ExpressJS server",
     "main": "index.js",
-    "engine": ">=7.6",
+    "engines": {
+        "node": "10.1.0",
+        "npm": "6.x"
+    },
     "scripts": {
         "start": "node index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "heroku-postbuild": "npm run build"
     },
     "keywords": [
         "ssl",
@@ -19,14 +23,14 @@
     "license": "MIT",
     "dependencies": {
         "babel-eslint": "^10.0.3",
-        "bcrypt": "^3.0.6",
+        "bcrypt": "^3.0.8",
         "body-parser": "1.18.3",
         "cookie-parser": "1.4.3",
         "cryptr": "^6.0.1",
         "express": "4.16.4",
         "express-fileupload": "^1.1.6-alpha.6",
         "express-flash-2": "^1.0.1",
-        "express-handlebars": "3.0.0",
+        "express-handlebars": "^3.0.0",
         "express-pjax": "0.0.1",
         "express-session": "1.15.6",
         "express-validator": "^6.2.0",

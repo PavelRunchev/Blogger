@@ -5,14 +5,14 @@
             Platform</legend>
     </div>
     <div class="form">
-        <h5 class="text-center text-light">User: <span class="font-italic font-weight-bold">{{user.email}}</span></h5>
+        <h5 class="text-center text-light">User: <span class="font-italic font-weight-bold">{{user._doc.email}}</span></h5>
         <h5 class="text-center text-light">roles:
-            {{#each user.roles}}
+            {{#each user._doc.roles}}
                 <span class="font-italic font-weight-bold">{{this}}</span>
             {{/ each}}
         </h5>
         <div class="d-flex justify-content-around role-form">
-            <form action="/admin/admin-addRole/{{user._id}}" method="POST">
+            <form action="/admin/admin-addRole/{{user._doc._id}}" method="POST">
                 <label class="text-light">Added Role</label>
                 <select class="custom-select" name="role">
                     <option value="" selected>Select Role</option>
@@ -24,7 +24,7 @@
                         class="fas fa-save mr-2"></i> Save</button>
             </form>
 
-            <form action="/admin/admin-removeRole/{{user._id}}" method="POST">
+            <form action="/admin/admin-removeRole/{{user._doc._id}}" method="POST">
                 <label class="text-light">Removed Role</label>
                 <select class="custom-select" name="role">
                     <option value="" selected>Select Role</option>

@@ -3,22 +3,22 @@
         {{#each articles}}
         <div class="card">
             <h4 class="text-right">{{categoryName}}</h4>
-            <h3 class="card-header">{{this.title}}</h3>
+            <h3 class="card-header">{{this._doc.title}}</h3>
             <div class="card-body">
                 <h6 class="card-subtitle text-muted text-right">Date: {{this.date}}</h6>
             </div>
             <img style="height: 400px; width: 100%; display: block;"
-                src="{{this.imageUrl}}"
+                src="{{this._doc.imageUrl}}"
                 alt="Card image">
             <div class="card-body">
                 <p>{{this.intro}}</p>
             </div>
-            <span class=""><a href="/article/article-details/{{this._id}}" class="read-more" data-pjax="#pjax-container">Read More</a></span>
+            <span class=""><a href="/category/category-details-article/{{this._doc._id}}" class="read-more" data-pjax="#pjax-container">Read More</a></span>
         </div>
         {{else}}
             <div class="container-fluid py-5 empty-container">
-                <h3 class="text-center font-weight-bold mt-5 pt-5">No articles to current Category!</h3>
-                <h3 class="text-center font-weight-bold mb-5 pb-5">Please try again!</h3>
+                <h4 class="text-center text-light font-weight-bold mt-5 pt-5">No articles to current Category!</h4>
+                <h4 class="text-center text-light font-weight-bold mb-5 pb-5">Please, create article!</h4>
             </div>
         {{/each}}
     </div>
