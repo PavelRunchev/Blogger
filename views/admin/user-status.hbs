@@ -1,0 +1,54 @@
+<div class="container-fluid user-status">
+    <h2 class="h2 text-center">Status for all Users</h2>
+    <table class="table">
+        <div class="admin-console">
+            <legend class="text-center text-light font-weight-bold mb-0 rounded"><i class="fas fa-users-cog"></i> Admin
+                Platform</legend>
+        </div>
+
+        <thead class="light-blue darken-3 white-text">
+            <tr>
+                <th scope="col" class="h6">#</th>
+                <th scope="col" class="h6">Registration</th>
+                <th scope="col" class="h6">Email</th>
+                <th scope="col" class="h6">Role</th>
+                <th scope="col" class="h6">User Info</th>
+                <th scope="col" class="h6">User Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each allUsers}}
+            <tr>
+                <th scope="row" class="h6">{{this.index}}</th>
+                <td class="h6">{{this.date}}</td>
+                <td class="h6 font-weight-bold">{{this._doc.email}}</td>
+
+                {{#if isRoleAdmin}}
+                    <td class="h6 text-warning">Admin</td>
+                {{else}}
+                    {{#if isRoleModerator}}
+                        <td class="h6 text-primary">Moderator</td>
+                    {{else}}
+                        <td class="h6 text-danger">User</td>
+                    {{/if}}
+                {{/if}}
+                <td class="h6"><a class="nav-link text-default" data-toggle="popover" data-placement="top"
+                        title="email: {{this._doc.email}}"
+                        data-content="Full name: {{this._doc.firstName}} {{this._doc.lastName}}">Info</a></td>
+                <td class="h6"><a class="text-primary" href="/admin/admin-user-changeRole/{{this._doc._id}}">Change role</a></td>
+            </tr>
+            {{else}}
+            <tr>
+                <th scope="row" class="h6"></th>
+                <td class="h6">No Users</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <div class="all-stats">
+        <p class="h6">All users: <span class="font-weight-bold text-primary">{{allAuthedUsers}}</span></p>
+        <h5 class="text-center font-weight-bold"><i class="fas fa-exclamation-triangle text-danger"></i> Only admins can access options!</h5>
+        <p class="h6">last register user: <span class="font-weight-bold font-italic text-primary">{{lastRegisterUser._doc.email}}</span>
+        </p>
+    </div>
+</div>

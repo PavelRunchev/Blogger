@@ -1,0 +1,105 @@
+//import font-awesome css file
+// @import url('../fontawesome/css/all.css');
+// @import url('../fontawesome/css/brands.css');
+// @import url('../fontawesome/css/fontawesome.css');
+// @import url('../fontawesome/css/regular.css');
+// @import url('../fontawesome/css/solid.css');
+// @import url('../fontawesome/css/svg-with-js.css');
+// @import url('../fontawesome/css/v4-shims.css');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100i,300,300i,400,400i,500,500i,700,700i,900,900i');
+@import url('https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i&subset=cyrillic,cyrillic-ext,latin-ext');
+@import 'mixins';
+@import 'animation';
+// Navigation
+@import 'navbar';
+@import 'navbar-left';
+@import 'info-messages';
+// Home Section
+@import 'survey';
+// Modal cookie accept
+@import 'modalCookie';
+//
+// Dynamic sections
+//
+@import 'index';
+@import 'home';
+@import 'guest-home';
+@import 'authed-home';
+// user section
+@import 'signIn';
+@import 'signUp';
+@import 'user-profile';
+@import 'sendMessage-form';
+@import 'myMessages';
+// Category section
+@import 'category-create';
+@import 'category-findArticlesByCategory';
+// Article section
+@import 'article-create';
+@import 'article-all';
+@import 'article-details';
+@import 'article-edit';
+@import 'myArticles';
+@import 'article-delete';
+// Admin Section
+@import 'admin-status-articles';
+@import 'admin-survey-status';
+@import 'admin-server-error';
+@import 'admin-user-error';
+@import 'admin-user-status';
+@import 'admin-userChangeRole';
+// Post send form
+@import 'post-send-form';
+//
+//vieo-link
+//
+@import 'video-links';
+// info
+@import 'contact-us';
+@import 'special-thanks';
+@import 'technology';
+@import 'support';
+// footer 
+@import 'footer';
+html {
+    width: 100%;
+}
+body { 
+    //font is Roboto style!
+    * {
+        box-sizing: border-box;
+    }
+    font-family: "Roboto";
+    width: 100%;
+    //main home
+    main {
+        background: linear-gradient(rgba(230, 230, 230, 0.9), rgba(230, 230, 230, 0.9)), url('../img/new-york.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        width: 100%;
+        min-height: 100%;
+        height: 100%;
+        
+        #pjax-container {
+            padding: 64px 0;
+        }
+        // loading bar at click in submit button!!!
+        #spinner {
+            opacity: 0;
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 5px;
+            animation: loading-submit 2s infinite linear;
+            -webkit-animation: loading-submit 2s infinite linear;
+            ;
+            z-index: 100;
+        }
+ 
+        .global-error {
+            font-size: 20px;
+            color: rgb(172,7,7);
+            font-weight: bold;
+        }
+    }
+}

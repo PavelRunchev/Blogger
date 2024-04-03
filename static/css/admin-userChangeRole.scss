@@ -1,0 +1,39 @@
+.user-change-role {
+    h2 {
+        @include title;
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    div legend {
+        width: 200px;
+        @include main-background-color;
+        @include box-shadow;
+        position: relative;
+        //top: -3rem;
+        z-index: 1;
+    }
+    .form {
+        width: 80%;
+        padding: 5% 2%;
+        @include form-background-color;
+        @include box-shadow;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        z-index: 0;
+        margin: 0% auto 5% auto;
+        .role-form {
+            margin-top: 10%;
+        }
+        .btn-saveChange {
+            margin-top: 5%;
+            @include btn-classic;
+            color: #fff;
+            border-radius: 3px;
+        }
+        .btn-saveChange:hover {
+            @include btn-hover-shadow-black;
+            font-weight: bold;
+        }
+    }
+}

@@ -1,0 +1,46 @@
+<div class="container-fluid article-delete">
+    <section class="container inner-articleDelete">
+        <h3>Delete article section</h3>
+
+        {{> before-delete-article}}
+
+        <form method="GET">
+            <div class="row-input px-2 mb-1">
+                <div class="md-form col-12 col-md-4 ">
+                    <input type="text" id="inputLGEx" class="form-control" placeholder="Title" name="title"
+                        value="{{article._doc.title}}" disabled/>
+                    
+                </div>
+                <div class="md-form col-12 col-md-6">
+                    <input type="text" id="form2" class="form-control" placeholder="ImageUrl" name="imageUrl"
+                        value="{{article._doc.imageUrl}}" disabled/>
+                    
+                </div>
+            </div>
+
+            <div class="row-input px-2">
+                <div class="md-form col-12 col-md-4">
+                    <label for="exampleSelect1" class="text-light pl-4 label-select">Choose your Category</label>
+                    <select class="form-control select-option" id="exampleSelect1" name="category" disabled>
+                        {{#each categories}}
+                            <option value="{{this._doc._id}}">{{this._doc.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="md-form col-12 col-md-6">
+                    <input type="text" id="form2" class="form-control" placeholder="VideoLink" name="videoLink"
+                        value="{{article._doc.videoLink}}" disabled/>
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="label-content">Content</label>
+                <textarea type="text" class="form-control" placeholder="Content" name="content" rows="10"
+                    cols="50" disabled>{{article._doc.content}}</textarea>
+            </div>
+        </form>
+        <a href="/article/article-details/{{article._doc._id}}" class="btn btn-indigo btn-nav" data-pjax="#pjax-container"><i class="far fa-arrow-alt-circle-left"></i> Back</a>
+        <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#modalConfirmDelete"><i class="fas fa-trash-alt"></i> Delete</button>
+    </section>
+</div>

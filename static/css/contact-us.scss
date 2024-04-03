@@ -1,0 +1,143 @@
+$top0position: 3rem;
+$top3position: 6rem;
+$text-size: 20px;
+
+.contacts-us {
+    width: 100%;
+    max-width: 100%;
+    padding: 2% 0;
+    h2 {
+        text-align: center;
+        @include title;
+    } 
+    h2:after {
+        @include line-below-title;
+    }
+    .inner-contacts {
+        width: 100%;
+        p {
+            font-weight: bold;
+            text-shadow: 2px 2px rgb(255, 255, 255);
+        }
+        .owner {
+            position: relative;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            font-size: $text-size;
+            margin-bottom: 5px;
+            animation: showContacts 8s ease-in-out 0.5s backwards;
+        }
+        .owner-email {
+            position: relative;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            font-size: $text-size;
+            margin-bottom: 5px;
+            animation: showContacts 8s ease-in-out 0.5s backwards;
+        }
+        .owner-linkedIn {
+            position: relative;
+            top: -4.6rem;
+            left: 0rem;
+            opacity: 0;
+            font-size: $text-size;
+            margin-bottom: 5px;
+            animation: showContacts 8s ease-in-out 8s backwards;
+        }
+        .owner-phone {
+            position: relative;
+            top: -4.6rem;
+            left: 0rem;
+            opacity: 0;
+            font-size: $text-size;
+            margin-bottom: 5px;
+            animation: showContacts 8s ease-in-out 8s backwards;
+        }
+        .admin {
+            position: relative;
+            top: -9rem;
+            left: 0rem;
+            opacity: 0;
+            font-size: $text-size;
+            margin-bottom: 5px;
+            animation: showContacts 8s ease-in-out 16s backwards;
+        }
+        .admin-email {
+            position: relative;
+            top: -9rem;
+            left: 0rem;
+            opacity: 0;
+            font-size: $text-size;
+            margin-bottom: 5px;
+            animation: showContacts 8s ease-in-out 16s backwards;
+        }
+        .admin-skype {
+            position: relative;
+            top: -13.2rem;
+            left: 0rem;
+            opacity: 0;
+            font-size: $text-size;
+            margin-bottom: 5px;
+            animation: showContacts 8s ease-in-out 24s backwards;
+        }
+        .admin-phone {
+            position: relative;
+            top: -13.2rem;
+            left: 0rem;
+            opacity: 0;
+            font-size: $text-size;
+            margin-bottom: 5px;
+            animation: showContacts 8s ease-in-out 24s backwards;
+        }
+        .development-softuni {
+            position: relative;
+            top: -17.6rem;
+            left: 0rem;
+            opacity: 0;
+            font-size: $text-size;
+            margin-bottom: 5px;
+            animation: showContacts 8s ease-in-out 32s backwards;
+        }
+        .softuni-logo {
+            width: 6rem;
+            height: 6rem;
+            display: block;
+            margin: 0 auto;
+            border-radius: 0.5rem;
+            position: relative;
+            top: -17rem;
+            left: 0rem;
+            opacity: 0;
+            font-size: 18px;
+            -moz-box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.75);
+            box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.75);
+            animation: showContacts 8s ease-in-out 32s backwards;
+        }
+        .developer {
+            position: relative;
+            top: -25.8rem;
+            left: 0rem;
+            opacity: 0;
+            font-size: $text-size;
+            margin-bottom: 5px;
+            animation: showContacts 8s ease-in-out 40s backwards;
+        }
+        .developer-logo {
+            width: 6rem;
+            height: 6rem;
+            display: block;
+            margin: 0 auto;
+            border-radius: 0.5rem;
+            position: relative;
+            top: -25.3rem;
+            left: 0rem;
+            opacity: 0;
+            font-size: 18px;
+            -moz-box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.75);
+            box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.75);
+            animation: showContacts 8s ease-in-out 40s backwards;
+        }
+    }
+}

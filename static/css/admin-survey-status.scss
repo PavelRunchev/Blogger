@@ -1,0 +1,102 @@
+.survey-status {
+    width: 100%;
+    padding: 3% 2%;
+    .h2 {
+        @include title;
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    .table {
+        width: 80%;
+        margin: 0 auto;
+        @include box-shadow;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        z-index: 0;
+        tbody {
+            background: rgba(255, 255, 255, 0.85);
+            .userEmail {
+                color: rgb(0, 98, 165)
+            }
+        }
+    }
+    .admin-console {
+        display: flex;
+        justify-content: center;
+        legend {
+            width: 300px;
+            @include main-background-color;
+            @include box-shadow;
+            z-index: 1;
+        }
+    }
+    .all-stats {
+        width: 80%;
+        padding: 1% 3%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 999px) {
+    .survey-status {
+        & .table {
+            width: 96%;
+            max-width: 96%;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .survey-status {
+        padding-left: 0;
+        padding-right: 0;
+        h2 {
+            font-size: 26px;
+        }
+        .admin-console legend {
+            width: 200px;
+            font-size: 18px;
+        }
+
+        & .table,
+        & .all-stats {
+          width: 98%;
+          max-width: 98%;
+          & thead .h6,
+          & tbody .h6,
+          & tbody .h6 a {
+            padding-right: 0;
+            padding-left: 0;
+          }
+        }
+    
+        & .table {
+            & thead,
+            & tbody {
+                & tr {
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: start;
+                padding-left: 5%;
+                    & th,
+                    & td {
+                        display: flex;
+                        text-align: left;
+                        flex-grow: 1;
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+
+        & .all-stats {
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+            align-items: center;
+          }
+    }
+}

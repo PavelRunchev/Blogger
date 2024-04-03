@@ -1,0 +1,41 @@
+<div class="container user-change-role">
+    <h2>User Change Role</h2>
+    <div class="d-flex justify-content-center">
+        <legend class="text-center text-light font-weight-bold w-25 mb-0 rounded"><i class="fas fa-users-cog"></i> Admin
+            Platform</legend>
+    </div>
+    <div class="form">
+        <h5 class="text-center text-light">User: <span class="font-italic font-weight-bold">{{user._doc.email}}</span></h5>
+        <h5 class="text-center text-light">roles:
+            {{#each user._doc.roles}}
+                <span class="font-italic font-weight-bold">{{this}}</span>
+            {{/ each}}
+        </h5>
+        <div class="d-flex justify-content-around role-form">
+            <form action="/admin/admin-addRole/{{user._doc._id}}" method="POST">
+                <label class="text-light">Added Role</label>
+                <select class="custom-select" name="role">
+                    <option value="" selected>Select Role</option>
+                    <option value="User">User</option>
+                    <option value="Moderator">Moderator</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                <button type="submit" class="btn-saveChange blue-gradient d-block mx-auto"><i
+                        class="fas fa-save mr-2"></i> Save</button>
+            </form>
+
+            <form action="/admin/admin-removeRole/{{user._doc._id}}" method="POST">
+                <label class="text-light">Removed Role</label>
+                <select class="custom-select" name="role">
+                    <option value="" selected>Select Role</option>
+                    <option value="User">User</option>
+                    <option value="Moderator">Moderator</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                <button type="submit" class="btn-saveChange blue-gradient d-block mx-auto"><i
+                        class="fas fa-save mr-2"></i> Save</button>
+            </form>
+        </div>
+
+    </div>
+</div>

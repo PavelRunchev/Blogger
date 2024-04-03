@@ -1,0 +1,146 @@
+.profile-section {
+    h2 {
+        @include title;
+        margin: 0 auto;
+        padding-bottom: 0;
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    .profile-box {
+        width: 70%;
+        margin: 0 auto;
+        padding: 1% 0;
+        @include form-horizontal-background-color;
+        @include box-shadow;
+        border-radius: 0.5rem;
+        .overlay {
+            width: 40%;
+            background: none;
+            .img-fluid {
+                display: block;
+                width: 200px;
+                height: 200px;
+                border: 2px solid #fff;
+                margin: 2% auto;
+                @include box-shadow;
+                cursor: pointer;
+            }
+            .img-fluid:active {
+                transform: scale(1.5);
+            }
+        }
+        .profile-user-info {
+            display: flex;
+            justify-content: space-around;
+            margin: 10% 0;
+            .profile-data {
+                width: 40%;
+            }
+        }
+        .inner-container {
+            display: flex;
+            justify-content: space-around;
+            .card {
+                width: 40%;
+            }
+        }
+        .accordion {
+            background: none;
+        }
+        .btn-saveChange {
+            margin-top: 5%;
+            @include btn-classic;
+            color: #fff;
+            border-radius: 3px;
+        }
+        .btn-saveChange:hover {
+            @include btn-hover-shadow-black;
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .profile-section {
+        .profile-box  {
+            width: 85%;
+            .user-data-change .card-body .form-elegant .row .md-form {
+                margin: 0% auto;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .profile-section {
+        h2 {
+            font-size: 26px;
+        }
+        .profile-box {
+            width: 96%;
+            .profile-user-info {
+                flex-direction: column;
+                .user-profile-image {
+                    margin: 2% auto;
+                    width: 60%;
+                }
+                .profile-data {
+                    margin: 2% auto;
+                    width: 60%;
+                }
+            } 
+
+            .inner-container {
+                flex-direction: column;
+                .card {
+                    margin: 2% auto;
+                    width: 80%;
+                }
+            }
+
+            .user-data-change .collapse .card-body .form-elegant {
+                padding-bottom: 5%;
+            }
+
+            .user-data-change .collapse .card-body .form-elegant .row .md-form {
+                margin: 3% auto;
+            }
+        }
+
+        
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .profile-section {
+        & .profile-box {
+            width: 100%;
+            max-width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        & .profile-user-info {
+            & .user-profile-image {
+                width: 90%;
+            }
+            & .profile-data {
+                width: 90%;
+            }
+        }
+  
+        & .inner-container {
+            max-width: 100%;
+            width: 100%;
+            & .card {
+                width: 90%;
+            }
+
+            & #inputGroupFile02 {
+                width: 100%;
+                max-width: 100%;
+                overflow: scroll;
+            }
+        }
+    }
+}

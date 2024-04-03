@@ -1,0 +1,48 @@
+<div class="container-fluid article-create">
+
+    <section class="container inner-articleCreate">
+        <h3>Create article section</h3>
+
+        {{#if globalError}}
+        <p class="text-center global-error">{{globalError}}</p>
+        {{/if}}
+        <form action="/article/article-create" method="POST">
+            <div class="row-input px-2 mb-1">
+                <div class="md-form form-lg col-md-4">
+                    <input type="text" id="inputLGEx" class="form-control" name="title"
+                        value="{{fields.title}}" />
+                    <label for="inputLGEx" class="text-light pl-4 label-text">Article Title</label>
+                </div>
+                <div class="md-form form-lg col-md-6">
+                    <input type="text" id="form2" class="form-control" name="imageUrl"
+                        value="{{fields.imageUrl}}" />
+                    <label for="form2" class="text-light pl-4 label-text">Article Image Url</label>
+                </div>
+            </div>
+
+            <div class="row-input px-2">
+                <div class="md-form form-lg col-md-4">
+                    <label for="exampleSelect1" class="text-light pl-4 label-select">Choose your Category</label>
+                    <select class="form-control select-option" id="exampleSelect1" name="category">
+                        {{#each categories}}
+                            <option value="{{this._doc._id}}">{{this._doc.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="md-form form-lg col-md-6">
+                    <input type="text" id="form2" class="form-control" name="videoLink"
+                        value="{{fields.videoLink}}" />
+                    <label for="form2" class="text-light pl-4 label-text">Video Link (not required)</label>
+                    <p class="info text-light">You are adding video url that contains "embed" not "watch", otherwise it won't work! Example: 'https://www.youtube.com/embed/hpXxzzLOw00'.</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="label-content">Content</label>
+                <textarea type="text" class="form-control" placeholder="Content" name="content" rows="10"
+                    cols="50">{{fields.content}}</textarea>
+            </div>
+            <button type="submit" class="btn-createArticle d-block mx-auto blue-gradient"><i id="spinner" class="fas fa-spinner"></i> Submit</button>
+        </form>
+    </section>
+</div>

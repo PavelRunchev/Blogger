@@ -1,0 +1,69 @@
+.myArticles {
+    h2 {
+        @include title;
+    }
+    .article-list {
+        width: 100%;
+        margin: 2.5% auto;
+        display: block;
+        padding: 0%;
+        .card {
+            width: 70%;
+            margin: 0 auto 50px auto;
+            padding: 5%;
+            @include box-shadow;
+            .card-body {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            span .read-more {
+                font-size: 22px;
+                float: right;
+                font-weight: bold;
+            }
+        }
+        .empty-container {
+            width: 60%;
+            @include form-background-color;
+            @include box-shadow;
+            border-radius: 0.5rem;
+            margin: 15% auto;
+            h3 {
+                color: #fff;
+                text-shadow: 1px 1px rgb(0, 0, 0);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .myArticles .article-list .card {
+        width: 83%;
+    }
+}
+
+@media screen and (max-width: 999px) {
+    .myArticles .article-list .card {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .myArticles {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        .article-list .card {
+            width: 92%;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .myArticles .article-list .card {
+        width: 98%;
+        max-width: 98%;
+        margin: 0 auto;
+    }
+}
+

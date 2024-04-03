@@ -1,0 +1,118 @@
+.support {
+    width: 100%;
+    padding: 5% 0;
+    h2 {
+        @include title;
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    .inner-support {
+        background: -webkit-linear-gradient(rgba(0, 98, 165, 0.9), rgba(0, 98, 165, 0.3));
+        background: linear-gradient(rgba(0, 98, 165, 0.9), rgba(0, 98, 165, 0.3));
+        width: 60%;
+        @include box-shadow;
+        padding: 2% 0;
+        border-radius: 5px;
+        margin: 0 auto;
+        h5 {
+            @include title;
+            text-align: center;
+            transform: perspective(400px) rotateX(90deg);
+        }
+        p {
+            text-align: left;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            padding-left: 40%;
+            text-shadow: 1px 1px rgb(0, 0, 0);
+            transform: perspective(400px) rotateX(90deg);
+        }
+        .os {
+            animation: flipInX 1.5s linear 0.1s forwards;
+        }
+        .android {
+            animation: flipInX 1.5s linear 1s forwards;
+        }
+        .linux {
+            animation: flipInX 1.5s linear 2s forwards;
+        }
+        .windows {
+            animation: flipInX 1.5s linear 3s forwards;
+        }
+        .browsers {
+            animation: flipInX 1.5s linear 4s forwards;
+        }
+        .chrome {
+            animation: flipInX 1.5s linear 5s forwards;
+        }
+        .firefox {
+            animation: flipInX 1.5s linear 6s forwards;
+        }
+        .edge {
+            animation: flipInX 1.5s linear 7s forwards;
+        }
+        .fa-windows,
+        .fa-edge {
+            color: #0075D1;
+        }
+        .fa-linux {
+            color: #000;
+        }
+        .fa-android {
+            color: #9FC437;
+        }
+        .fa-chrome {
+            color: #EFCA09;
+        }
+        .fa-firefox {
+            color: #C64027;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .support {
+        & .inner-support { 
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .support {
+        & .inner-support { 
+            & h5 {
+                width: 100%;
+                max-width: 100%;
+                margin: 0 0;
+                text-align: left;
+                padding-left: 5%;
+                
+            }
+
+            & .android, .linux, .windows, .chrome, .firefox, .edge {
+                padding-left: 5%;
+                max-width: 100%;
+            } 
+        }
+    }
+}
+
+@keyframes flipInX {
+    from {}
+    to {
+        transform: perspective(400px) rotateX(10deg);
+        -webkit-transform: perspective(400px) rotateX(10deg);
+    }
+}
+
+@-webkit-keyframes flipInX {
+    from {}
+    to {
+        transform: perspective(400px) rotateX(10deg);
+        -webkit-transform: perspective(400px) rotateX(10deg);
+    }
+}

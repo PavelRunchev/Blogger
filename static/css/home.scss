@@ -1,0 +1,15 @@
+
+.home {
+    h1 {
+        @include title;
+        padding-top: 2rem;
+    }
+    
+    h1:after {
+        @include line-below-title;
+        padding-bottom: 0;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+}
+

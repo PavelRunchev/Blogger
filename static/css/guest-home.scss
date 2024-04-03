@@ -1,0 +1,33 @@
+.guest-home {
+    width: 100%;
+    margin: 1% auto 10% auto;
+    border-radius: 1rem;
+    @include box-shadow;
+    @include main-background-color;
+    img {
+        height: 40rem;
+    }
+}
+
+@media screen and (max-width:992px) {
+    .container {
+        max-width: 94%;
+    }
+    .guest-home {
+        max-width: 94%;
+    }
+}
+
+
+@media screen and (max-width:600px) {
+    .container {
+        max-width: 100%;
+    }
+    .guest-home {
+        
+        max-width: 100%;
+        width: 100%;
+        margin: 0 0;
+        h4 { font-size: 18px; }
+    }
+}

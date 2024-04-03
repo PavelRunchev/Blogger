@@ -1,0 +1,65 @@
+<div class="card card-cascade wider reverse article-details">
+
+    <!-- Card image -->
+    <div class="view view-cascade overlay zoom">
+        <img class="card-img-top bg" src="{{article.image}}" alt="Card image cap">
+    </div>
+
+    <div class="card-body card-body-cascade text-center">
+        <div class="top-info blue-gradient p-4">
+            <div class="like-unlike">
+                <form id="like-form" action="/article/article-like/{{article._doc._id}}" method="POST"></form>
+                <form id="unlike-form" action="/article/article-unlike/{{article._doc._id}}" method="POST"></form>
+                <a class="mr-3" data-pjax="#pjax-container"
+                    href="javascript:document.getElementById('like-form').submit()"><i class="fas fa-thumbs-up"></i>
+                    <span>:
+                        {{article.isLike}}</span></a>
+
+                <a class="" data-pjax="#pjax-container"
+                    href="javascript:document.getElementById('unlike-form').submit()"><i class="fas fa-thumbs-down"></i>
+                    <span>:
+                        {{article.isUnlike}}</span></a>
+            </div>
+            <h4 class="text-light">Category: <span
+                    class="font-weight-bold">{{article.articleCategory}}</span>
+            </h4>
+        </div>
+
+        <h2 class="card-title"><strong>{{article._doc.title}}</strong></h2>
+
+        {{#each article.firstPartParagraph}}
+            <p class="card-text">{{this}}</p>
+        {{/each}}
+
+        {{#if article._doc.videoLink}}
+            <div class="embed-responsive embed-responsive-16by9 mb-5 video">
+                <iframe class="embed-responsive-item" src="{{article._doc.videoLink}}" allowfullscreen></iframe>
+            </div>
+        {{/if}}
+
+        {{#each article.paragraphContent}}
+            <p class="card-text tab-content">{{this}}</p>
+        {{/each}}
+    </div>
+    <div class="card-footer">
+        <p class="sub-info mb-5">
+            <span>Date: {{article.date}}</span>
+            <span class="text-dark">publisher by: {{article.publisher}}</span>
+        </p>
+        <div class="btn-box mb-2">
+            <a href="/article/article-all" class="btn-indigo btn-nav" data-pjax="#pjax-container"><i
+                    class="far fa-arrow-alt-circle-left"></i> Back</a>
+            {{#if isAuthed}}
+            <a href="/post/post-form/{{article._doc._id}}" class="btn-default btn-nav" data-pjax="#pjax-container"><i
+                    class="fas fa-paper-plane"></i> Send Post</a>
+            {{/if}}
+            {{#if article.isOwnerOrAdmin}}
+                <a href="/article/article-edit/{{article._doc._id}}" class="btn-yellow btn-nav" data-pjax="#pjax-container"><i
+                        class="fas fa-edit"></i> Edit</a>
+                <a href="/article/article-delete/{{article._doc._id}}" class="btn-danger btn-nav" data-pjax="#pjax-container"><i
+                        class="fas fa-trash-alt"></i> Delete</a>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{> article-posts}}

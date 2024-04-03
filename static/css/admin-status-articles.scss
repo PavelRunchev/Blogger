@@ -1,0 +1,71 @@
+.status-articles {
+    width: 100%;
+    padding: 3% 2%;
+    .h2 {
+        @include title;
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    .table {
+        width: 100%;
+        @include box-shadow;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        z-index: 0;
+        tbody {
+            background: rgba(255, 255, 255, 0.85);
+            .userEmail {
+                color: rgb(0, 98, 165)
+            }
+        }
+    }
+    .admin-console {
+        display: flex;
+        justify-content: center;
+        legend {
+            width: 300px;
+            @include main-background-color;
+            @include box-shadow;
+            z-index: 1;
+        }
+    }
+}
+
+@media screen and (max-width: 899px) {
+    .status-articles {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        .table {
+            width: 98%;
+            max-width: 98%;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .status-articles {
+        & .table {
+            & thead,
+            & tbody {
+                & tr {
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: start;
+                padding-left: 5%;
+                    & th,
+                    & td {
+                        display: flex;
+                        text-align: left;
+                        flex-grow: 1;
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,50 @@
+<div class="container-fluid survey-status">
+    <h2 class="h2 text-center">
+        Total statistic for the Survey!
+    </h2>
+    <h5 class="text-center font-weight-bold"><i class="fas fa-exclamation-triangle text-danger"></i> Only admins can access options!</h5>
+    <table class="table">
+        <div class="admin-console">
+            <legend class="text-center text-light font-weight-bold mb-0 rounded"><i class="fas fa-users-cog"></i> Admin
+                Platform</legend>
+        </div>
+
+        <thead class="light-blue darken-3 white-text">
+            <tr>
+                <th scope="col" class="h6">#</th>
+                <th scope="col" class="h6">Sender</th>
+                <th scope="col" class="h6">Message</th>
+                <th scope="col" class="h6">Rating</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {{#each scores}}
+            <tr>
+                <th scope="row" class="h6">{{this.index}}</th>
+                <td class="h6 font-weight-bold">{{this._doc.sender}}</td>
+                {{#if this._doc.message}}
+                    <td class="h6"><a class="nav-link text-primary" data-toggle="popover" data-placement="bottom" title="Message" data-content="{{this._doc.message}}">Reading</a></td>
+                {{else}}
+                <td class="h6">No Message</td>
+                {{/if}}
+                <td class="h6 blue-text">{{this._doc.rating}}</td>
+            </tr>
+            {{else}}
+            <tr>
+                <th></th>
+                <td></td>
+                <td class="h6">No Data</td>
+                <td></td>
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+    <div class="all-stats">
+        <span class="font-weight-bold">Total Points for site: {{allRatings}}</span>
+        <span class="font-weight-bold">Total Status for site: <span
+                class="font-italic text-primary">{{status}}</span>
+        </span>
+    </div>
+</div>

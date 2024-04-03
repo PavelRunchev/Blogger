@@ -1,0 +1,20 @@
+.survey {
+    .btn-anketa {
+        display: inline-block;
+        cursor: pointer;
+        position: fixed;
+        top: 11rem;
+        right: 1rem;
+        z-index: 10;
+    }
+    .modal {
+        z-index: 99999;
+        .moon-image {
+            width: 200px;
+            height: 136px;
+        }
+        .modal-body {
+            background: linear-gradient(rgba(230, 230, 230, 0.9), rgba(230, 230, 230, 0.9)), url('../img/crop.jpg');
+        }
+    }
+}

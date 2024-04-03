@@ -1,0 +1,63 @@
+.server-errors {
+    width: 100%;
+    padding: 3% 2%;
+    h2 {
+        @include title;
+        .fa-users-cog {
+            color: rgb(0, 98, 165);
+        }
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    .admin-console {
+        display: flex;
+        justify-content: center;
+        legend {
+            width: 300px;
+            @include main-background-color;
+            @include box-shadow;
+            z-index: 1;
+        }
+    }
+    .inner-serverErrors {
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.85);
+        width: 100%;
+        border-radius: 1rem;
+        @include box-shadow;
+        padding: 5% 0% 5% 5%;
+        #clearErrors {
+            cursor: pointer;
+            color: rgb(0, 98, 165);
+            display: block;
+            text-align: right;
+        }
+        #clearErrors:hover {
+            color: rgb(255, 2, 25);
+        }
+        .delete-row {
+            color: rgb(255, 2, 25);
+        }
+        .delete-row:hover {
+            color: rgb(200, 50, 50);
+        }
+        p {
+            font-size: 14px;
+        }
+    }
+}
+
+@media screen and (max-width: 999px) {
+    .server-errors {
+        width: 100%;
+        max-width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+        & .inner-serverErrors {
+            width: 98%;
+            max-width: 98%;
+            margin: 0 auto;
+        }
+    }
+}

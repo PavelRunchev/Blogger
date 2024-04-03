@@ -1,0 +1,20 @@
+// Info Messages from flash messages!!!
+.info-msg {
+    background: linear-gradient(90deg, rgba(47, 164, 231, 0.8) 0%, rgba(47, 164, 231, 0.8) 100%);
+    @include flash-message;
+}
+
+.success-msg {
+    background: linear-gradient(90deg, rgba(115, 168, 57, 0.8) 0%, rgba(115, 168, 57, 0.8) 100%);
+    @include flash-message;
+}
+
+.warning-msg {
+    background: linear-gradient(90deg, rgba(218, 165, 32, 0.8) 0%, rgba(218, 165, 32, 0.8) 100%);
+    @include flash-message;
+}
+
+.danger-msg {
+    background: linear-gradient(90deg, rgba(199, 28, 34, 0.8) 0%, rgba(199, 28, 34, 0.8) 100%);
+    @include flash-message;
+}

@@ -1,0 +1,22 @@
+
+
+<div class="modal fade bottom" id="modalCookie" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" data-backdrop="true">
+  <div class="modal-dialog modal-frame modal-bottom modal-notify modal-info" role="document">
+
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <div class="row d-flex justify-content-center align-items-center">
+
+          <p class="pt-3 pr-2 h5">We use cookies to improve your website experience!</p>
+
+          <a type="button" onclick="window.open('https://www.cookiebot.com/en/privacy-policy-generator-gdpr')" class="btn btn-unique waves-effect" id="noAccessCookie" data-dismiss="modal" ><i class="fas fa-book ml-1"></i> Learn more </a>
+          <form id="accessCookie-form" action="/user/accessCookie" method="POST"></form>
+          <a type="button" onclick="javascript:document.getElementById('accessCookie-form').submit()" class="btn btn-cyan waves-effect" data-dismiss="modal" data-pjax="#pjax-container"><i class="fas fa-cookie-bite"></i> accept </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

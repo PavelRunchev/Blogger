@@ -1,0 +1,97 @@
+//top navigation
+.double-nav {
+    @include main-background-color;
+    position: fixed;
+    z-index: 99;
+    color: #fff;
+    .button-collapse {
+        font-size: 26px;
+        cursor: pointer;
+        .fa-chevron-circle-right {
+            color: #fff;
+        }
+        .fa-chevron-circle-right:hover {
+            transform: scale(1.2);
+            color: #ddd;
+        }
+    }
+    .button-collapse:hover {
+        color: #000;
+    }
+    .navbar-collapse {
+        .right-items {
+            margin-left: auto;
+        }
+    }
+    .dropdown-default {
+        @include main-background-color;
+        .dropdown-item {
+            color: #fff;
+        }
+        .dropdown-item:hover {
+            color: rgb(0, 98, 165);
+        }
+    }
+    .dropdown-menu-right {
+        background: none;
+        z-index: 10;
+    }
+    .nav-item {
+        margin: auto 0.5rem;
+    }
+    .nav-link {
+        color: #fff;
+    }
+    .nav-link:hover {
+        color: #ddd;
+        transform: scale(1.2);
+    }
+    .fa-comment {
+        cursor: pointer;
+        font-size: 30px;
+        padding: 10%;
+        color: #fff;
+        animation: noMessagesReading 2s linear infinite;
+    }
+    .dropdown-menu-right {
+        width: 50%;
+        @include main-background-color;
+        border-radius: 0.5rem;
+        z-index: 10;
+        .dropdown-item {
+            color: #fff;
+        }
+        .dropdown-item:hover {
+            background: #fff;
+            color: rgb(0, 98, 165);
+        }
+        .sendMessage {
+            color: #fff;
+        }
+    }
+    .profile {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        @include box-shadow;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .double-nav {
+        .navbar-collapse {
+            .nav-link {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .double-nav {
+        .navbar-collapse {
+            padding-left: 10%;
+        }
+    }
+}

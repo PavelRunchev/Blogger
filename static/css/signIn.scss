@@ -1,0 +1,146 @@
+.signIn {
+    padding: 10% 0;
+    .signIn-box {
+        @include main-background-color;
+        width: 1000px;
+        margin: 0 auto;
+        border: 2px solid #fff;
+        border-radius: 3px;
+        @include box-shadow;
+
+        .row {
+            margin:  0;
+            label {
+                color: #fff;
+            }
+            .btn-signIn {
+                @include btn-main-view;
+            }
+            .btn-signIn:hover {
+                @include btn-hover-shadow;
+                font-weight: bold;
+            }
+    
+            .banner-sec .carousel .carousel-inner .carousel-item {
+                overflow: hidden;
+            }
+            .banner-text {
+                width: 70%;
+                position: absolute;
+                bottom: 40px;
+                padding-left: 20px;
+            }
+    
+            .signIn-sec {
+                margin: 0;
+                padding: 0 0 3% 10px;
+            }
+            .signIn-sec h2 {
+                padding-top: 10%;
+                margin-bottom: 30px;
+                font-weight: 800;
+                font-size: 30px;
+            }
+    
+            .signIn-sec form .form-group {
+                width: 80%;
+                margin: 5% auto;
+            }
+    
+            // bottom border
+            .signIn-sec h2:after {
+                content: " ";
+                width: 100px;
+                height: 5px;
+                background: #ffff;
+                display: block;
+                margin: 5% auto;
+                border-radius: 3px;
+            }
+            .banner-sec {
+                overflow: hidden;
+                padding: 0;
+            }
+            .fa-sign-in-alt {
+                font-size: 24px;
+                color: #fff;
+            }
+            .fa-sign-in-alt:hover {
+                color: #ddd;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .signIn {
+        .signIn-box {
+            width: 90%;
+            .row {
+                .signIn-sec {
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .signIn {
+        .signIn-box {
+            width: 92%;
+            height: auto;
+            overflow: hidden;
+            .row {
+                display: flex;
+                flex-direction: column;
+                .signIn-sec {
+                    width: 350px;
+                    padding-bottom: 5%;
+                    order: 1;
+                }
+
+                .banner-sec {
+                    height: 398px;
+                    width: 100%;
+                    .carousel-inner,
+                    .carousel-item {
+                        height: 398px;
+                        img {
+                            height: 100%;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .signIn .signIn-box {
+        width: 96%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .signIn .signIn-box .row .signIn-sec {
+        width: 100%;
+    }
+    .signIn .signIn-box {
+        width: 100%;
+    }
+
+    .login-form {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .signIn .signIn-box .row .signIn-sec {
+        width: 100%;
+    }
+
+   
+}

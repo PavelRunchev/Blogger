@@ -1,0 +1,133 @@
+[2020-04-05T10:50:16.047] [ERROR] serverError - Cannot read property '_id' of undefined
+[2020-12-22T09:09:51.269] [ERROR] serverError - Cannot read property 'email' of undefined
+[2020-12-22T09:09:51.270] [FATAL] serverError - TypeError
+[2020-12-22T09:10:17.409] [ERROR] serverError - Cannot read property 'email' of undefined
+[2020-12-22T09:10:17.410] [FATAL] serverError - TypeError
+[2020-12-22T09:11:28.528] [ERROR] serverError - Cannot read property 'email' of undefined
+[2020-12-22T09:11:28.529] [FATAL] serverError - TypeError
+[2020-12-22T09:11:35.069] [ERROR] serverError - Cannot read property 'email' of undefined
+[2020-12-22T09:11:35.070] [FATAL] serverError - TypeError
+[2020-12-22T09:11:37.177] [ERROR] serverError - Cannot read property 'email' of undefined
+[2020-12-22T09:11:37.177] [FATAL] serverError - TypeError
+[2020-12-22T09:11:45.006] [ERROR] serverError - Cannot read property 'email' of undefined
+[2020-12-22T09:11:45.007] [FATAL] serverError - TypeError
+[2020-12-22T09:13:19.677] [ERROR] serverError - Cannot read property 'email' of undefined
+[2020-12-22T09:13:19.678] [FATAL] serverError - TypeError
+[2020-12-22T09:17:11.835] [ERROR] serverError - Cannot read property 'email' of undefined
+[2020-12-22T09:17:11.837] [FATAL] serverError - TypeError
+[2020-12-22T09:37:34.612] [ERROR] serverError - Cannot read property '_id' of undefined
+[2020-12-22T09:37:34.623] [FATAL] serverError - TypeError
+[2020-12-23T18:16:57.607] [ERROR] serverError - Cannot read property '_id' of undefined
+[2020-12-23T18:16:57.620] [FATAL] serverError - TypeError
+[2020-12-24T10:37:27.718] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:37:27.724] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:37:27.727] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:37:27.735] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:37:27.719] [FATAL] serverError - ReferenceError
+[2020-12-24T10:37:27.724] [FATAL] serverError - ReferenceError
+[2020-12-24T10:37:27.727] [FATAL] serverError - ReferenceError
+[2020-12-24T10:37:27.735] [FATAL] serverError - ReferenceError
+[2020-12-24T10:38:03.004] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:38:03.005] [FATAL] serverError - ReferenceError
+[2020-12-24T10:38:03.158] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:38:03.158] [FATAL] serverError - ReferenceError
+[2020-12-24T10:39:00.637] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:39:00.638] [FATAL] serverError - ReferenceError
+[2020-12-24T10:39:09.375] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:39:09.375] [FATAL] serverError - ReferenceError
+[2020-12-24T10:39:42.255] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:39:42.256] [FATAL] serverError - ReferenceError
+[2020-12-24T10:39:53.560] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:39:53.560] [FATAL] serverError - ReferenceError
+[2020-12-24T10:43:32.429] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:43:32.429] [FATAL] serverError - ReferenceError
+[2020-12-24T10:44:11.263] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:44:11.263] [FATAL] serverError - ReferenceError
+[2020-12-24T10:47:27.731] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:47:27.732] [FATAL] serverError - ReferenceError
+[2020-12-24T10:47:32.130] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:47:32.130] [FATAL] serverError - ReferenceError
+[2020-12-24T10:48:49.655] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:48:49.657] [FATAL] serverError - ReferenceError
+[2020-12-24T10:48:57.608] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:48:57.609] [FATAL] serverError - ReferenceError
+[2020-12-24T10:50:25.008] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:50:25.008] [FATAL] serverError - ReferenceError
+[2020-12-24T10:50:28.621] [ERROR] serverError - convertDateAndMinutes is not defined
+[2020-12-24T10:50:28.621] [FATAL] serverError - ReferenceError
+[2020-12-25T11:44:58.310] [ERROR] serverError - Cannot read property '_id' of undefined
+[2020-12-25T11:44:58.323] [FATAL] serverError - TypeError
+[2020-12-25T11:45:14.660] [ERROR] serverError - Cannot read property 'name' of undefined
+[2020-12-25T11:45:14.661] [FATAL] serverError - TypeError
+[2020-12-25T11:45:15.208] [ERROR] serverError - Cannot read property 'name' of undefined
+[2020-12-25T11:45:15.208] [FATAL] serverError - TypeError
+[2020-12-25T11:47:15.123] [ERROR] serverError - Cannot read property 'name' of undefined
+[2020-12-25T11:47:15.123] [FATAL] serverError - TypeError
+[2020-12-25T11:47:15.419] [ERROR] serverError - Cannot read property 'name' of undefined
+[2020-12-25T11:47:15.420] [FATAL] serverError - TypeError
+[2020-12-25T11:47:53.678] [ERROR] serverError - Cannot read property 'name' of undefined
+[2020-12-25T11:47:55.876] [ERROR] serverError - Cannot read property 'name' of undefined
+[2020-12-25T11:47:53.679] [FATAL] serverError - TypeError
+[2020-12-25T11:47:55.876] [FATAL] serverError - TypeError
+[2020-12-25T12:07:56.996] [ERROR] serverError - undefined is not iterable (cannot read property Symbol(Symbol.iterator))
+[2020-12-25T12:07:56.996] [FATAL] serverError - TypeError
+[2020-12-25T12:16:03.763] [ERROR] serverError - undefined is not iterable (cannot read property Symbol(Symbol.iterator))
+[2020-12-25T12:16:03.763] [FATAL] serverError - TypeError
+[2020-12-25T12:16:09.134] [ERROR] serverError - undefined is not iterable (cannot read property Symbol(Symbol.iterator))
+[2020-12-25T12:16:09.134] [FATAL] serverError - TypeError
+[2020-12-25T12:35:12.988] [ERROR] serverError - Cannot read property '_id' of undefined
+[2020-12-25T12:35:13.002] [FATAL] serverError - TypeError
+[2020-12-26T08:56:14.176] [ERROR] serverError - Invalid status code: {}
+[2020-12-26T08:56:14.177] [FATAL] serverError - RangeError
+[2020-12-26T09:05:47.864] [ERROR] serverError - Cannot set headers after they are sent to the client
+[2020-12-26T09:05:47.864] [FATAL] serverError - Error
+[2020-12-26T09:07:47.663] [ERROR] serverError - Cannot set headers after they are sent to the client
+[2020-12-26T09:07:47.663] [FATAL] serverError - Error
+[2020-12-26T09:11:41.651] [ERROR] serverError - Cannot set headers after they are sent to the client
+[2020-12-26T09:11:41.651] [FATAL] serverError - Error
+[2020-12-26T09:15:12.627] [ERROR] serverError - Cannot set headers after they are sent to the client
+[2020-12-26T09:15:12.627] [FATAL] serverError - Error
+[2020-12-26T09:25:34.960] [ERROR] serverError - Cannot set headers after they are sent to the client
+[2020-12-26T09:25:34.960] [FATAL] serverError - Error
+[2020-12-26T09:28:28.340] [ERROR] serverError - Cannot read property '_id' of undefined
+[2020-12-26T09:28:28.352] [FATAL] serverError - TypeError
+[2020-12-26T09:28:55.724] [ERROR] serverError - Cannot set headers after they are sent to the client
+[2020-12-26T09:28:55.724] [FATAL] serverError - Error
+[2020-12-26T09:43:53.917] [ERROR] serverError - Cannot set headers after they are sent to the client
+[2020-12-26T09:43:53.917] [FATAL] serverError - Error
+[2020-12-26T09:44:38.213] [ERROR] serverError - Cannot set headers after they are sent to the client
+[2020-12-26T09:44:38.213] [FATAL] serverError - Error
+[2020-12-26T09:56:44.006] [ERROR] serverError - Cannot set headers after they are sent to the client
+[2020-12-26T09:56:44.006] [FATAL] serverError - Error
+[2020-12-26T09:58:54.314] [ERROR] serverError - Cannot set headers after they are sent to the client
+[2020-12-26T09:58:54.314] [FATAL] serverError - Error
+[2020-12-26T10:09:02.061] [ERROR] serverError - Assignment to constant variable.
+[2020-12-26T10:09:02.062] [FATAL] serverError - TypeError
+[2020-12-26T10:12:13.820] [ERROR] serverError - Assignment to constant variable.
+[2020-12-26T10:12:13.820] [FATAL] serverError - TypeError
+[2020-12-26T10:13:26.213] [ERROR] serverError - Assignment to constant variable.
+[2020-12-26T10:13:26.214] [FATAL] serverError - TypeError
+[2020-12-26T10:16:26.835] [ERROR] serverError - Assignment to constant variable.
+[2020-12-26T10:16:26.836] [FATAL] serverError - TypeError
+[2020-12-26T10:16:58.553] [ERROR] serverError - Assignment to constant variable.
+[2020-12-26T10:16:58.553] [FATAL] serverError - TypeError
+[2020-12-26T10:18:41.776] [ERROR] serverError - Assignment to constant variable.
+[2020-12-26T10:18:41.777] [FATAL] serverError - TypeError
+[2020-12-26T10:21:44.192] [ERROR] serverError - err is not defined
+[2020-12-26T10:21:44.193] [FATAL] serverError - ReferenceError
+[2020-12-26T10:24:47.001] [ERROR] serverError - err is not defined
+[2020-12-26T10:24:47.001] [FATAL] serverError - ReferenceError
+[2020-12-26T10:26:47.242] [ERROR] serverError - err is not defined
+[2020-12-26T10:26:47.242] [FATAL] serverError - ReferenceError
+[2020-12-26T10:29:02.926] [ERROR] serverError - err is not defined
+[2020-12-26T10:29:02.928] [FATAL] serverError - ReferenceError
+[2020-12-26T10:30:43.247] [ERROR] serverError - err is not defined
+[2020-12-26T10:30:43.248] [FATAL] serverError - ReferenceError
+[2020-12-26T10:35:03.694] [ERROR] serverError - err is not defined
+[2020-12-26T10:35:03.695] [FATAL] serverError - ReferenceError
+[2020-12-26T10:47:00.665] [ERROR] serverError - Server selection timed out after 30000 ms
+[2020-12-26T10:47:00.666] [FATAL] serverError - MongoTimeoutError
+[2020-12-26T10:47:38.208] [ERROR] serverError - Server selection timed out after 30000 ms
+[2020-12-26T10:47:38.208] [FATAL] serverError - MongoTimeoutError
+[2020-12-26T10:54:55.504] [ERROR] serverError - err is not defined
+[2020-12-26T10:54:55.505] [FATAL] serverError - ReferenceError

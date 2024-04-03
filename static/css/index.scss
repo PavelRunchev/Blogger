@@ -1,0 +1,29 @@
+.container-fluid {
+    h1 {
+        padding-top: 0;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .container-fluid {
+        h1 {
+            font-size: 30px;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .container-fluid {
+        h1 {
+            font-size: 26px;
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .container-fluid {
+        h1 {
+            font-size: 22px;
+        }
+    }
+}

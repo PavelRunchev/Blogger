@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blogger</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/ico" href="/favicon/favicon.ico">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-social.css">
+    <link rel="stylesheet" href="/bootstrap/css/mdb.lite.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/mdb.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/style.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/animations-extended.min.css">
+
+    <!-- Font Awesome 5.11 -->
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/fontawesome/css/brands.css">
+    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="/fontawesome/css/regular.css">
+    <link rel="stylesheet" href="/fontawesome/css/solid.css">
+    <link rel="stylesheet" href="/fontawesome/css/svg-with-js.css">
+    <link rel="stylesheet" href="/fontawesome/css/v4-shims.css">
+
+    <link href="/css/site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        {{> navbar}}
+        {{> navbar-left}}
+    </header>
+
+    <main>
+        {{#if flash}}
+        {{#if flash.info}}
+        <h2 class="info-msg">{{flash.info}}</h2>
+        {{/if}}
+        {{#if flash.success}}
+        <h2 class="success-msg">{{flash.success}}</h2>
+        {{/if}}
+        {{#if flash.warning}}
+        <h2 class="warning-msg">{{flash.warning}}</h2>
+        {{/if}}
+        {{#if flash.danger}}
+        <h2 class="danger-msg">{{flash.danger}}</h2>
+        {{/if}}
+        {{/if}}
+
+
+      
+
+
+        <div class="d-flex flex-column col-xl-12 col-lg-12 col-sm-12 col-12 px-0">
+            <section id="pjax-container" class="col-md-12">
+                {{#if isAuthed}}
+                    <div class="survey">
+                        {{> survey-form}}
+                    </div>
+                {{/if}}
+                {{{body}}}
+            </section>
+
+            {{#if currentUser.accessCookie}}
+
+                {{else}}
+                    {{#if isAccessCookie}}
+
+                    {{else}}
+                    {{> accessCookies}}
+                    {{/if}}
+            {{/if}}
+
+            <aside >
+                {{> video-links}}
+            </aside>
+        </div>
+    </main>
+
+    {{> footer}}
+
+    <!-- Loading jQuery -->
+    <script src="/bootstrap/js/jquery.min.js"></script>
+    <script src="/bootstrap/js/jquery.easing.js"></script>
+    <!-- Loading jQuery pjax plugin -->
+    <script src="/bootstrap/js/jquery.pjax.js"></script>
+
+    <!-- Loading Bootstrap js files -->
+    <script src="/bootstrap/js/popper.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/bootstrap/js/scrolling.js"></script>
+    <script src="/bootstrap/js/scrolling-navbar.js"></script>
+    <script src="/bootstrap/js/mdb.min.js"></script>
+    <script src="/bootstrap/js/waves.js"></script>
+    <script src="/bootstrap/js/wow.js"></script>
+    {{!-- <script src="/bootstrap/js/bs-custom-file-input.js"></script> --}}
+
+    <!-- Font Awesome JS -->
+    <script src="/fontawesome/js/all.js"></script>
+    <script src="/fontawesome/js/brands.js"></script>
+    <script src="/fontawesome/js/fontawesome.js"></script>
+    <script src="/fontawesome/js/regular.js"></script>
+    <script src="/fontawesome/js/solid.js"></script>
+    <script src="/fontawesome/js/v4-shims.js"></script>
+
+    <script src="/js/app.js"></script>
+</body>
+
+</html>

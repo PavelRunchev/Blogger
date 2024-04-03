@@ -1,0 +1,102 @@
+.table-responsive {
+    padding-bottom: 5%;
+    h2 {
+        @include title;
+        padding-bottom: 0;
+    }
+    h2:after {
+        @include line-below-title;
+    }
+    .table {
+        @include form-background-color;
+        margin: 0 auto;
+        width: 80%;
+        @include box-shadow;
+        border-radius: 0.5rem;
+        padding: 5% 3%;
+        overflow: hidden;
+        font-weight: bold;
+        color: #fff;
+        tbody {
+            background: rgba(255, 255, 255, 0.95);
+        }
+        th,
+        td {
+            font-size: 16px;
+        }
+        .btn-delete {
+            background-color: none;
+            outline: none;
+            border: none;
+            color: rgb(255, 2, 25);
+        }
+        .btn-delete:hover {
+            color: rgb(200, 50, 50);
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .table-responsive {
+        .table {
+            width: 90%;
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .table-responsive {
+        h2 {
+            font-size: 26px;
+        }
+        .table {
+            width: 80%;
+            th,
+            td {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .table-responsive {
+        h2 {
+            font-size: 22px;
+        }
+        .table {
+            width: 94%;
+            th,
+            td {
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .table-responsive {
+        h2 {
+            font-size: 18px;
+        }
+        .table {
+            width: 100%;
+            max-width: 100%;
+            th,
+            td {
+                font-size: 10px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .table-responsive {
+        h2 {
+            font-size: 18px;
+        }
+        .table {
+              opacity: 0;
+        }
+    }
+}

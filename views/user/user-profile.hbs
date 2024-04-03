@@ -1,0 +1,113 @@
+<div class="container-fluid profile-section">
+    <h2 class="text-center">Profile Section</h2>
+
+    <div class="profile-box">
+        <div class="profile-user-info">
+            <div class="overlay user-profile-image">
+                <img src="{{user._doc.profileImage}}" alt="image" class="img-fluid rounded" />
+            </div>
+
+            <div class="profile-data d-flex flex-column justify-content-center">
+                <div class="mx-auto">
+                    <h6 class="text-light">User profile data</h6>
+                    <div class="text-left font-weight-bold text-dark">Email: <span
+                        class="font-weight-bold text-light">{{user._doc.email}}</span></div>
+                    <div class="text-left font-weight-bold text-dark">First Name: <span
+                        class="font-weight-bold text-light">{{user._doc.firstName}}</span></div>
+                    <div class="text-left font-weight-bold text-dark">Last Name: <span
+                    class="font-weight-bold text-light">{{user._doc.lastName}}</span></div>
+                    <div class="text-left font-weight-bold text-dark">Age: <span
+                    class="font-weight-bold text-light">{{user._doc.age}}</span></div>
+                    <div class="text-left font-weight-bold text-dark">Gendere: <span
+                    class="font-weight-bold text-light">{{user._doc.gender}}</span></div>
+                    <div class="text-left font-weight-bold text-dark">published articles: <span
+                    class="font-weight-bold text-light">{{user.articlesCount}}</span></div>
+                </div>
+            </div>
+        </div>
+         {{#if globalError}}
+            <p class="text-center global-error">{{globalError}}</p>
+        {{/if}}
+
+        <div class="inner-container">
+           
+            <div class="card border-dark text-dark mb-3" style="max-width: 20rem;">
+                <div class="card-header">Profile image from upload</div>
+                <div class="card-body">
+                    <form method="Post" action="/user/user-profile/changeUploadImage" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <div class="custom-file mt-4">
+                                <input type="file" class="custom-file-input" id="inputGroupFile02" name="uploadImage">
+                                <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                            </div>
+                            <button type="submit" class="btn-saveChange blue-gradient d-block mx-auto"><i
+                                    class="fas fa-upload mr-2"></i> Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card border-dark text-dark mb-3" style="max-width: 20rem;">
+                <div class="card-header">Profile image from URL</div>
+                <div class="card-body">
+                    <form class="md-form" action="/user/user-profile/changeProfileImageUrl" method="POST">
+                        <div class="custom-file">
+                            <input type="text" id="form1" class="form-control" name="imageUrl" value="{{imageUrl}}">
+                            <label for="form1">Image Url</label>
+                        </div>
+                        <button type="submit" class="btn-saveChange blue-gradient d-block mx-auto"><i
+                                class="fas fa-download mr-2"></i> Save</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="user-data-change">
+            <button class="btn btn-link d-block mx-auto w-10 text-light" type="button" data-toggle="collapse"
+                data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                User Data Change
+            </button>
+
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
+                <div class="card-body">
+                    <form class="form-elegant" action="/user/user-profile/user-changeData" method="POST">
+                        <div class="row d-flex justify-content-around">
+                            <div class="md-form col-12 col-sm-8 col-md-6 col-lg-4">
+                                <input type="text" id="Form-email" class="form-control text-light" name="email"
+                                    value="{{user._doc.email}}">
+                                <label for="Form-email" class="text-light pl-4 active">Your email</label>
+                            </div>
+
+                            <div class="md-form col-12 col-sm-8 col-md-6 col-lg-4">
+                                <input type="number" id="Form-age" class="form-control text-light" name="age"
+                                    value="{{user._doc.age}}">
+                                <label for="Form-age" class="text-light pl-4 active">Your Age</label>
+                            </div>
+                        </div>
+
+                        <div class="row d-flex justify-content-around">
+                            <div class="md-form col-12 col-sm-8 col-md-6 col-lg-4">
+                                <input type="text" id="Form-firstName" class="form-control text-light" name="firstName"
+                                    value="{{user._doc.firstName}}">
+                                <label for="Form-firstName" class="text-light pl-4 active">Your First Name</label>
+                            </div>
+
+                            <div class="md-form col-12 col-sm-8 col-md-6 col-lg-4">
+                                <input type="text" id="Form-lastName" class="form-control text-light" name="lastName"
+                                    value="{{user._doc.lastName}}">
+                                <label for="Form-lastName" class="text-light pl-4 active">Your Last Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="btn-saveChange blue-gradient d-block mx-auto"><i
+                                    class="fas fa-save mr-2"></i> Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

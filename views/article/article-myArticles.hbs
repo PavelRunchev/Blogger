@@ -1,0 +1,24 @@
+<div class="container myArticles">
+    <div class="article-list">
+        {{#each articles}}
+        <div class="card mb-3">
+            <h4 class="text-right">{{categoryName}}</h4>
+            <h3 class="card-header">{{this._doc.title}}</h3>
+            <div class="card-body">
+                <h6 class="card-subtitle text-muted text-right">Date: {{this.date}}</h6>
+            </div>
+            <img style="height: 400px; width: 100%; display: block;"
+                src="{{this._doc.imageUrl}}"
+                alt="Card image">
+            <div class="card-body">
+                <p>{{this.intro}}</p>
+            </div>
+            <a href="/article/article-details-myArticle/{{this._doc._id}}" class="card-link text-right h5" data-pjax="#pjax-container">Read More</a>
+        </div>
+        {{else}}
+            <div class="container-fluid py-5 empty-container">
+                <h3 class="h3 text-light text-center">You didn't publish an articles!</h3>
+            </div>
+        {{/each}}
+    </div>
+</div>

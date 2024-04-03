@@ -1,0 +1,43 @@
+<div class="container-fluid article-posts">
+    {{#each articleMessages}}
+        <div class="message-card">
+            {{#if this.Admin}}
+                <div class="admin-options">
+                    <form id="postLock-form" action="/post/postLock/{{_doc._id}}" method="post"></form>
+                    <a href="javascript:document.getElementById('postLock-form').submit()"><i class="fas fa-lock"></i></a>
+                    <form id="postRemove-form" action="/post/postRemove/{{_doc._id}}" method="post"></form>
+                    <a href="javascript:document.getElementById('postRemove-form').submit()"><i class="fas fa-trash"></i></a>
+                </div>
+            {{else}}
+            {{/if}}
+
+            {{#if this.Moderator}}
+                   <div class="admin-options">
+                        <form id="postLock-form" action="/post/postLock/{{_doc._id}}" method="post"></form>
+                        <a href="javascript:document.getElementById('postLock-form').submit()"><i class="fas fa-lock"></i></a>
+                        <form id="postRemove-form" action="/post/postRemove/{{_doc._id}}" method="post"></form>
+                        <a href="javascript:document.getElementById('postRemove-form').submit()"><i class="fas fa-trash"></i></a>
+                    </div>
+            {{else}}
+            {{/if}}
+            <div class="message-box">
+                <div class="photo">
+                    <img src="{{this.image}}" class="rounded-circle" alt="logo-image">
+                </div>
+                <div class="message-view">
+                    <p class="message-title">
+                        <span class="font-weight-bold">{{this.senderPost}}</span>
+                        <span>{{this.date}}</span>
+                        <span class="font-weight-bold">#{{this.index}}</span>
+                    </p>
+                    {{#if this._doc.isLock}}
+                        <p class="text-danger text-center font-weight-bold">Violation of site policies!</p>
+                        <p class="text-center text-danger"><i class="fas fa-exclamation-triangle fa-4x"></i></p>
+                    {{else}}
+                        <p class="content">{{this._doc.content}}</p>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
